@@ -45,9 +45,29 @@ public function adicionar(){
 
     }
 
-public function login(){
-    
-}
+    public function edit($id = null){
+
+        $usuario = $this->Usuarios->get($id);
+      
+        if($this->request->is(['post','put'])){
+           $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
+           
+           if($this->Usuarios->save($usuario)){
+              $this->Flash->success('Usuario editado com sucesso');
+              return $this->redirect(['action' => 'index']);
+           }else{
+              $this->Flash->error('Usuario não foi editado, por gentileza tentar novamente');
+           }
+        }
+      
+        $this->set(compact('usuario'));
+      
+      }
+      
+
+    public function login(){
+        
+    }
 
 public function display(...$path)
 {
@@ -76,25 +96,5 @@ public function display(...$path)
         throw new NotFoundException();
     }
 }
-
-public function edit($id = null){
-
-  $usuario = $this->Usuarios->get($id);
-
-  if($this->request->is(['post','put'])){
-     $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
-     if($this->Usuarios->save($usuario)){
-        $this->Flash->success('Usuario editado com sucesso');
-        return $this->redirect(['action' => 'index']);
-     }else{
-        $this->Flash->error('Usuario não foi editado, por gentileza tentar novamente');
-     }
-  }
-
-  $this->set(compact('usuario'));
-
-}
-
-
 
 }

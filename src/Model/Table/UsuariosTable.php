@@ -3,7 +3,7 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
-use Cake\ORM\RuleChecker;
+use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -48,8 +48,8 @@ class UsuariosTable extends Table {
 
     //Funçao para nao deixar adicionar ou editar com dados ja existentes no banco.
     public function buildRules(RulesChecker $rules){
-        $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->isUnique(['nome']));
+        $rules->add($rules->isUnique(['email'],'Email em duplicidade'));
+        $rules->add($rules->isUnique(['nome'], 'Nome ja esta em uso'));
         return $rules;
     }
 

@@ -1,10 +1,10 @@
 <?php
+
 namespace App\Model\Entity;
 
 
-use Cake\ORM\Entity;
 use Cake\Auth\DefaultPasswordHasher;
-
+use Cake\ORM\Entity;
 
 class Usuario extends Entity
 {
@@ -21,9 +21,10 @@ class Usuario extends Entity
 
     ];
 
-    protected function _setPassword($password)
+//função que criptografa a senha na hora de enviar ao banco
+    protected function _setPassword ($password)
     {
-        if (strlen($password) > 3) {
+        if (strlen($password) > 0) {
             return (new DefaultPasswordHasher)->hash($password);
         }
     }
