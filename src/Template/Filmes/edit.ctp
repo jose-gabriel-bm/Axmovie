@@ -1,14 +1,17 @@
 <div class="users index large-6 medium-6 columns content">
-<h3> Editar Usuario<h3>
+<h3> Editar Filme<h3>
 <?php
 
-echo $this->Form->create($usuario);
+echo $this->Form->create($filme);
 
-echo $this->Form->control('nome');
-echo $this->Form->control('email');
- echo $this->Form->control('password');
-echo $this->Form->control('status');
-echo $this->Form->control('id_perfil');
+echo $this->Form->control('titulo');
+echo $this->Form->control('id_genero' );
+echo $this->Form->control('id_usuario');
+echo $this->Form->control('id_diretor');
+echo $this->Form->control('lancamento');
+echo $this->Form->control('valor_compra');
+echo $this->Form->control('status' );
+echo $this->Form->control('idioma');
 
 echo $this->Form->button('Salvar');
 

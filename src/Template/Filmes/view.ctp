@@ -1,33 +1,49 @@
 <div class="users view large-12 medium-12 columns content">
-    <h3><?php echo $usuario->nome;  ?></h3>
+    <h3><?php echo $filme->titulo;  ?></h3>
     <table>
         <tr>
             <th>ID: </th>
-            <td><?php echo $usuario->id; ?></td>
+            <td><?php echo $filme->id; ?></td>
         </tr>
         <tr>
-            <th>Perfil: </th>
-            <td><?php echo $usuario->id_perfil; ?></td>
+            <th>Titulo: </th>
+            <td><?php echo $filme->titulo; ?></td>
         </tr>
         <tr>
-            <th>Nome: </th>
-            <td><?php echo $usuario->nome; ?></td>
+            <th>Genero: </th>
+            <td><?php echo $filme->id_genero; ?></td>
         </tr>
         <tr> 
-            <th>E-mail: </th>
-            <td><?php echo $usuario->email; ?></td>
+            <th>Usuario: </th>
+            <td><?php echo $filme->id_usuario; ?></td>
+        </tr>
+        <tr> 
+            <th>Diretor: </th>
+            <td><?php echo $filme->id_diretor; ?></td>
+        </tr>
+        <tr> 
+            <th>lancamento?: </th>
+            <td><?php echo $filme->lancamento; ?></td>
+        </tr>
+        <tr> 
+            <th>Valor do Filme: </th>
+            <td><?php echo $filme->valor_compra; ?></td>
         </tr>
         <tr>
             <th>Status: </th>
-            <td><?php echo $usuario->status; ?></td>
+            <td><?php echo $filme->status; ?></td>
+        </tr>
+        <tr>
+            <th>Idioma: </th>
+            <td><?php echo $filme->idioma; ?></td>
         </tr>
         <tr>
             <th>Cadastrado em: </th>
-            <td><?php echo $usuario->created; ?></td>
+            <td><?php echo $filme->created; ?></td>
         </tr>
         <tr>
             <th>Modificado em: </th>
-            <td><?php echo $usuario->modified; ?></td>
+            <td><?php echo $filme->modified; ?></td>
         </tr>
     </table>
 </div>

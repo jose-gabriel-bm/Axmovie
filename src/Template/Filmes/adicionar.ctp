@@ -5,15 +5,14 @@
 <?php
 echo $this->Form->create($filme);
 
-echo $this->Form->control('nome',['required' => true]);
-echo $this->Form->control('id_perfil' ,['required' => true]);
-echo $this->Form->control('email',['required' => true]);
-echo $this->Form->control('password',['required' => true]);
-echo $this->Form->control('nome',['required' => true]);
-echo $this->Form->control('id_perfil' ,['required' => true]);
-echo $this->Form->control('email',['required' => true]);
-echo $this->Form->control('password',['required' => true]);
- 
+echo $this->Form->control('titulo',['required' => true]);
+echo $this->Form->control('id_genero' ,['required' => true]);
+echo $this->Form->control('id_usuario',['required' => true]);
+echo $this->Form->control('id_diretor',['required' => true]);
+echo $this->Form->control('lancamento',['required' => true]);
+echo $this->Form->control('valor_compra',['required' => true]);
+echo $this->Form->control('status' ,['required' => true]);
+echo $this->Form->control('idioma',['required' => true]);
 
 echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index']);
 echo $this->Form->button('Cadastrar');
