@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\Table;
 use Cake\Auth\DefaultPasswordHasher;
 
 class UsuariosController extends AppController{
@@ -41,7 +42,7 @@ public function adicionar(){
             $this->Flash->success(__('Usuario Cadastrado com sucesso'));
             return $this->redirect(['action' => 'index']);
         }else{
-            $this->Flash->success(__('Erro: Usuario não foi Cadastrado, tentar novamente '));
+            $this->Flash->error(__('Erro: Usuario não foi Cadastrado, tentar novamente '));
         }
     }   
     $this->set(compact('usuario'));
@@ -53,7 +54,7 @@ public function adicionar(){
         $usuario = $this->Usuarios->get($id);
       
         if($this->request->is(['post','put'])){
-           $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
+           $usuario = $this->Usuarios->patchEntity($usuario, $this->request->data);
            
            if($this->Usuarios->save($usuario)){
               $this->Flash->success('Usuario editado com sucesso');
@@ -70,5 +71,16 @@ public function adicionar(){
 
     public function login(){
         
+    }
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $usuario = $this->Usuarios->get($id);
+        if($this->Usuarios->delete($usuario)){
+            $this->Flash->success('Usuario deletado com sucesso');
+        }else{
+            $this->Flash->error('Usuario nao pode ser deletado, verificar e tentar novamente');
+        }
+        return $this->redirect(['action' =>'index']);      
     }
 }

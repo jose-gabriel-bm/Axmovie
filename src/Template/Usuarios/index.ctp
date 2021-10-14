@@ -20,20 +20,20 @@
                 <td><?php echo $usuario->id_perfil; ?></td>
                 <td><?php echo $usuario->status; ?></td>
                 <td>
-                <?= $this->Html->link(__(' Visualizar '), 
-                ['controller' => 'usuarios', 'action' => 'view', $usuario->id],
-                ['class' => 'btn btn-outline-primary btn-sm']) ?> 
+                <?php echo $this->Html->link(__(' Visualizar '), 
+                ['controller' => 'usuarios', 'action' => 'view', $usuario->id]);
 
-                <?= $this->Html->link(__(' Editar '), 
-                ['controller' => 'usuarios', 'action' => 'edit', $usuario->id],
-                ['class' => 'btn btn-outline-primary btn-sm']) ?> 
-
+                echo $this->Html->link(__(' Editar '), 
+                ['controller' => 'usuarios', 'action' => 'edit', $usuario->id]);
                 
+                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$usuario->id ],
+                ['confirm' => 'Realmente deseja apagar o usuario?', $usuario->id ]); 
+                ?> 
 
-                 Deletar</td>
+                </td>
             </tr>
             <?php endforeach; ?>
-        </tbody>
+        </tbody>    
     </table>
     <div class="paginator">
         <ul class="pagination">
