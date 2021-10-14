@@ -15,9 +15,9 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->applyMiddleware('csrf');
 
-    $routes->connect('/', ['controller' => 'Usuarios', 'action' => 'display', 'login']);
+    $routes->connect('/', ['controller' => 'Usuarios', 'action' => 'login']);
 
-    $routes->connect('/pages/*', ['controller' => 'Usuarios', 'action' => 'display']);
+    // $routes->connect('/pages/*', ['controller' => 'Usuarios', 'action' => 'display']);
 
 
     $routes->fallbacks(DashedRoute::class);

@@ -21,12 +21,5 @@ class Usuario extends Entity
 
     ];
 
-//função que criptografa a senha na hora de enviar ao banco
-    protected function _setPassword ($password)
-    {
-        if (strlen($password) > 0) {
-            return (new DefaultPasswordHasher)->hash($password);
-        }
-    }
 
 }

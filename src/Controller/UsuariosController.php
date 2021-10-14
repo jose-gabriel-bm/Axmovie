@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Auth\DefaultPasswordHasher;
 
 class UsuariosController extends AppController{
 
@@ -33,6 +34,8 @@ public function adicionar(){
 
     if($this->request->is('post')){
         $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
+        //criptografia de senha.
+        $usuario->password = (new DefaultPasswordHasher)->hash($usuario->password);
         
         if($this->Usuarios->save($usuario)){
             $this->Flash->success(__('Usuario Cadastrado com sucesso'));
@@ -68,33 +71,4 @@ public function adicionar(){
     public function login(){
         
     }
-
-public function display(...$path)
-{
-    if (!$path) {
-        return $this->redirect('/');
-    }
-    if (in_array('..', $path, true) || in_array('.', $path, true)) {
-        throw new ForbiddenException();
-    }
-    $Usuarios = $subpage = null;
-
-    if (!empty($path[0])) {
-        $Usuarios = $path[0];
-    }
-    if (!empty($path[1])) {
-        $subpage = $path[1];
-    }
-    $this->set(compact('Usuarios', 'subpage'));
-
-    try {
-        $this->render(implode('/', $path));
-    } catch (MissingTemplateException $exception) {
-        if (Configure::read('debug')) {
-            throw $exception;
-        }
-        throw new NotFoundException();
-    }
-}
-
 }
