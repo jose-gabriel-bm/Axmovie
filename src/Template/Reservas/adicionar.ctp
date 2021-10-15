@@ -5,7 +5,7 @@
 <?php
 echo $this->Form->create($reserva);
 
-echo $this->Form->control('id_cliente',['required' => true] );
+echo $this->Form->control('id_cliente',['required' => true]);
 echo $this->Form->control('id_filme',['required' => true]);
 echo $this->Form->control('id_usuario',['required' => true]);
 echo $this->Form->control('valor_multa_atraso',['required' => true]);

@@ -36,8 +36,8 @@ class UsuariosTable extends Table {
          $validator
          ->requirePresence('email','create')
          ->notEmpty('email');
- 
-         $validator
+         
+          $validator
          ->requirePresence('password','create')
          ->notEmpty('password');
  

@@ -10,8 +10,9 @@ echo $this->Form->control('id_usuario');
 echo $this->Form->control('id_diretor');
 echo $this->Form->control('lancamento');
 echo $this->Form->control('valor_compra');
-echo $this->Form->control('status' );
-echo $this->Form->control('idioma');
+echo $this->Form->radio('status', ['Inativo', 'Ativo']);
+echo $this->Form->select('idioma', ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
+['empty' => 'Selecione idioma']);
 
 echo $this->Form->button('Salvar');
 
