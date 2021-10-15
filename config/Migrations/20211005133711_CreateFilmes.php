@@ -43,15 +43,13 @@ class CreateFilmes extends AbstractMigration
             'values' => ['Ingles','Japones','Chines','Portugues','Hindi','Espanhol']
         ]);
 
-        $table->addColumn('data_criacao', 'datetime', [
+        $table->addColumn('created', 'datetime', [
             'null' => true, 
         ]);
-        $table->addColumn('data_modificacao', 'datetime', [
+        $table->addColumn('modified', 'datetime', [
             'null' => true,   
         ]);
         
-
-
         $table->addIndex(['titulo'], ['unique' => true]);
         $table->create();
     }

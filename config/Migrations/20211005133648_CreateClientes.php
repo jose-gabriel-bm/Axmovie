@@ -28,10 +28,10 @@ class CreateClientes extends AbstractMigration
             'default'=>true,
             'null'=>false,
         ]);
-        $table->addColumn('data_criacao', 'datetime', [
+        $table->addColumn('created', 'datetime', [
             'null'=>true,
         ]);
-        $table->addColumn('data_modificacao', 'datetime', [
+        $table->addColumn('modified', 'datetime', [
             'null'=>true,  
         ]);
         

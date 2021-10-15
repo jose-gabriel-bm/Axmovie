@@ -50,10 +50,10 @@ public function adicionar(){
            $filme = $this->Filmes->patchEntity($filme, $this->request->data);
            
            if($this->Filmes->save($filme)){
-              $this->Flash->success('Usuario editado com sucesso');
+              $this->Flash->success('Filme editado com sucesso');
               return $this->redirect(['action' => 'index']);
            }else{
-              $this->Flash->error('Usuario não foi editado, por gentileza tentar novamente');
+              $this->Flash->error('Filme não foi editado, por gentileza tentar novamente');
            }
         }
       
@@ -68,9 +68,9 @@ public function adicionar(){
         $this->request->allowMethod(['post', 'delete']);
         $filme = $this->Filmes->get($id);
         if($this->Filmes->delete($filme)){
-            $this->Flash->success('Usuario deletado com sucesso');
+            $this->Flash->success('Filme deletado com sucesso');
         }else{
-            $this->Flash->error('Usuario nao pode ser deletado, verificar e tentar novamente');
+            $this->Flash->error('Filme nao pode ser deletado, verificar e tentar novamente');
         }
         return $this->redirect(['action' =>'index']);      
     }

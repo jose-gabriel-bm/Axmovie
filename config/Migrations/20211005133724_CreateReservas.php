@@ -35,7 +35,7 @@ class CreateReservas extends AbstractMigration
         ]);
         
 
-        $table->addColumn('data_locacao', 'datetime', [
+        $table->addColumn('created', 'datetime', [
             'null' => false, 
         ]);
         $table->addColumn('data_limite_devolucao', 'datetime', [
