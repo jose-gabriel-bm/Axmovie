@@ -514,13 +514,27 @@ div.message.hidden {
 }
 
 .content h4 {
-    color: #be140b;
+    color: #4d8f97;
     padding-bottom: 0.5rem;
     margin-bottom: 20px;
-    border-bottom: 2px solid #be140b;
+    border-bottom: 2px solid #4d8f97;
+}
+.content .related h4 {
+    color: #4d8f97;
+    padding-bottom: 0.5rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 0px;
 }
 
-.content .related h4 {
+.content h5 {
+    color: #4d8f97;
+    padding-bottom: 0.5rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4d8f97;
+}
+
+.content .related h5 {
     color: #4d8f97;
     padding-bottom: 0.5rem;
     margin-top: 20px;
