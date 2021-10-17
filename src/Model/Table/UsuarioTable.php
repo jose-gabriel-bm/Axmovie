@@ -27,19 +27,19 @@ class UsuariosTable extends Table {
          //essa validação informa que o campo nome, id perfil, email e senha nao pode ser vazio quando criado.
          $validator
          ->requirePresence('nome','create')
-         ->notEmpty('nome');
+         ->notEmpty('nome','Inserir um nome');
  
          $validator
          ->requirePresence('id_perfil','create')
-         ->notEmpty('id_perfil');
+         ->notEmpty('id_perfil','Inserir um perfil');
  
          $validator
          ->requirePresence('email','create')
-         ->notEmpty('email');
+         ->notEmpty('email','Inserir um email');
          
           $validator
          ->requirePresence('password','create')
-         ->notEmpty('password');
+         ->notEmpty('password','E necessario colocar a senha');
  
  
          return $validator;

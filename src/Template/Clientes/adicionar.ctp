@@ -39,7 +39,7 @@ echo $this->Form->control('Cep');
 <?php
 echo $this->Form->control('Codigo Pais');
 echo $this->Form->control('DDD');
-echo $this->Form->control('Numero',['required' => true]);
+echo $this->Form->control('Celular',['required' => true]);
 ?>
 <label>Principal ?*</label>
 <?php

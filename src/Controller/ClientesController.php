@@ -14,9 +14,7 @@ public function index(){
    
     $this->paginate = [
         'limit' => 10,
-            'order' => [
-                'Usuarios.id' => 'asc',
-            ]
+            'order' => ['Usuarios.id' => 'asc',]
     ];  
    $clientes = $this->paginate($this->Clientes);
    $this->set(compact('clientes'));
@@ -49,6 +47,8 @@ public function adicionar()
             
         } 
 
+        //Esse componente loadModel e usado quando esta acessando uma tabela diferente da controler
+        $this->loadModel('Enderecos');
         $entityEndereco = $this->Enderecos->newEntity ([
 
             'id_usuario' => '3',
@@ -65,20 +65,21 @@ public function adicionar()
             
         } 
 
+        $this->loadModel('Contatos');
         $entityContato = $this->Contatos->newEntity ([
 
             'id_cliente' => $idCliente,
             'codigo_pais' => $cliente['Codigo Pais'],
             'ddd' => $cliente['DDD'],
-            'numero' => $cliente['Numero'],
+            'numero' => $cliente['Celular'],
             'principal' => $cliente['Principal'],
-            'whatsapp' => $cliente['whatsapp'] ]);                         
+            'whatsapp' => $cliente['Whatsapp'] ]);                         
              
         if($this->Contatos->save($entityContato)) {
-            $this->Flash->success(__('Cliente Cadastrado com sucesso.'));
-            return $this->redirect(['action' => 'index']);
+            
         } 
-        
+        $this->Flash->success(__('Cliente Cadastrado com sucesso.'));
+        return $this->redirect(['action' => 'index']);
     }    
     
 }
@@ -92,8 +93,8 @@ public function edit($id = null){
 public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $filme = $this->Filmes->get($id);
-        if($this->Filmes->delete($filme)){
+        $cliente = $this->Clientes->get($id);
+        if($this->Clientes->delete($cliente)){
             $this->Flash->success('Filme deletado com sucesso');
         }else{
             $this->Flash->error('Filme nao pode ser deletado, verificar e tentar novamente');

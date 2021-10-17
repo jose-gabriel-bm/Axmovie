@@ -3,41 +3,50 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>titulo</th>
-                <th>id_genero</th>
-                <th>id_usuario</th>
-                <th>id_diretor</th>
-                <th>lancamento?</th>
-                <th>valor do Filme</th>
-                <th>status</th>
-                <th>idioma</th>
-                <th>Açoes</th>
-                
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Status</th>
+            
+                <!-- <th>Numero</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Cep</th> --> 
+
+                <!-- <th>Codigo Pais</th>
+                <th>DDD</th>
+                <th>Celular</th>
+                <th>Principal</th>
+                <th>Whatsapp</th> -->
+                <th>Açoes</th>       
             </tr>
         </thead>
         <tbody>
             <?php foreach ($clientes as $cliente): ?>
+            
             <tr>
-                <td><?php echo $cliente->id; ?></td>
-                <td><?php echo $cliente->titulo; ?></td>
-                <td><?php echo $cliente->id_genero; ?></td>
-                <td><?php echo $cliente->id_usuario; ?></td>
-                <td><?php echo $cliente->id_diretor; ?></td>
-                <td><?php echo $cliente->lancamento; ?></td>
-                <td><?php echo $cliente->valor_compra; ?></td>
-                <td><?php echo $cliente->status; ?></td>
-                <td><?php echo $cliente->idioma; ?></td>
-                
+                <td><?php echo $cliente->nome;?></td>
+                <td><?php echo $cliente->cpf;?></td>
+                <td><?php echo $cliente->email;?></td>
+                <td><?php echo $cliente->status;?></td>
+
+                <!-- id_cliente;
+                codigo_pais;
+                ddd;
+                numero => $cliente[Celular],
+                principal;
+                whatsapp; -->
+
                 <td>
                 <?php echo $this->Html->link(__(' Visualizar '), 
-                ['controller' => 'filmes', 'action' => 'view', $filme->id]);
+                ['controller' => 'clientes', 'action' => 'view', $cliente->id]);
 
                 echo $this->Html->link(__(' Editar '), 
-                ['controller' => 'filmes', 'action' => 'edit', $filme->id]);
+                ['controller' => 'clientes', 'action' => 'edit', $cliente->id]);
                 
-                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$filme->id ],
-                ['confirm' => 'Realmente deseja apagar o usuario?', $filme->id ]); 
+                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$cliente->id ],
+                ['confirm' => 'Realmente deseja apagar o usuario?', $cliente->id ]); 
                 ?> 
 
                 </td>
@@ -63,3 +72,18 @@
         </p>
     </div>
 </div>
+
+
+
+
+            
+            
+            
+
+            
+    
+
+
+                  
+             
+           
