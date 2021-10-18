@@ -22,32 +22,16 @@ public function index(){
 
 public function view($id = null){
     
-//    $cliente = $this->Clientes->get($id);
-//    $this->set(['cliente' => $cliente]);
-
-        // $cliente = $this->Enderecos->get($id, [
-        // 'contain' => ['Clientes']de
-
-        // ]);
-        
+     
         $this->loadModel('Enderecos');
 
-        // $endereco = $this->Enderecos->findByIdCliente($id, [
-        //     'contain' => ['Clientes']
-        // ])->first();
+        $cliente = $this->Clientes->get($id, [
+            'contain' => ['Enderecos','Contatos']
+        ]);
 
+        $this->set(compact('cliente'));
 
-        // debug($endereco);
-
-
-        $clientes = $this->Clientes->get($id, [
-            'contain' => ['Enderecos']
-        ])->first();
-
-
-        //  $this->set(compact('cliente','endereco',contato));
-
-        
+    
 
 }
 

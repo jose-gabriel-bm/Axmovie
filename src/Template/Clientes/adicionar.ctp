@@ -37,10 +37,10 @@ echo $this->Form->control('Cep');
 </label>
 
 <?php
-echo $this->Form->control('Codigo Pais');
-echo $this->Form->control('DDD');
+echo $this->Form->control('Codigo Pais',['default' => '55']);
+echo $this->Form->control('DDD',['default' => '62']);
 echo $this->Form->control('Celular',['required' => true]);
-?>
+?>,
 <label>Principal ?*</label>
 <?php
 echo $this->Form->radio('Principal', ['Não ', 'Sim'],['required' => true]);

@@ -1,6 +1,6 @@
+
 <div class="users view large-6 medium-6 columns content">
-    <?php pr($cliente) ?>
-    <h3><?php echo $cliente->nome;  ?></h3>
+   <h3><?php echo $cliente->nome;  ?></h3>
     <table>
         <div>
             <label>
@@ -20,43 +20,37 @@
             </tr>
             <tr> 
                 <td>Status: </td>
-                <td><?php echo $cliente->status; ?></td>
+                <td><?php echo $cliente->opcoes_status; ?></td>
             </tr>
         </div>
     </table>
+
     <table>
         <label>
             <h5><b>Endereço</b></h5>
         </label>
 
         <tr> 
-            <td>Diretor: </td>
-            <td><?php echo $cliente->id_diretor; ?></td>
+            <td>Logradouro:</td>
+            <td><?php echo $cliente->enderecos[0]->logradouro; ?></td>
         </tr>
         <tr> 
-            <td>lancamento?: </td>
-            <td><?php echo $cliente->lancamento; ?></td>
+            <td>numero: </td>
+            <td><?php echo $cliente->enderecos[0]->numero; ?></td>
         </tr>
         <tr> 
-            <td>Valor do cliente: </td>
-            <td><?php echo $cliente->valor_compra; ?></td>
+            <td>Bairro: </td>
+            <td><?php echo $cliente->enderecos[0]->bairro;  ?></td>
         </tr>
         <tr>
-            <td>Status: </td>
-            <td><?php echo $cliente->status; ?></td>
+            <td>Cep: </td>
+            <td><?php echo $cliente->enderecos[0]->cep;  ?></td>
         </tr>
         <tr>
-            <td>Idioma: </td>
-            <td><?php echo $cliente->idioma; ?></td>
+            <td>Complemento: </td>
+            <td><?php echo $cliente->enderecos[0]->complemento;  ?></td>
         </tr>
-        <tr>
-            <td>Cadastrado em: </td>
-            <td><?php echo $cliente->created; ?></td>
-        </tr>
-        <tr>
-            <td>Modificado em: </td>
-            <td><?php echo $cliente->modified; ?></td>
-        </tr>
+      
     </table>
     <table>
         <label>
@@ -64,33 +58,28 @@
         </label>
 
         <tr> 
-            <td>Diretor: </td>
-            <td><?php echo $cliente->id_diretor; ?></td>
+            <td>Codigo Pais: </td>
+            <td><?php echo $cliente->contatos[0]->codigo_pais; ?></td>
         </tr>
         <tr> 
-            <td>lancamento?: </td>
-            <td><?php echo $cliente->lancamento; ?></td>
+            <td>DDD: </td>
+            <td><?php echo $cliente->contatos[0]->ddd;?></td>
         </tr>
         <tr> 
-            <td>Valor do cliente: </td>
-            <td><?php echo $cliente->valor_compra; ?></td>
+            <td>Celular: </td>
+            <td><?php echo $cliente->contatos[0]->numero; ?></td>
         </tr>
+
         <tr>
-            <td>Status: </td>
-            <td><?php echo $cliente->status; ?></td>
+            <td>Principal: </td>
+            <td><?php echo  $cliente->contatos[0]->numero_principal; ?></td>
         </tr>
+
         <tr>
-            <td>Idioma: </td>
-            <td><?php echo $cliente->idioma; ?></td>
+            <td>Whatsapp: </td>
+            <td><?php echo  $cliente->contatos[0]->possui_whatsapp; ?></td>
         </tr>
-        <tr>
-            <td>Cadastrado em: </td>
-            <td><?php echo $cliente->created; ?></td>
-        </tr>
-        <tr>
-            <td>Modificado em: </td>
-            <td><?php echo $cliente->modified; ?></td>
-        </tr>
+       
     </table>
 </div>
 

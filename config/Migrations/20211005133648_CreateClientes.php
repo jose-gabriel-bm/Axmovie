@@ -28,12 +28,8 @@ class CreateClientes extends AbstractMigration
             'default'=>true,
             'null'=>false,
         ]);
-        $table->addColumn('created', 'datetime', [
-            'null'=>true,
-        ]);
-        $table->addColumn('modified', 'datetime', [
-            'null'=>true,  
-        ]);
+        $table->addColumn('created', 'datetime');
+        $table->addColumn('modified', 'datetime');
         
         $table->addIndex(['cpf'], ['unique' => true]);
 
