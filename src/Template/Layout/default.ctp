@@ -24,13 +24,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-12 medium-10 columns">
-            <li class="name">
+            <!-- <li class="name">
                 <h3><a href=""><?= $this->fetch('title') ?></a></h3>
                 
-            </li> 
-            <!-- <li>
-                <h3><a>Teste</a></h3>
-            </li> -->
+            </li>  -->
+            <li>
+                <h3><a>
+                <?php echo $this->Html->link(__(' Axmovie '), 
+                ['controller' => 'Usuarios', 'action' => 'index', '_full' => true]);?>
+                </a></h3>
+            </li>
            
             
         </ul>

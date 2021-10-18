@@ -1,4 +1,12 @@
-<div class="users index large-12 medium-12 columns content">
+<nav class="large-3 medium-3 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Usuarios') ?></li>
+        <li><?= $this->Html->link(__('Novo Usuario'), ['action' => 'adicionar']) ?></li>
+        <li><?= $this->Html->link(__('Lista de Usuarios'), ['action' => 'index']) ?></li>     
+    </ul>
+</nav>
+
+<div class="users index large-9 medium-9 columns content">
     <h3>Lista de Usuarios</h3>
     <table>
         <thead>

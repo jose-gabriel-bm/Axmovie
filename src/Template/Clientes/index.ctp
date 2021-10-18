@@ -31,8 +31,8 @@
                 <td><?php echo $cliente->email;?></td>
                 <td><?php echo $cliente->status;?></td>
 
-                <!-- id_cliente;
-                codigo_pais;
+
+                <!-- codigo_pais;
                 ddd;
                 numero => $cliente[Celular],
                 principal;

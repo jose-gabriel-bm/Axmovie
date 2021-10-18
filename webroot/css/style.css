@@ -12,11 +12,11 @@ a {
 }
 /* menu superior */
 .side-nav li a:not(.button) {
-    color: #15848F;
+    color: #a0d3e8;
 }
 
 .side-nav li a:not(.button):hover {
-    color: #15848F;
+    color: #000000;
 }
 
 header {
@@ -332,7 +332,7 @@ pre {
 }
 
 .side-nav li.heading {
-    color: #308e97;
+    color: #000000;
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -340,12 +340,12 @@ pre {
 }
 
 #actions-sidebar {
-    background: #fafafa;
+    background: #4d8f97;
 }
 
 .index table {
     margin-top: 0rem;
-    border: 4;
+    border: 3;
     width: 100%;
     table-layout: fixed;
 }
@@ -492,7 +492,7 @@ div.message.hidden {
 }
 @media(max-width: 640px) {
     #actions-sidebar {
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
         margin-bottom: 0;
     }
 }

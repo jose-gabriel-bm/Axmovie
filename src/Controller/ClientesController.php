@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Model\Entity\Usuario;
+use App\Model\Entity\Cliente;
 use Cake\ORM\Table;
 use Cake\Auth\DefaultPasswordHasher;
 use phpDocumentor\Reflection\Types\This;
@@ -21,8 +21,34 @@ public function index(){
 }
 
 public function view($id = null){
-   $cliente = $this->Clientes->get($id);
-   $this->set(['cliente' => $cliente]);
+    
+//    $cliente = $this->Clientes->get($id);
+//    $this->set(['cliente' => $cliente]);
+
+        // $cliente = $this->Enderecos->get($id, [
+        // 'contain' => ['Clientes']de
+
+        // ]);
+        
+        $this->loadModel('Enderecos');
+
+        // $endereco = $this->Enderecos->findByIdCliente($id, [
+        //     'contain' => ['Clientes']
+        // ])->first();
+
+
+        // debug($endereco);
+
+
+        $clientes = $this->Clientes->get($id, [
+            'contain' => ['Enderecos']
+        ])->first();
+
+
+        //  $this->set(compact('cliente','endereco',contato));
+
+        
+
 }
 
 public function adicionar()

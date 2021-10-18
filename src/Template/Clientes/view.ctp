@@ -1,4 +1,5 @@
 <div class="users view large-6 medium-6 columns content">
+    <?php pr($cliente) ?>
     <h3><?php echo $cliente->nome;  ?></h3>
     <table>
         <div>
