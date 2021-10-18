@@ -7,18 +7,7 @@
                 <th>CPF</th>
                 <th>Email</th>
                 <th>Status</th>
-            
-                <!-- <th>Numero</th>
-                <th>Complemento</th>
-                <th>Bairro</th>
-                <th>Cidade</th>
-                <th>Cep</th> --> 
 
-                <!-- <th>Codigo Pais</th>
-                <th>DDD</th>
-                <th>Celular</th>
-                <th>Principal</th>
-                <th>Whatsapp</th> -->
                 <th>Açoes</th>       
             </tr>
         </thead>
@@ -29,14 +18,7 @@
                 <td><?php echo $cliente->nome;?></td>
                 <td><?php echo $cliente->cpf;?></td>
                 <td><?php echo $cliente->email;?></td>
-                <td><?php echo $cliente->status;?></td>
-
-
-                <!-- codigo_pais;
-                ddd;
-                numero => $cliente[Celular],
-                principal;
-                whatsapp; -->
+                <td><?php echo $cliente->opcoes_status;?></td>
 
                 <td>
                 <?php echo $this->Html->link(__(' Visualizar '), 
@@ -45,8 +27,8 @@
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'clientes', 'action' => 'edit', $cliente->id]);
                 
-                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$cliente->id ],
-                ['confirm' => 'Realmente deseja apagar o usuario?', $cliente->id ]); 
+                echo $this->Form->postlink(('Inativar'), ['action' => 'inativar',$cliente->id ],
+                ['confirm' => 'Realmente deseja inativa o cliente?', $cliente->id ]); 
                 ?> 
 
                 </td>

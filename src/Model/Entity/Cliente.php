@@ -23,6 +23,6 @@ class Cliente extends Entity
 
     protected function _getOpcoesStatus()
     {
-        return $this->status ? 'Sim' : 'Não';
+        return $this->status ? 'Ativo' : 'Inativo';
     }
 }

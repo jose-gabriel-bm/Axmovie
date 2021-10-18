@@ -6,7 +6,7 @@ use App\Controller\AppController;
 use App\Model\Entity\Cliente;
 use Cake\ORM\Table;
 use Cake\Auth\DefaultPasswordHasher;
-use phpDocumentor\Reflection\Types\This;
+use Cake\ORM\TableRegistry;
 
 class ClientesController extends AppController{
 
@@ -17,7 +17,7 @@ public function index(){
             'order' => ['Usuarios.id' => 'asc',]
     ];  
    $clientes = $this->paginate($this->Clientes);
-   $this->set(compact('clientes'));
+      $this->set(compact('clientes'));
 }
 
 public function view($id = null){
@@ -34,6 +34,7 @@ public function view($id = null){
     
 
 }
+
 
 public function adicionar()
 {
@@ -100,15 +101,11 @@ public function edit($id = null){
       
       }
       
-public function delete($id = null)
+public function inativar()
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $cliente = $this->Clientes->get($id);
-        if($this->Clientes->delete($cliente)){
-            $this->Flash->success('Filme deletado com sucesso');
-        }else{
-            $this->Flash->error('Filme nao pode ser deletado, verificar e tentar novamente');
-        }
-        return $this->redirect(['action' =>'index']);      
+
+        $cliente->status = 0 ;
+        $clientesTable->save($cliente);
+
     }
 }
