@@ -11,24 +11,16 @@
     <h3><?php echo $filme->titulo;  ?></h3>
     <table>
         <tr>
-            <td>ID: </td>
-            <td><?php echo $filme->id; ?></td>
-        </tr>
-        <tr>
             <td>Titulo: </td>
             <td><?php echo $filme->titulo; ?></td>
         </tr>
         <tr>
             <td>Genero: </td>
-            <td><?php echo $filme->id_genero; ?></td>
-        </tr>
-        <tr> 
-            <td>Usuario: </td>
-            <td><?php echo $filme->id_usuario; ?></td>
+            <td><?php echo $filme->genero->genero; ?></td>
         </tr>
         <tr> 
             <td>Diretor: </td>
-            <td><?php echo $filme->id_diretor; ?></td>
+            <td><?php echo $filme->diretore->nome; ?></td>
         </tr>
         <tr> 
             <td>lancamento?: </td>

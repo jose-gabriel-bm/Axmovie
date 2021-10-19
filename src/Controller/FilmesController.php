@@ -26,11 +26,20 @@ public function index(){
 }
 
 public function view($id = null){
-   $filme = $this->Filmes->get($id);
-   $this->set(['filme' => $filme]);
+
+    $filme = $this->Filmes->get($id);
+    $this->set(['filme' => $filme]);
+
+    $filme = $this->Filmes->get($id, [
+       'contain' => ['Generos','Diretores']
+    ]);
+    $this->set(compact('filme'));
 }
 
 public function adicionar(){
+
+    $idioma = ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'];
+
     $filme = $this->Filmes->newEntity();
 
     if($this->request->is('post')){
@@ -43,7 +52,7 @@ public function adicionar(){
             $this->Flash->error(__('Erro: Filme não foi Cadastrado, tentar novamente '));
         }
     }   
-    $this->set(compact('filme'));
+    $this->set(compact('filme','idioma'));
 
     }
 

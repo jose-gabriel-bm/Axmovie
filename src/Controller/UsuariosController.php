@@ -25,7 +25,8 @@ public function index(){
 }
 
 public function view($id = null){
-  
+    
+
     $usuario = $this->Usuarios->get($id);
     $this->set(['usuario' => $usuario]);
 

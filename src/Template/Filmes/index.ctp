@@ -12,7 +12,7 @@
     <nav class="large-2 medium-2 ">
         <ul class="side-nav">
         <?php echo $this->Html->link(__('Adicionar novo Filme '), ['controller' => 'filmes','action' =>'adicionar']); ?>  
-        </ul>
+    </ul>
     </nav>
     <table>
         <thead>
@@ -25,7 +25,7 @@
                 <th>valor do Filme</th>
                 <th>Status</th>
                 <th>Idioma</th>
-                <th>Açoes</th>
+                <th>Ações</th>
                 
             </tr>
         </thead>
