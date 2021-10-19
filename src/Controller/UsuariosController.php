@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Model\Entity\Usuario;
-use Cake\ORM\Table;
 use Cake\Auth\DefaultPasswordHasher;
-use Cake\Http\Client\Request;
 
 class UsuariosController extends AppController{
 
@@ -15,22 +12,26 @@ public function index(){
     $this->paginate = [
         'limit' => 10,
             'order' => [
-                'Usuarios.id' => 'asc',
+                'Usuarios.id' => 'DESC',
             ]
-    ];  
-   $usuarios = $this->paginate($this->Usuarios);
-   $this->set(compact('usuarios'));
+    ];   
+
+    $usuarios = $this->Usuarios->find('all',[
+        'contain' => ['Perfis']
+    ]);
+    $usuarios = $this->paginate($usuarios);
+   
+   $this->set(compact('usuarios',));
 }
 
 public function view($id = null){
   
-   $usuario = $this->Usuarios->get($id);
-   $this->set(['usuario' => $usuario]);
+    $usuario = $this->Usuarios->get($id);
+    $this->set(['usuario' => $usuario]);
 
-   $usuario = $this->Usuarios->get($id, [
-    'contain' => ['Perfis']
-
-]);
+    $usuario = $this->Usuarios->get($id, [
+        'contain' => ['Perfis']
+    ]);
 $this->set(compact('usuario'));
 }
 

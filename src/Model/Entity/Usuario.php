@@ -22,5 +22,9 @@ class Usuario extends Entity
     {
         return $this->status ? 'Ativo' : 'Inativo';
     }
+    protected function _getOpcoesPerfil()
+    {
+        return $this->status ? 'Administrador' : 'Atendente';
+    }
 
 }

@@ -16,18 +16,18 @@
                 <!-- <th>ID</th> -->
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th>ID Perfil</th>
+                <th>Perfil</th>
                 <th>Status</th>
                 <th>Açoes</th>
             </tr>
         </thead>
         <tbody>
+            
             <?php foreach ($usuarios as $usuario): ?>
-            <tr>
-
+            <tr>                
                 <td><?php echo $usuario->nome; ?></td>
                 <td><?php echo $usuario->email; ?></td>
-                <td><?php echo $usuario->id_perfil ?></td>
+                <td><?php echo $usuario->perfi->perfil ?></td>
                 
                 <td><?php echo $usuario->opcoes_status; ?></td>
                 <td>
