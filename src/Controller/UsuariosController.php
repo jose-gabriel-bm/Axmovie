@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Usuario;
 use Cake\ORM\Table;
 use Cake\Auth\DefaultPasswordHasher;
 
@@ -20,12 +21,8 @@ public function index(){
    $this->set(compact('usuarios'));
 }
 
-public function visualizar($id = null){
-    $usuario = $this->Usuarios->get($id);
-    $this->set(['usuario' => $usuario]);
-}
-
 public function view($id = null){
+  
    $usuario = $this->Usuarios->get($id);
    $this->set(['usuario' => $usuario]);
 }
@@ -67,11 +64,6 @@ public function adicionar(){
         $this->set(compact('usuario'));
       
       }
-      
-
-    public function login(){
-        
-    }
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -82,5 +74,15 @@ public function adicionar(){
             $this->Flash->error('Usuario nao pode ser deletado, verificar e tentar novamente');
         }
         return $this->redirect(['action' =>'index']);      
+    }
+    public function login()
+    {
+        // if($this->request->is('post')){
+        //    $usuario = $this->Auth->identify();
+        //    if($usuario){
+        //        $this->Auth->setUser($usuario);
+        //        return $this->redirect($this->Auth->redirectUrl());
+        //    }
+        // }
     }
 }

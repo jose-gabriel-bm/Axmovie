@@ -20,6 +20,9 @@ class Usuario extends Entity
         'modified'=>true
 
     ];
-
+    protected function _getOpcoesStatus()
+    {
+        return $this->status ? 'Ativo' : 'Inativo';
+    }
 
 }

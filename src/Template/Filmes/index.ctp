@@ -1,4 +1,13 @@
-<div class="users index large-12 medium-12 columns content">
+<nav class="large-2 medium-2 columns" id="actions-sidebar">
+    <ul class="side-nav">
+       
+        <li class="heading"><?= $this->Html->link(__('Usuarios'), ['controller' => 'Usuarios','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Filmes'), ['controller' => 'Filmes','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Clientes'), ['controller' => 'Clientes','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Reservas'), ['controller' => 'Reservas','action' =>'index']) ?></li>  
+    </ul>
+</nav>
+<div class="users index large-10 medium-10 columns content">
     <h3>Lista de Filmes</h3>
     <nav class="large-2 medium-2 ">
         <ul class="side-nav">
@@ -8,15 +17,14 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>titulo</th>
-                <th>id_genero</th>
-                <th>id_usuario</th>
-                <th>id_diretor</th>
-                <th>lancamento?</th>
+                
+                <th>Titulo</th>
+                <th>Genero</th>
+                <th>Diretor</th>
+                <th>Lancamento ?</th>
                 <th>valor do Filme</th>
-                <th>status</th>
-                <th>idioma</th>
+                <th>Status</th>
+                <th>Idioma</th>
                 <th>Açoes</th>
                 
             </tr>
@@ -24,10 +32,9 @@
         <tbody>
             <?php foreach ($filmes as $filme): ?>
             <tr>
-                <td><?php echo $filme->id; ?></td>
+                
                 <td><?php echo $filme->titulo; ?></td>
                 <td><?php echo $filme->id_genero; ?></td>
-                <td><?php echo $filme->id_usuario; ?></td>
                 <td><?php echo $filme->id_diretor; ?></td>
                 <td><?php echo $filme->opcoes_lancamento; ?></td>
                 <td><?php echo $filme->valor_compra; ?></td>

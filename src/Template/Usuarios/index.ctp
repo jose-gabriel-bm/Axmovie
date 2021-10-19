@@ -1,17 +1,19 @@
-<nav class="large-3 medium-3 columns" id="actions-sidebar">
+<nav class="large-2 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Usuarios') ?></li>
-        <li><?= $this->Html->link(__('Novo Usuario'), ['action' => 'adicionar']) ?></li>
-        <li><?= $this->Html->link(__('Lista de Usuarios'), ['action' => 'index']) ?></li>     
+       
+        <li class="heading"><?= $this->Html->link(__('Usuarios'), ['controller' => 'Usuarios','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Filmes'), ['controller' => 'Filmes','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Clientes'), ['controller' => 'Clientes','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Reservas'), ['controller' => 'Reservas','action' =>'index']) ?></li>  
     </ul>
 </nav>
 
-<div class="users index large-9 medium-9 columns content">
+<div class="users index large-10 medium-10 columns content">
     <h3>Lista de Usuarios</h3>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <!-- <th>ID</th> -->
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>ID Perfil</th>
@@ -22,11 +24,12 @@
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
             <tr>
-                <td><?php echo $usuario->id; ?></td>
+                <!-- <td><?php echo $usuario->id; ?></td> -->
                 <td><?php echo $usuario->nome; ?></td>
                 <td><?php echo $usuario->email; ?></td>
                 <td><?php echo $usuario->id_perfil; ?></td>
-                <td><?php echo $usuario->status; ?></td>
+                
+                <td><?php echo $usuario->opcoes_status; ?></td>
                 <td>
                 <?php echo $this->Html->link(__(' Visualizar '), 
                 ['controller' => 'usuarios', 'action' => 'view', $usuario->id]);
@@ -34,9 +37,9 @@
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'usuarios', 'action' => 'edit', $usuario->id]);
                 
-                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$usuario->id ],
-                ['confirm' => 'Realmente deseja apagar o usuario?', $usuario->id ]); 
-                ?> 
+                // echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$usuario->id ],
+                // ['confirm' => 'Realmente deseja apagar o usuario?', $usuario->id ]); 
+                // ?> 
 
                 </td>
             </tr>

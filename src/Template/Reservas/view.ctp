@@ -1,46 +1,57 @@
-<div class="users view large-12 medium-12 columns content">
+<nav class="large-2 medium-2 columns" id="actions-sidebar">
+    <ul class="side-nav">
+       
+        <li class="heading"><?= $this->Html->link(__('Usuarios'), ['controller' => 'Usuarios','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Filmes'), ['controller' => 'Filmes','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Clientes'), ['controller' => 'Clientes','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Reservas'), ['controller' => 'Reservas','action' =>'index']) ?></li>  
+    </ul>
+</nav>
+<div class="users view large-10 medium-10 columns content">
     <h3><?php echo 'Visualizar reserva';  ?></h3>
     <table>
         <tr>
-            <th>ID: </th>
+            <td>ID: </td>
             <td><?php echo $reserva->id; ?></td>
         </tr>
         <tr>
-            <th>Cliente: </th>
+            <td>Cliente: </td>
             <td><?php echo $reserva->id_cliente; ?></td>
         </tr>
         <tr>
-            <th>Filme: </th>
+            <td>Filme: </td>
             <td><?php echo $reserva->id_filme; ?></td>
         </tr>
         <tr> 
-            <th>Usuario: </th>
+            <td>Usuario: </td>
             <td><?php echo $reserva->id_usuario; ?></td>
         </tr>
         <tr> 
-            <th>Multa por Atraso: </th>
+            <td>Multa por Atraso: </td>
             <td><?php echo $reserva->valor_multa_atraso; ?></td>
         </tr>
         <tr> 
-            <th>Total a pagar reserva: </th>
+            <td>Total a pagar reserva: </td>
             <td><?php echo $reserva->valor_total_pagar; ?></td>
         </tr>
         <tr> 
-            <th>Reserva Criada em: </th>
+            <td>Reserva Criada em: </td>
             <td><?php echo $reserva->created; ?></td>
         </tr>
         <tr>
-            <th>Data limite Devolução: </th>
+            <td>Data limite Devolução: </td>
             <td><?php echo $reserva->data_limite_devolucao; ?></td>
         </tr>
         <tr>
-            <th>Data que foi devolvido: </th>
+            <td>Data que foi devolvido: </td>
             <td><?php echo $reserva->data_devolucao; ?></td>
         </tr>
         <tr>
-            <th>Status: </th>
+            <td>Status: </td>
             <td><?php echo $reserva->status; ?></td>
         </tr>
        
     </table>
+   <?php echo $this->Html->link(__('Voltar  '), ['controller' => 'Reservas','action' =>'index']);
+    ?>
 </div>

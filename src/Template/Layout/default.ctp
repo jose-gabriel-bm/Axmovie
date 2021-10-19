@@ -1,7 +1,5 @@
 <?php
-
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Axmovie';
 ?>
 <!DOCTYPE html>
 <html>

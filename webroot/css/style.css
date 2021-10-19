@@ -319,7 +319,7 @@ pre {
 }
 
 .top-bar.expanded .title-area {
-    background:  #4d8f97;
+    background:  #2d7177;
 }
 
 .top-bar.expanded, .top-bar,.top-bar-section ul li,.top-bar-section li:not(.has-form) a:not(.button) {
@@ -327,8 +327,8 @@ pre {
 }
 
 .top-bar-section li:not(.has-form) a:not(.button):hover {
-    background-color: #308e97;
-    background: #308e97;
+    background-color: #2d7177;
+    background: #2d7177;
 }
 
 .side-nav li.heading {
@@ -340,7 +340,7 @@ pre {
 }
 
 #actions-sidebar {
-    background: #010303;
+    background: #4d8f97;
 }
 
 .index table {

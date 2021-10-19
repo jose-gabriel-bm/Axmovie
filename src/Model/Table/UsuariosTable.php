@@ -15,6 +15,7 @@ class UsuariosTable extends Table {
         $this->table('usuarios');
         
         $this->addBehavior('Timestamp');
+
     }
 
     public function validationDefault(validator $validator){

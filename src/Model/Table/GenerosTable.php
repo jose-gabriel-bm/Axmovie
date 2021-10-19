@@ -15,6 +15,7 @@ class GenerosTable extends Table {
         $this->table('generos');
         
         $this->addBehavior('Timestamp');
+        $this->belongsTo('Enderecos');
 
         $this->setDisplayField('genero');
     }
