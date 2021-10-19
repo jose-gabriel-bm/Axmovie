@@ -9,16 +9,7 @@ use Cake\ORM\Entity;
 class Cliente extends Entity
 {
     public $_accessible = [
-
-        'id'=>true,
-        'id_usuario'=>true,
-        'nome'=>true,
-        'cpf'=>true,
-        'email'=>true,
-        'status'=>true,
-        'data_criacao'=>true,
-        'data_modificacao'=>true,
-       
+        '*' => true
     ];
 
     protected function _getOpcoesStatus()

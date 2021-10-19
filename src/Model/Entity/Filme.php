@@ -10,17 +10,7 @@ class Filme extends Entity
 {
     public $_accessible = [
 
-        'id'=>true,
-        'titulo'=>true,
-        'id_genero'=>true,
-        'id_usuario'=>true,
-        'id_diretor'=>true,
-        'lancamento'=>true,
-        'valor_compra'=>true,
-        'status'=>true,
-        'idioma'=>true,
-        'created'=>true,
-        'modified'=>true
+        '*' => true
 
     ];
     protected function _getOpcoesStatus()

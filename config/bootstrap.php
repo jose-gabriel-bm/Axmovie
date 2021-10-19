@@ -146,3 +146,6 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+Cake\I18n\FrozenDate::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
+Cake\I18n\FrozenTime::setToStringFormat('dd/MM/yyyy - hh:mm:ss');

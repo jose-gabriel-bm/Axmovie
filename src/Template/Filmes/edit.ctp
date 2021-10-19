@@ -16,8 +16,11 @@ echo $this->Form->create($filme);
 echo $this->Form->control('titulo');
 echo $this->Form->control('id_genero' );
 echo $this->Form->control('id_usuario');
-echo $this->Form->control('id_diretor');
-echo $this->Form->control('lancamento');
+echo $this->Form->control('id_diretor');?>
+
+<label>Lansamento</label>
+<?php
+echo $this->Form->radio('lansamento', ['Não', 'Sim']);
 echo $this->Form->control('valor_compra');
 echo $this->Form->radio('status', ['Inativo', 'Ativo']);
 echo $this->Form->select('idioma', ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],

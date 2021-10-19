@@ -76,7 +76,7 @@ public function adicionar()
         $entityContato = $this->Contatos->newEntity ([
 
             'id_cliente' => $idCliente,
-            'codigo_pais' => $cliente['Codigo Pais'],
+            'codigo_pais' => $cliente['Codigo_Pais'],
             'ddd' => $cliente['DDD'],
             'numero' => $cliente['Celular'],
             'principal' => $cliente['Principal'],

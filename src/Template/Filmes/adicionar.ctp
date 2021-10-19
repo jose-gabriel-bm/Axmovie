@@ -20,7 +20,7 @@ echo $this->Form->create($filme);
 
 echo $this->Form->control('titulo',['required' => true]);
 echo $this->Form->control('id_genero' ,['required' => true]);
-echo $this->Form->control('id_usuario',['required' => true]);
+echo $this->Form->control('id_usuario',['value' => 1]);
 echo $this->Form->control('id_diretor',['required' => true]);?>
 <label>Lancamento*</label>
 <?php

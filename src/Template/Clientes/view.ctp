@@ -89,7 +89,7 @@
         </tr>
        
     </table>
-    <?PHP echo $this->Html->link(__('Voltar  '), ['controller' => 'Usuarios','action' =>'index']);?>
+    <?PHP echo $this->Html->link(__('Voltar  '), ['controller' => 'Clientes','action' =>'index']);?>
 
 </div>
 <div class="users view large-1 medium-1 columns content"></div>
