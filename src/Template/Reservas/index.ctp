@@ -1,5 +1,10 @@
 <div class="users index large-12 medium-12 columns content">
     <h3>Lista de Reservas</h3>
+    <nav class="large-2 medium-2 ">
+        <ul class="side-nav">
+        <?php echo $this->Html->link(__('Adicionar nova Reserva '), ['controller' => 'reservas','action' =>'adicionar']); ?>  
+        </ul>
+    </nav>
     <table>
         <thead>
             <tr>
@@ -29,7 +34,7 @@
                 <td><?php echo $reserva->created; ?></td>
                 <td><?php echo $reserva->data_limite_devolucao; ?></td>
                 <td><?php echo $reserva->data_devolucao; ?></td>
-                <td><?php echo $reserva->status; ?></td>
+                <td><?php echo $reserva->opcoes_status; ?></td>
                 
                 <td>
                 <?php echo $this->Html->link(__(' Visualizar '), 

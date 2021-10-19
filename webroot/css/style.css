@@ -12,7 +12,7 @@ a {
 }
 /* menu superior */
 .side-nav li a:not(.button) {
-    color: #a0d3e8;
+    color: #090a0a;
 }
 
 .side-nav li a:not(.button):hover {
@@ -340,7 +340,7 @@ pre {
 }
 
 #actions-sidebar {
-    background: #4d8f97;
+    background: #010303;
 }
 
 .index table {

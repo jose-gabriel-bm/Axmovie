@@ -1,5 +1,10 @@
 <div class="users index large-12 medium-12 columns content">
     <h3>Lista de Filmes</h3>
+    <nav class="large-2 medium-2 ">
+        <ul class="side-nav">
+        <?php echo $this->Html->link(__('Adicionar novo Filme '), ['controller' => 'filmes','action' =>'adicionar']); ?>  
+        </ul>
+    </nav>
     <table>
         <thead>
             <tr>
@@ -24,9 +29,9 @@
                 <td><?php echo $filme->id_genero; ?></td>
                 <td><?php echo $filme->id_usuario; ?></td>
                 <td><?php echo $filme->id_diretor; ?></td>
-                <td><?php echo $filme->lancamento; ?></td>
+                <td><?php echo $filme->opcoes_lancamento; ?></td>
                 <td><?php echo $filme->valor_compra; ?></td>
-                <td><?php echo $filme->status; ?></td>
+                <td><?php echo $filme->opcoes_status; ?></td>
                 <td><?php echo $filme->idioma; ?></td>
                 
                 <td>

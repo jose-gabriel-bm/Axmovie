@@ -12,7 +12,7 @@ echo $this->Form->control('valor_total_pagar');
 echo $this->Form->control('created' );
 echo $this->Form->control('data_limite_devolucao');
 echo $this->Form->control('data_devolucao' );
-echo $this->Form->control('status');
+echo $this->Form->radio('status', ['Inativo', 'Ativo']);
 
 echo $this->Form->button('Salvar');
 

@@ -1,5 +1,16 @@
+
+
+
 <div class="users index large-12 medium-12 columns content">
+    
     <h3>Lista de Clientes</h3>
+
+    <nav class="large-2 medium-2 ">
+        <ul class="side-nav">
+        <?php echo $this->Html->link(__('Adicionar novo Cliente '), ['controller' => 'clientes','action' =>'adicionar']); ?>  
+        </ul>
+    </nav>
+
     <table>
         <thead>
             <tr>
@@ -27,9 +38,9 @@
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'clientes', 'action' => 'edit', $cliente->id]);
                 
-                echo $this->Form->postlink(('Inativar'), ['action' => 'inativar',$cliente->id ],
-                ['confirm' => 'Realmente deseja inativa o cliente?', $cliente->id ]); 
-                ?> 
+                // echo $this->Form->postlink(('Inativar'), ['action' => 'inativar',$cliente->id ],
+                // ['confirm' => 'Realmente deseja inativa o cliente?', $cliente->id ]); 
+                // ?> 
 
                 </td>
             </tr>

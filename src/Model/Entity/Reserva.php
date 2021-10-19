@@ -23,6 +23,10 @@ class Reserva extends Entity
         
 
     ];
-
+    
+    protected function _getOpcoesStatus()
+    {
+        return $this->status ? 'Ativo' : 'Inativo';
+    }
 
 }

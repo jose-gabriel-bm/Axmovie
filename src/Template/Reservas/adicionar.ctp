@@ -13,7 +13,7 @@ echo $this->Form->control('valor_total_pagar',['required' => true]);
 echo $this->Form->control('created' ,['required' => true]);
 echo $this->Form->control('data_limite_devolucao',['required' => true]);
 echo $this->Form->control('data_devolucao',['required' => true] );
-echo $this->Form->control('status',['required' => true]);
+echo $this->Form->radio('status', ['Inativo', 'Ativo']);
 
 echo $this->Html->link(__('Cancelar  '), ['controller' => 'Reservas','action' =>'index']);
 echo $this->Form->button('Cadastrar');

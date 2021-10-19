@@ -3,10 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Model\Entity\Cliente;
-use Cake\ORM\Table;
-use Cake\Auth\DefaultPasswordHasher;
-use Cake\ORM\TableRegistry;
 
 class ClientesController extends AppController{
 
@@ -97,15 +93,26 @@ public function adicionar()
 
 public function edit($id = null){
 
-       
-      
-      }
-      
-public function inativar()
-    {
+    $cliente = $this->Clientes->get($id, [
+        'contain' => ['Enderecos','Contatos']
+    ]);
 
-        $cliente->status = 0 ;
-        $clientesTable->save($cliente);
+    if ($this->request->is(['post', 'put',])) {
 
+        $clienteEdicao = $this->Clientes->patchEntity($cliente, $this->request->getData());
+        $clienteEdicao = $cliente;
+        if($this->Clientes->save($clienteEdicao)) {
+
+            $this->Flash->success(__('Cliente Editado com sucesso.'));
+            return $this->redirect(['action' => 'index']);
+        } else{
+            $this->Flash->danger('Cliente nao pode ser editado.');
+        }
     }
+    $this->set(compact('cliente'));
+}
+      
+// // public function inativar()
+// //     {
+//     }
 }

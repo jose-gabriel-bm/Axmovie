@@ -1,4 +1,4 @@
-<div class="users view large-12 medium-12 columns content">
+<div class="users view large-6 medium-6 columns content">
     <h3><?php echo $filme->titulo;  ?></h3>
     <table>
         <tr>
@@ -23,7 +23,7 @@
         </tr>
         <tr> 
             <th>lancamento?: </th>
-            <td><?php echo $filme->lancamento; ?></td>
+            <td><?php echo $filme->opcoes_lancamento; ?></td>
         </tr>
         <tr> 
             <th>Valor do Filme: </th>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <th>Status: </th>
-            <td><?php echo $filme->status; ?></td>
+            <td><?php echo $filme->opcoes_status; ?></td>
         </tr>
         <tr>
             <th>Idioma: </th>
@@ -46,4 +46,6 @@
             <td><?php echo $filme->modified; ?></td>
         </tr>
     </table>
+    <?PHP echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index'],['required' => true]);
+    ?>
 </div>

@@ -23,6 +23,13 @@ class Filme extends Entity
         'modified'=>true
 
     ];
+    protected function _getOpcoesStatus()
+    {
+        return $this->status ? 'Ativo' : 'Inativo';
+    }
 
-
+    protected function _getOpcoesLancamento()
+    {
+        return $this->status ? 'Sim' : 'Não';
+    }
 }
