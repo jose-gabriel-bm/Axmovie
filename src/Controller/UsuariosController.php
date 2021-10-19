@@ -6,6 +6,7 @@ use App\Controller\AppController;
 use App\Model\Entity\Usuario;
 use Cake\ORM\Table;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Http\Client\Request;
 
 class UsuariosController extends AppController{
 
@@ -25,43 +26,71 @@ public function view($id = null){
   
    $usuario = $this->Usuarios->get($id);
    $this->set(['usuario' => $usuario]);
+
+   $usuario = $this->Usuarios->get($id, [
+    'contain' => ['Perfis']
+
+]);
+$this->set(compact('usuario'));
 }
 
 public function adicionar(){
     $usuario = $this->Usuarios->newEntity();
 
+    $this->loadModel('Perfis');
+    $perfis =$this->Perfis->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'perfil'
+    ])->toArray();
+
     if($this->request->is('post')){
         $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
         //criptografia de senha.
         $usuario->password = (new DefaultPasswordHasher)->hash($usuario->password);
-        
-        if($this->Usuarios->save($usuario)){
+       
+         if($this->Usuarios->save($usuario)){
             $this->Flash->success(__('Usuario Cadastrado com sucesso'));
             return $this->redirect(['action' => 'index']);
-        }else{
+         }else{
             $this->Flash->error(__('Erro: Usuario não foi Cadastrado, tentar novamente '));
         }
     }   
-    $this->set(compact('usuario'));
+    $this->set(compact('usuario', 'perfis'));
 
     }
 
     public function edit($id = null){
 
-        $usuario = $this->Usuarios->get($id);
+        $usuario = $this->Usuarios->get($id, [
+            'contain' => ['Perfis']
+        ]);
       
-        if($this->request->is(['post','put'])){
-           $usuario = $this->Usuarios->patchEntity($usuario, $this->request->data);
-           
-           if($this->Usuarios->save($usuario)){
-              $this->Flash->success('Usuario editado com sucesso');
-              return $this->redirect(['action' => 'index']);
-           }else{
-              $this->Flash->error('Usuario não foi editado, por gentileza tentar novamente');
+        $this->loadModel('Perfis');
+        $perfis =$this->Perfis->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'perfil'
+        ])->toArray();
+      
+
+
+        unset($usuario['password']);
+      
+        if ($this->request->is(['post','put'])) {
+            unset($this->request->data['password']);
+            $request = $this->request->data;
+            $usuario = $this->Usuarios->patchEntity($usuario, $request);
+            // debug($request);
+            // debug($usuario);
+            
+           if ($this->Usuarios->save($usuario)) {
+                $this->Flash->success('Usuario editado com sucesso');
+                return $this->redirect(['action' => 'index']);
+           } else {
+                $this->Flash->error('Usuario não foi editado, por gentileza tentar novamente');
            }
         }
       
-        $this->set(compact('usuario'));
+        $this->set(compact('usuario','perfis'));
       
       }
     public function delete($id = null)

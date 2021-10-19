@@ -42,6 +42,10 @@ class FilmesTable extends Table {
          $validator
          ->requirePresence('lancamento','create')
          ->notEmpty('lancamento');
+
+         $validator
+         ->requirePresence('idioma','create')
+         ->notEmpty('idioma','Selecionar idioma');
  
  
          return $validator;

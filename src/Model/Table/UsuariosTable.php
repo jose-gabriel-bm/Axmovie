@@ -13,8 +13,14 @@ class UsuariosTable extends Table {
 
         parent::initialize($config);
         $this->table('usuarios');
+        $this->displayField('nome');
         
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Perfis', [
+            'foreignKey' => 'id_perfil'
+        ]);
+        
 
     }
 
@@ -49,7 +55,7 @@ class UsuariosTable extends Table {
     //Funçao para nao deixar adicionar ou editar com dados ja existentes no banco.
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['nome'], 'Nome ja esta em uso'));
+        $rules->add($rules->isUnique(['nome'], 'Nome ja tem cadastro'));
         $rules->add($rules->isUnique(['email'],'Email em duplicidade'));
         return $rules;
     } 

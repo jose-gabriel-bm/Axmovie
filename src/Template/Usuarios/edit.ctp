@@ -15,11 +15,22 @@ echo $this->Form->create($usuario);
 
 echo $this->Form->control('nome');
 echo $this->Form->control('email');
-echo $this->Form->control('password');?>
+echo $this->Form->control('password',['value ' =>  'senha','disabled' => true]);?>
 <label>Status</label>
+
 <?php
 echo $this->Form->radio('status', ['Inativo', 'Ativo']);
-echo $this->Form->control('id_perfil');
+
+echo $this->Form->input(
+    'id_perfil', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' => $perfis,
+        'default'=>$usuario->perfi->id,
+        'label'=>'Perfil'
+    ]
+);
 
 echo $this->Html->link(__('Cancelar  '), ['controller' => 'Usuarios','action' =>'index']);
 

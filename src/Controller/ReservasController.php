@@ -26,9 +26,10 @@ public function view($id = null){
 }
 
 public function adicionar(){
+
     $reserva = $this->Reservas->newEntity();
 
-    if($this->request->is('post')){
+    if($this->request->is('post', 'put')){
         $reserva = $this->Reservas->patchEntity($reserva, $this->request->getData());
              
         if($this->Reservas->save($reserva)){

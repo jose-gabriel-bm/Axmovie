@@ -10,13 +10,10 @@
 <div class="users view large-7 medium-7 columns content">
     <h3><?php echo $usuario->nome;  ?></h3>
     <table>
-        <tr>
-            <td>ID: </td>
-            <td><?php echo $usuario->id; ?></td>
-        </tr>
+       
         <tr>
             <td>Perfil: </td>
-            <td><?php echo $usuario->id_perfil; ?></td>
+            <td><?php echo $usuario->perfi->perfil; ?></td>
         </tr>
         <tr>
             <td>Nome: </td>

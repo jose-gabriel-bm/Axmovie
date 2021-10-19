@@ -48,9 +48,9 @@
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'filmes', 'action' => 'edit', $filme->id]);
                 
-                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$filme->id ],
-                ['confirm' => 'Realmente deseja apagar o usuario?', $filme->id ]); 
-                ?> 
+                // echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$filme->id ],
+                // ['confirm' => 'Realmente deseja apagar o usuario?', $filme->id ]); 
+                // ?> 
 
                 </td>
             </tr>

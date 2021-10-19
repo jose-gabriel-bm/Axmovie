@@ -24,10 +24,10 @@
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
             <tr>
-                <!-- <td><?php echo $usuario->id; ?></td> -->
+
                 <td><?php echo $usuario->nome; ?></td>
                 <td><?php echo $usuario->email; ?></td>
-                <td><?php echo $usuario->id_perfil; ?></td>
+                <td><?php echo $usuario->id_perfil ?></td>
                 
                 <td><?php echo $usuario->opcoes_status; ?></td>
                 <td>
@@ -36,10 +36,7 @@
 
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'usuarios', 'action' => 'edit', $usuario->id]);
-                
-                // echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$usuario->id ],
-                // ['confirm' => 'Realmente deseja apagar o usuario?', $usuario->id ]); 
-                // ?> 
+                ?> 
 
                 </td>
             </tr>
