@@ -13,10 +13,15 @@ public function index(){
     $this->paginate = [
         'limit' => 10,
             'order' => [
-                'Usuarios.id' => 'asc',
+                'Filmes.id' => 'desc',
             ]
     ];  
-   $filmes = $this->paginate($this->Filmes);
+    $filmes = $this->Filmes->find('all',[
+        'contain' => ['Generos','Diretores']
+    ]);
+    
+   $filmes = $this->paginate($filmes);
+
    $this->set(compact('filmes'));
 }
 

@@ -34,8 +34,8 @@
             <tr>
                 
                 <td><?php echo $filme->titulo; ?></td>
-                <td><?php echo $filme->id_genero; ?></td>
-                <td><?php echo $filme->id_diretor; ?></td>
+                <td><?php echo $filme->genero->genero; ?></td>
+                <td><?php echo $filme->diretore->nome; ?></td>
                 <td><?php echo $filme->opcoes_lancamento; ?></td>
                 <td><?php echo $filme->valor_compra; ?></td>
                 <td><?php echo $filme->opcoes_status; ?></td>

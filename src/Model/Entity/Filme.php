@@ -10,7 +10,7 @@ class Filme extends Entity
 {
     public $_accessible = [
 
-        '*' => true
+        '*' => true 
 
     ];
     protected function _getOpcoesStatus()

@@ -20,7 +20,7 @@ public function index(){
         'contain' => ['Perfis']
     ]);
     $usuarios = $this->paginate($usuarios);
-   
+    
    $this->set(compact('usuarios',));
 }
 

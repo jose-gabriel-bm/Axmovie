@@ -2,7 +2,6 @@
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -16,7 +15,14 @@ class FilmesTable extends Table {
         
         $this->addBehavior('Timestamp');
 
-        $this->setDisplayField('genero');
+        $this->belongsTo('Generos', [
+            'foreignKey' => 'id_genero'
+        ]);
+        $this->belongsTo('Diretores', [
+            'foreignKey' => 'id_diretor'
+        ]);
+
+      
     }
 
     public function validationDefault(validator $validator){
