@@ -11,8 +11,14 @@ class ReservasController extends AppController{
         $this->paginate = [
             'limit' => 10,
             'order' => ['Reservas.id' => 'asc',]
-        ];  
-        $reservas = $this->paginate($this->Reservas);
+        ]; 
+
+        $reservas = $this->Reservas->find('all',[
+            'contain' => ['Clientes','Filmes']
+        ]); 
+
+        $reservas = $this->paginate($reservas);
+     
         $this->set(compact('reservas'));
     }
 

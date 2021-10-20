@@ -9,7 +9,7 @@
 </nav>
 <div class="users view large-10 medium-10 columns content">
     <h3><?php echo 'Visualizar reserva';  ?></h3>
-    <table>
+    <table >
         <tr>
             <td>Cliente: </td>
             <td><?php echo $reserva->id_cliente; ?></td>
@@ -19,16 +19,12 @@
             <td><?php echo $reserva->id_filme; ?></td>
         </tr>
         <tr> 
-            <td>Usuario: </td>
-            <td><?php echo $reserva->id_usuario; ?></td>
-        </tr>
-        <tr> 
             <td>Multa por Atraso: </td>
-            <td><?php echo $reserva->valor_multa_atraso; ?></td>
+            <td><?php echo !$reserva->valor_multa_atraso ? "-" :$reserva->valor_multa_atraso; ?></td>
         </tr>
         <tr> 
             <td>Total a pagar reserva: </td>
-            <td><?php echo $reserva->valor_total_pagar; ?></td>
+            <td><?php echo !$reserva->valor_total_pagar ?"-":$reserva->valor_total_pagar; ?></td>
         </tr>
         <tr> 
             <td>Reserva Criada em: </td>
@@ -39,12 +35,12 @@
             <td><?php echo $reserva->data_limite_devolucao; ?></td>
         </tr>
         <tr>
-            <td>Data que foi devolvido: </td>
-            <td><?php echo $reserva->data_devolucao; ?></td>
+            <td>Data que foi Devolvido: </td>
+            <td><?php echo !$reserva->data_devolucao ?"-":$reserva->data_devolucao; ?></td>
         </tr>
         <tr>
             <td>Status: </td>
-            <td><?php echo $reserva->status; ?></td>
+            <td><?php echo $reserva->OpcoesStatus; ?></td>
         </tr>
        
     </table>

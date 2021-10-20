@@ -10,9 +10,8 @@ public function index(){
    
     $this->paginate = [
         'limit' => 10,
-            'order' => [
-                'Filmes.id' => 'desc',
-            ]
+        'order' => [
+        'Filmes.id' => 'desc',]
     ];  
     $filmes = $this->Filmes->find('all',[
         'contain' => ['Generos','Diretores']

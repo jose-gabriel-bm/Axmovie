@@ -21,23 +21,24 @@
                 <th>Filme</th>
                 <th>Data Locacao</th>
                 <th>Data Limite Devolucao</th>
-                <th>Data Devolucao</th>
-                <th>Status</th>
-                <th>Açoes</th>
+                <th style="text-align: center; vertical-align: middle;" >Data Devolucao</th>
+                <th style="text-align: center; vertical-align: middle;">Status</th>
+                <th style="text-align: center; vertical-align: middle;">Açoes</th>
                 
             </tr>
         </thead>
         <tbody>
             <?php foreach ($reservas as $reserva): ?>
             <tr>
-                <td><?php echo $reserva->id_cliente; ?></td>
-                <td><?php echo $reserva->id_filme; ?></td>
+                <td><?php echo $reserva->cliente->nome; ?></td>
+                <td><?php echo $reserva->filme->titulo; ?></td>
                 <td><?php echo $reserva->created; ?></td>
-                <td><?php echo if($reserva->data_limite_devolucao === null){} ?></td>
-                <td><?php echo $reserva->data_devolucao; ?></td>
-                <td><?php echo $reserva->opcoes_status; ?></td>
+                <td><?php echo $reserva->data_limite_devolucao;?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo !$reserva->data_devolucao ? "-" : $reserva->data_limite_devolucao; ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo $reserva->opcoes_status; ?></td>
                 
-                <td>
+                <td style="text-align: center; vertical-align: middle;">
+
                 <?php echo $this->Html->link(__(' Detalhes '), 
                 ['controller' => 'reservas', 'action' => 'view', $reserva->id]);
 

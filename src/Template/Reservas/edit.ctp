@@ -23,7 +23,7 @@ echo $this->Form->control('data_limite_devolucao');
 echo $this->Form->control('data_devolucao' );
 echo $this->Form->radio('status', ['Inativo', 'Ativo']);
 
-echo $this->Html->link(__('Cancelar  '), ['controller' => 'Usuarios','action' =>'index']);
+echo $this->Html->link(__('Cancelar  '), ['controller' => 'Reservas','action' =>'index']);
 
 echo $this->Form->button('Salvar');
 

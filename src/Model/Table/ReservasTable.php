@@ -14,10 +14,10 @@ class ReservasTable extends Table {
         $this->table('reservas');
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Clientes', [
+        $this->belongsTo('Clientes', [
             'foreignKey' => 'id_cliente'
         ]);
-        $this->hasMany('Filmes', [
+        $this->belongsTo('Filmes', [
             'foreignKey' => 'id_filme'
         ]);
     }
