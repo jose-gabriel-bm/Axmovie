@@ -11,12 +11,8 @@ class PerfisTable extends Table {
         parent::initialize($config);
         $this->table('perfis');
         $this->displayField('perfil');
-        
         $this->addBehavior('Timestamp');
         
-        // $this->hasOne('Usuarios', [
-        //     'foreignKey' => 'id_perfil'
-        // ]);
     }
 
 }

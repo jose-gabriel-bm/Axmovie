@@ -38,17 +38,10 @@
             <td>Idioma: </td>
             <td><?php echo $filme->idioma; ?></td>
         </tr>
-        <!-- <tr>
-            <td>Cadastrado em: </td>
-            <td><?php echo $filme->created; ?></td>
-        </tr>
-        <tr>
-            <td>Modificado em: </td>
-            <td><?php echo $filme->modified; ?></td>
-        </tr> -->
+
     </table>
     <?PHP 
-        echo $this->Html->link(__('Cancelar  '), 
+        echo $this->Html->link(__('Voltar'), 
         ['controller' => 'Filmes','action' =>'index'],
         ['required' => true]);
     ?>

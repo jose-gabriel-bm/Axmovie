@@ -5,38 +5,37 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
 
-class UsuariosController extends AppController{
+class UsuariosController extends AppController {
 
-public function index(){
-   
+public function index()
+{
     $this->paginate = [
         'limit' => 10,
-            'order' => [
-                'Usuarios.id' => 'DESC',
-            ]
+        'order' => [
+        'Usuarios.id' => 'DESC',
+        ]
     ];   
 
     $usuarios = $this->Usuarios->find('all',[
         'contain' => ['Perfis']
     ]);
-    $usuarios = $this->paginate($usuarios);
-    
-   $this->set(compact('usuarios',));
+    $usuarios = $this->paginate($usuarios); 
+    $this->set(compact('usuarios',));
 }
 
-public function view($id = null){
-    
-
+public function view($id = null)
+{
     $usuario = $this->Usuarios->get($id);
     $this->set(['usuario' => $usuario]);
 
     $usuario = $this->Usuarios->get($id, [
         'contain' => ['Perfis']
     ]);
-$this->set(compact('usuario'));
+    $this->set(compact('usuario'));
 }
 
-public function adicionar(){
+public function adicionar()
+{
     $usuario = $this->Usuarios->newEntity();
 
     $this->loadModel('Perfis');
@@ -49,8 +48,8 @@ public function adicionar(){
         $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
         //criptografia de senha.
         $usuario->password = (new DefaultPasswordHasher)->hash($usuario->password);
-       
-         if($this->Usuarios->save($usuario)){
+        
+        if($this->Usuarios->save($usuario)){
             $this->Flash->success(__('Usuario Cadastrado com sucesso'));
             return $this->redirect(['action' => 'index']);
          }else{
@@ -81,7 +80,6 @@ public function adicionar(){
             $usuario = $this->Usuarios->patchEntity($usuario, $request);
             // debug($request);
             // debug($usuario);
-            
            if ($this->Usuarios->save($usuario)) {
                 $this->Flash->success('Usuario editado com sucesso');
                 return $this->redirect(['action' => 'index']);

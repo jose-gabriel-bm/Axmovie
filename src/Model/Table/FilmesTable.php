@@ -22,39 +22,34 @@ class FilmesTable extends Table {
             'foreignKey' => 'id_diretor'
         ]);
 
-      
     }
 
     public function validationDefault(validator $validator){
 
-        //essa validação informa que o id deve ser inteiro e sera criado pelo sistema.
-         $validator
-         ->integer('id')
-         ->allowEmpty('id', 'create');
- 
-         //essa validação informa que o campo nome, id perfil, email e senha nao pode ser vazio quando criado.
-         $validator
-         ->requirePresence('titulo','create')
-         ->notEmpty('titulo');
- 
-         $validator
-         ->requirePresence('valor_compra','create')
-         ->notEmpty('valor_compra');
- 
-         $validator
-         ->requirePresence('status','create')
-         ->notEmpty('status');
- 
-         $validator
-         ->requirePresence('lancamento','create')
-         ->notEmpty('lancamento');
+        $validator
+        ->integer('id')
+        ->allowEmpty('id', 'create');
 
-         $validator
-         ->requirePresence('idioma','create')
-         ->notEmpty('idioma','Selecionar idioma');
- 
- 
-         return $validator;
+        $validator
+        ->requirePresence('titulo','create')
+        ->notEmpty('titulo');
+
+        $validator
+        ->requirePresence('valor_compra','create')
+        ->notEmpty('valor_compra');
+
+        $validator
+        ->requirePresence('status','create')
+        ->notEmpty('status');
+
+        $validator
+        ->requirePresence('lancamento','create')
+        ->notEmpty('lancamento');
+        $validator
+        ->requirePresence('idioma','create')
+        ->notEmpty('idioma','Selecionar idioma');
+
+        return $validator;
      }
 
     //Funçao para nao deixar adicionar ou editar com dados ja existentes no banco.

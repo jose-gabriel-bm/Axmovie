@@ -11,10 +11,6 @@
     <h3><?php echo 'Visualizar reserva';  ?></h3>
     <table>
         <tr>
-            <td>ID: </td>
-            <td><?php echo $reserva->id; ?></td>
-        </tr>
-        <tr>
             <td>Cliente: </td>
             <td><?php echo $reserva->id_cliente; ?></td>
         </tr>

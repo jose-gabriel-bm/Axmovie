@@ -9,7 +9,6 @@ use Cake\ORM\Entity;
 class Reserva extends Entity
 {
     public $_accessible = [
-
         'id'=>true,
         'id_cliente'=>true,
         'id_filme'=>true,
@@ -20,13 +19,10 @@ class Reserva extends Entity
         'data_limite_devolucao'=>true,
         'data_devolucao'=>true,
         'status'=>true,
-        
-
     ];
-    
     protected function _getOpcoesStatus()
     {
-        return $this->status ? 'Ativo' : 'Inativo';
+        return $this->status ? 'Aberta' : 'Fechada';
     }
 
 }

@@ -6,28 +6,25 @@ use App\Controller\AppController;
 
 class ClientesController extends AppController{
 
-public function index(){
-   
+public function index()
+{   
     $this->paginate = [
         'limit' => 10,
             'order' => ['Usuarios.id' => 'asc',]
     ];  
-   $clientes = $this->paginate($this->Clientes);
-      $this->set(compact('clientes'));
+    $clientes = $this->paginate($this->Clientes);
+    $this->set(compact('clientes'));
 }
 
 public function view($id = null){
     
      
-        $this->loadModel('Enderecos');
-
-        $cliente = $this->Clientes->get($id, [
-            'contain' => ['Enderecos','Contatos']
-        ]);
-
-        $this->set(compact('cliente'));
-
-    
+    $this->loadModel('Enderecos');
+    $cliente = $this->Clientes->get($id, [
+        'contain' => ['Enderecos','Contatos']
+    ]);
+    $this->set(compact('cliente'));
+ 
 
 }
 
@@ -50,8 +47,7 @@ public function adicionar()
     
         $idCliente = null;
         if($this->Clientes->save($entityCliente)) {
-            $idCliente = $entityCliente->id;
-            
+            $idCliente = $entityCliente->id;  
         } 
 
         //Esse componente loadModel e usado quando esta acessando uma tabela diferente da controler

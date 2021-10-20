@@ -10,7 +10,6 @@ class GenerosTable extends Table {
 
         parent::initialize($config);
         $this->table('generos');
-        
         $this->addBehavior('Timestamp');
  
     }

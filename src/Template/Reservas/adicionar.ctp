@@ -12,17 +12,35 @@
 <h3>Cadastro de Reserva</h3>
 
 <?php
-echo $this->Form->create($reserva);
 
-echo $this->Form->control('id_cliente',['required' => true]);
-echo $this->Form->control('id_filme',['required' => true]);
-echo $this->Form->control('id_usuario',['required' => true]);
-echo $this->Form->control('valor_multa_atraso',['required' => true]);
-echo $this->Form->control('valor_total_pagar');
-echo $this->Form->control('created' ,['required' => true, 'label' => 'Criada Em:']);
-echo $this->Form->control('data_limite_devolucao',['required' => true]);
-echo $this->Form->control('data_devolucao',['required' => true] );
-echo $this->Form->radio('status', ['Inativo', 'Ativo']);
+echo $this->Form->create(NULL);
+
+echo $this->Form->input(
+    'id_cliente', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' => $cliente,
+        'label'=>'Cliente'
+    ]
+);
+echo $this->Form->input(
+    'id_filme', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' => $filme,
+        'label'=>'Filme'
+    ]
+);
+echo $this->Form->control('data_limite_devolucao',
+    [ 
+    'type' => 'datetime',
+    'dateFormat' => 'dd-MM-yyyy', 
+    'minYear' => date('Y') +1, 
+    'maxYear' => date('Y') + 10,
+    ]
+    );
 
 echo $this->Html->link(__('Cancelar  '), ['controller' => 'Reservas','action' =>'index']);
 echo $this->Form->button('Cadastrar');

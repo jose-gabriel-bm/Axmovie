@@ -24,7 +24,7 @@ class CreateReservas extends AbstractMigration
 
 
         $table->addColumn('valor_multa_atraso','decimal',[
-            'null'=>false,
+            'null'=>true,
             'precision'=>5,
             'scale'=>2
         ]);

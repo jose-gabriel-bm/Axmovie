@@ -44,7 +44,7 @@
         echo $this->Form->select('idioma', ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
         ['empty' => 'Selecione idioma']);
 
-        echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index'],['required' => true]);
+        echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index']);
         echo $this->Form->button('Salvar');
 
         echo $this->Form->end();

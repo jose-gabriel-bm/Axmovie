@@ -49,7 +49,7 @@
         [
             'type' => 'select',
             'multiple' => false,
-            'options' => ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
+            'options' => ['Ingles'=> 'ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
             'label'=>'Idioma'
         ]
     );

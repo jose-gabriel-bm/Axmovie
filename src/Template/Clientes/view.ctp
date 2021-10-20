@@ -15,10 +15,6 @@
                 <h5><b>Dados pessoais</b></h5>
             </label>
             <tr>
-                <td>ID: </td>
-                <td><?php echo $cliente->id; ?></td>
-            </tr>
-            <tr>
                 <td>CPF: </td>
                 <td><?php echo $cliente->cpf; ?></td>
             </tr>

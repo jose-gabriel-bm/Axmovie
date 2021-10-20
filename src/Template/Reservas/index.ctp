@@ -17,13 +17,9 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Cliente</th>
                 <th>Filme</th>
-                <th>Usuario</th>
-                <th>Multa Atraso</th>
-                <th>total a pagar</th>
-                <th>Criada em:</th>
+                <th>Data Locacao</th>
                 <th>Data Limite Devolucao</th>
                 <th>Data Devolucao</th>
                 <th>Status</th>
@@ -34,27 +30,23 @@
         <tbody>
             <?php foreach ($reservas as $reserva): ?>
             <tr>
-                <td><?php echo $reserva->id; ?></td>
                 <td><?php echo $reserva->id_cliente; ?></td>
                 <td><?php echo $reserva->id_filme; ?></td>
-                <td><?php echo $reserva->id_usuario; ?></td>
-                <td><?php echo $reserva->valor_multa_atraso; ?></td>
-                <td><?php echo $reserva->valor_total_pagar; ?></td>
                 <td><?php echo $reserva->created; ?></td>
-                <td><?php echo $reserva->data_limite_devolucao; ?></td>
+                <td><?php echo if($reserva->data_limite_devolucao === null){} ?></td>
                 <td><?php echo $reserva->data_devolucao; ?></td>
                 <td><?php echo $reserva->opcoes_status; ?></td>
                 
                 <td>
-                <?php echo $this->Html->link(__(' Visualizar '), 
+                <?php echo $this->Html->link(__(' Detalhes '), 
                 ['controller' => 'reservas', 'action' => 'view', $reserva->id]);
 
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'reservas', 'action' => 'edit', $reserva->id]);
                 
-                echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$reserva->id ],
-                ['confirm' => 'Realmente deseja apagar o usuario?', $reserva->id ]); 
-                ?> 
+                // echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$reserva->id ],
+                // ['confirm' => 'Realmente deseja apagar o usuario?', $reserva->id ]); 
+                // ?> 
 
                 </td>
             </tr>
