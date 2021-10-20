@@ -15,13 +15,7 @@ echo $this->Form->create($reserva);
 
 echo $this->Form->control('id_cliente' );
 echo $this->Form->control('id_filme');
-echo $this->Form->control('id_usuario');
-echo $this->Form->control('valor_multa_atraso');
-echo $this->Form->control('valor_total_pagar');
-echo $this->Form->control('created' );
 echo $this->Form->control('data_limite_devolucao');
-echo $this->Form->control('data_devolucao' );
-echo $this->Form->radio('status', ['Inativo', 'Ativo']);
 
 echo $this->Html->link(__('Cancelar  '), ['controller' => 'Reservas','action' =>'index']);
 

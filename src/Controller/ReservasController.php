@@ -26,6 +26,11 @@ class ReservasController extends AppController{
     {
         $reserva = $this->Reservas->get($id);
         $this->set(['reserva' => $reserva]);
+
+        $reserva = $this->Reservas->get($id, [
+            'contain' => ['Filmes','Clientes']
+        ]);
+        $this->set(compact('reserva'));
     }
 
     public function adicionar()

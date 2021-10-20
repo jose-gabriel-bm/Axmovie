@@ -12,11 +12,11 @@
     <table >
         <tr>
             <td>Cliente: </td>
-            <td><?php echo $reserva->id_cliente; ?></td>
+            <td><?php echo $reserva->cliente->nome; ?></td>
         </tr>
         <tr>
             <td>Filme: </td>
-            <td><?php echo $reserva->id_filme; ?></td>
+            <td><?php echo $reserva->filme->titulo; ?></td>
         </tr>
         <tr> 
             <td>Multa por Atraso: </td>
