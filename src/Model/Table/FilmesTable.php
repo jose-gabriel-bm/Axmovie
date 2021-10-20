@@ -62,6 +62,9 @@ class FilmesTable extends Table {
     {
         $rules->add($rules->isUnique(['titulo'], 'Titulo ja esta em uso'));
         return $rules;
+
+        $rules->add($rules->isUnique(['cpf'], 'cpf ja esta cadastrado'));
+        return $rules;
     } 
     
 }

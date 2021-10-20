@@ -14,38 +14,50 @@
 
 <?php
 
-use PhpParser\Node\Stmt\Label;
+    echo $this->Form->create($filme);
 
-echo $this->Form->create($filme);
+    echo $this->Form->control('titulo',['required' => true]);
+    echo $this->Form->input(
+        'id_genero', 
+        [
+            'type' => 'select',
+            'multiple' => false,
+            'options' =>  $generos,
+            'label'=>'Genero'
+        ]);
+    echo $this->Form->control('id_usuario' ,['required' => true]);
+    echo $this->Form->input(
+        'id_diretor', 
+        [
+            'type' => 'select',
+            'multiple' => false,
+            'options' =>  $diretores,
+            'label'=>'Diretor'
+        ]);
+    ?>
+    <label>Lancamento*</label>
+    <?php
+    echo $this->Form->radio('lancamento', ['Não', 'Sim']);
+    echo $this->Form->control('valor_compra',['required' => true]);
+    ?>
+    <label>Status*</label>
+    <?php
+    echo $this->Form->radio('status', ['Inativo', 'Ativo']);
 
-echo $this->Form->control('titulo',['required' => true]);
-echo $this->Form->control('id_genero' ,['required' => true]);
-echo $this->Form->control('id_usuario' ,['required' => true]);
-echo $this->Form->control('id_diretor',['required' => true]);?>
-<label>Lancamento*</label>
-<?php
-echo $this->Form->radio('lancamento', ['Não', 'Sim']);
-echo $this->Form->control('valor_compra',['required' => true]);
-?>
-<label>Status*</label>
-<?php
-echo $this->Form->radio('status', ['Inativo', 'Ativo']);
-
-echo $this->Form->input(
-    'idioma', 
-    [
-        'type' => 'select',
-        'multiple' => false,
-        'options' => $idioma,
-        'default'=>'Portugues',
-        'label'=>'Idioma'
-    ]
-);
+    echo $this->Form->input(
+        'idioma', 
+        [
+            'type' => 'select',
+            'multiple' => false,
+            'options' => ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
+            'label'=>'Idioma'
+        ]
+    );
 
 
-echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index'],['required' => true]);
-echo $this->Form->button('Cadastrar');
+    echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index'],['required' => true]);
+    echo $this->Form->button('Cadastrar');
 
-echo $this->Form->end();
+    echo $this->Form->end();
 ?>
 </div>

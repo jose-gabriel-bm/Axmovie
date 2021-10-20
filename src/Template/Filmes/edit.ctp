@@ -8,29 +8,46 @@
     </ul>
 </nav>
 <div class="users index large-6 medium-6 columns content">
-<h3> Editar Filme<h3>
+        <h3> Editar Filme<h3>
 <?php
-
-echo $this->Form->create($filme);
-
-echo $this->Form->control('titulo');
-echo $this->Form->control('id_genero' );
-echo $this->Form->control('id_usuario');
-echo $this->Form->control('id_diretor');?>
-
-<label>Lancamento</label>
+        echo $this->Form->create($filme);
+        echo $this->Form->control('titulo');
+        echo $this->Form->input(
+        'id_genero', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' =>  $generos,
+        'label'=>'Genero'
+    ]);
+        echo $this->Form->control('id_usuario');
+        echo $this->Form->input(
+        'id_diretor', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' =>  $diretores,
+        'label'=>'Diretor'
+    ]); 
+?>
+    <label>Lancamento</label>
 <?php
-echo $this->Form->radio('lancamento', ['Não', 'Sim']);
-echo $this->Form->control('valor_compra');
-echo $this->Form->radio('status', ['Inativo', 'Ativo']);
-echo $this->Form->select('idioma', ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
-['empty' => 'Selecione idioma']);
+        echo $this->Form->radio('lancamento', ['Não', 'Sim']);
+        echo $this->Form->control('valor_compra');
+?>
+    <label>Status</label>
+<?php
+        echo $this->Form->radio('status', ['Inativo', 'Ativo']);
+?>
+    <label>Idioma</label>
+<?php
+        echo $this->Form->select('idioma', ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
+        ['empty' => 'Selecione idioma']);
 
-echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index'],['required' => true]);
-echo $this->Form->button('Salvar');
+        echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index'],['required' => true]);
+        echo $this->Form->button('Salvar');
 
-echo $this->Form->end();
-
+        echo $this->Form->end();
 ?>
 </div>
 <div class="users view large-1 medium-1 columns content"></div>

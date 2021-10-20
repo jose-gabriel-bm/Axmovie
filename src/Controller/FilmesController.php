@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\Table;
-use Cake\Auth\DefaultPasswordHasher;
 
 class FilmesController extends AppController{
 
@@ -38,13 +36,23 @@ public function view($id = null){
 
 public function adicionar(){
 
-    $idioma = ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'];
-
     $filme = $this->Filmes->newEntity();
+    
+    $this->loadModel('Generos');
+    $generos =$this->Generos->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'genero'
+    ])->toArray();
+
+    $this->loadModel('Diretores');
+    $diretores =$this->Diretores->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'nome'
+    ])->toArray();
 
     if($this->request->is('post')){
         $filme = $this->Filmes->patchEntity($filme, $this->request->getData());
-             
+
         if($this->Filmes->save($filme)){
             $this->Flash->success(__('Filme Cadastrado com sucesso'));
             return $this->redirect(['action' => 'index']);
@@ -52,13 +60,25 @@ public function adicionar(){
             $this->Flash->error(__('Erro: Filme não foi Cadastrado, tentar novamente '));
         }
     }   
-    $this->set(compact('filme','idioma'));
+    $this->set(compact('filme','generos','diretores'));
 
     }
 
     public function edit($id = null){
 
         $filme = $this->Filmes->get($id);
+
+        $this->loadModel('Generos');
+        $generos =$this->Generos->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'genero'
+        ])->toArray();
+    
+        $this->loadModel('Diretores');
+        $diretores =$this->Diretores->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'nome'
+        ])->toArray();
       
         if($this->request->is(['post','put'])){
            $filme = $this->Filmes->patchEntity($filme, $this->request->data);
@@ -71,7 +91,7 @@ public function adicionar(){
            }
         }
       
-        $this->set(compact('filme'));
+        $this->set(compact('filme','generos','diretores'));
       
       }
       

@@ -48,7 +48,7 @@ echo $this->Form->create($cliente);
 </label>
 
 <?php
-    echo $this->Form->control('Codigo Pais',['value' => $cliente->contatos[0]->codigo_pais ]);
+    echo $this->Form->control('codigo_pais',['value' => $cliente->contatos[0]->codigo_pais ]);
     echo $this->Form->control('DDD',['value' => $cliente->contatos[0]->ddd ]);
     echo $this->Form->control('Celular',['value' => $cliente->contatos[0]->numero ]);
 ?>
