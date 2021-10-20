@@ -73,8 +73,6 @@ public function adicionar(){
             'valueField' => 'perfil'
         ])->toArray();
       
-
-
         unset($usuario['password']);
       
         if ($this->request->is(['post','put'])) {
