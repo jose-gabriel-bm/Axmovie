@@ -24,8 +24,7 @@ echo $this->Form->input(
         'label'=>'Cliente'
     ]
 );
-echo $this->Form->input(
-    'id_filme', 
+echo $this->Form->input('id_filme', 
     [
         'type' => 'select',
         'multiple' => false,
@@ -33,6 +32,14 @@ echo $this->Form->input(
         'label'=>'Filme'
     ]
 );
+echo $this->Form->control('data_inicio_locacao',
+    [ 
+    'type' => 'datetime',
+    'minYear' => date('Y') +1, 
+    'maxYear' => date('Y') + 10,
+    
+    ]
+    );
 echo $this->Form->control('data_limite_devolucao',
     [ 
     'type' => 'datetime',

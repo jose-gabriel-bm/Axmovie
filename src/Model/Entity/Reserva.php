@@ -15,7 +15,7 @@ class Reserva extends Entity
         'id_usuario'=>true,
         'valor_multa_atraso'=>true,
         'valor_total_pagar'=>true,
-        'created'=>true,
+        'data_inicio_locacao'=>true,
         'data_limite_devolucao'=>true,
         'data_devolucao'=>true,
         'status'=>true,

@@ -13,8 +13,23 @@
 
 echo $this->Form->create($reserva);
 
-echo $this->Form->control('id_cliente' );
-echo $this->Form->control('id_filme');
+echo $this->Form->input('id_cliente', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' => $cliente,
+        'label'=>'Cliente'
+    ]
+);
+echo $this->Form->input('id_filme', 
+    [
+        'type' => 'select',
+        'multiple' => false,
+        'options' => $filme,
+        'label'=>'Filme'
+    ]
+);
+echo $this->Form->control('data_inicio_locacao');
 echo $this->Form->control('data_limite_devolucao');
 
 echo $this->Html->link(__('Cancelar  '), ['controller' => 'Reservas','action' =>'index']);

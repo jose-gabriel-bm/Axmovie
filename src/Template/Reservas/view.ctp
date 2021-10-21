@@ -19,16 +19,8 @@
             <td><?php echo $reserva->filme->titulo; ?></td>
         </tr>
         <tr> 
-            <td>Multa por Atraso: </td>
-            <td><?php echo !$reserva->valor_multa_atraso ? "-" :$reserva->valor_multa_atraso; ?></td>
-        </tr>
-        <tr> 
-            <td>Total a pagar reserva: </td>
-            <td><?php echo !$reserva->valor_total_pagar ?"-":$reserva->valor_total_pagar; ?></td>
-        </tr>
-        <tr> 
             <td>Reserva Criada em: </td>
-            <td><?php echo $reserva->created; ?></td>
+            <td><?php echo $reserva->data_inicio_locacao; ?></td>
         </tr>
         <tr>
             <td>Data limite Devolução: </td>
@@ -37,6 +29,14 @@
         <tr>
             <td>Data que foi Devolvido: </td>
             <td><?php echo !$reserva->data_devolucao ?"-":$reserva->data_devolucao; ?></td>
+        </tr>
+        <tr> 
+            <td>Multa por Atraso: </td>
+            <td><?php echo !$reserva->valor_multa_atraso ? "-" :$reserva->valor_multa_atraso; ?></td>
+        </tr>
+        <tr> 
+            <td>Valor total da reserva: </td>
+            <td><?php echo !$reserva->valor_total_pagar ?"-":$reserva->valor_total_pagar; ?></td>
         </tr>
         <tr>
             <td>Status: </td>

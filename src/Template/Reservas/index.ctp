@@ -11,7 +11,9 @@
     <h3>Lista de Reservas</h3>
     <nav class="large-2 medium-2 ">
         <ul class="side-nav">
-        <?php echo $this->Html->link(__('Adicionar nova Reserva '), ['controller' => 'reservas','action' =>'adicionar']); ?>  
+        <?php
+
+echo $this->Html->link(__('Adicionar nova Reserva '), ['controller' => 'reservas','action' =>'adicionar']); ?>  
         </ul>
     </nav>
     <table>
@@ -19,7 +21,7 @@
             <tr>
                 <th>Cliente</th>
                 <th>Filme</th>
-                <th>Data Locacao</th>
+                <th>Data Inicio Locação</th>
                 <th>Data Limite Devolucao</th>
                 <th style="text-align: center; vertical-align: middle;" >Data Devolucao</th>
                 <th style="text-align: center; vertical-align: middle;">Status</th>
@@ -32,19 +34,31 @@
             <tr>
                 <td><?php echo $reserva->cliente->nome; ?></td>
                 <td><?php echo $reserva->filme->titulo; ?></td>
-                <td><?php echo $reserva->created; ?></td>
+                <td><?php echo $reserva->data_inicio_locacao; ?></td>
                 <td><?php echo $reserva->data_limite_devolucao;?></td>
                 <td style="text-align: center; vertical-align: middle;"><?php echo !$reserva->data_devolucao ? "-" : $reserva->data_limite_devolucao; ?></td>
                 <td style="text-align: center; vertical-align: middle;"><?php echo $reserva->opcoes_status; ?></td>
                 
                 <td style="text-align: center; vertical-align: middle;">
 
-                <?php echo $this->Html->link(__(' Detalhes '), 
-                ['controller' => 'reservas', 'action' => 'view', $reserva->id]);
+               
+                <?php 
+                if($reserva->status == 1){
+                   
+                    echo $this->Html->link(__(' Editar '), 
+                    ['controller' => 'reservas', 'action' => 'edit', $reserva->id]);
 
-                echo $this->Html->link(__(' Editar '), 
-                ['controller' => 'reservas', 'action' => 'edit', $reserva->id]);
-                
+                    echo $this->Html->link(__(' Detalhes'), 
+                    ['controller' => 'reservas', 'action' => 'view', $reserva->id]);
+
+                    echo $this->Html->link(__(' Fechar Reserva '), 
+                    ['controller' => 'reservas', 'action' => 'fechamento', $reserva->id]);
+
+                }else{
+                    echo $this->Html->link(__(' Detalhes'), 
+                    ['controller' => 'reservas', 'action' => 'view', $reserva->id]);
+                }
+            
                 // echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$reserva->id ],
                 // ['confirm' => 'Realmente deseja apagar o usuario?', $reserva->id ]); 
                 // ?> 

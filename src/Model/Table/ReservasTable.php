@@ -2,7 +2,6 @@
 
 namespace App\Model\Table;
 
-use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -31,6 +30,7 @@ class ReservasTable extends Table {
         $validator
         ->requirePresence('id_cliente','create')
         ->notEmpty('id_cliente');
+        
 
         $validator
         ->requirePresence('id_filme','create')
@@ -40,12 +40,9 @@ class ReservasTable extends Table {
         ->requirePresence('id_usuario','create')
         ->notEmpty('id_usuario');
 
-        // $validator
-        // ->requirePresence('created','create');
-
-        // $validator
-        // ->requirePresence('data_locacao','create')
-        // ->notEmpty('data_locacao');
+        $validator
+        ->requirePresence('data_inicio_locacao','create');
+    
 
         $validator
         ->requirePresence('data_limite_devolucao','create')

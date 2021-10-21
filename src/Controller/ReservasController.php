@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Reserva;
 
 class ReservasController extends AppController{
 
@@ -58,6 +59,7 @@ class ReservasController extends AppController{
                 'id_usuario' => '3',
 		        'id_cliente' => $reserva['id_cliente'],
 		        'id_filme' => $reserva['id_filme'],
+                'data_inicio_locacao' => $reserva['data_inicio_locacao'],
 		        'data_limite_devolucao' => $reserva['data_limite_devolucao'],
 		        'status' => '1'
             ]);
@@ -77,6 +79,18 @@ class ReservasController extends AppController{
     {
 
         $reserva = $this->Reservas->get($id);
+
+        $this->loadModel('Filmes');
+        $filme =$this->Filmes->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'titulo'
+        ])->toArray();
+
+        $this->loadModel('Clientes');
+        $cliente =$this->Clientes->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'nome'
+        ])->toArray();
       
         if($this->request->is(['post','put'])){
             $reserva = $this->Reservas->patchEntity($reserva, $this->request->data);
@@ -89,7 +103,7 @@ class ReservasController extends AppController{
            }
         }
 
-        $this->set(compact('reserva'));
+        $this->set(compact('reserva','cliente','filme'));
       
     }
          
@@ -105,4 +119,38 @@ class ReservasController extends AppController{
         // }
         // return $this->redirect(['action' =>'index']);      
     }
+    public function fechamento($id = null)
+    {
+        $reserva = $this->Reservas->get($id);
+
+        
+        // $teste = $this->calculoReserva($reserva);
+        // debug($teste);
+
+
+        $this->set(['reserva' => $reserva]);
+
+        $this->loadModel('Filmes');
+        $filme =$this->Filmes->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'titulo'
+        ])->toArray();
+
+        $this->loadModel('Clientes');
+        $cliente =$this->Clientes->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'nome'
+        ])->toArray();
+
+       
+        $this->set(compact('reserva','filme','cliente'));
+    }
+    // private function calculoReserva(Reserva $reserva){
+        
+    //     $hoje = date('d/m/Y H:i:s');
+    //     $this->reserva->data_devolucao = $hoje ;
+
+    //     return $reserva;
+       
+    // }
 }

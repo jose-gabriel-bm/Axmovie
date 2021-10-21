@@ -65,7 +65,7 @@ if (Configure::read('debug')) {
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
  * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
  */
-date_default_timezone_set(Configure::read('App.defaultTimezone'));
+date_default_timezone_set('America/Sao_Paulo');
 
 /*
  * Configure the mbstring extension to use the correct encoding.
@@ -73,7 +73,7 @@ date_default_timezone_set(Configure::read('App.defaultTimezone'));
 mb_internal_encoding(Configure::read('App.encoding'));
 
 
-ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
+ini_set('intl.default_locale', 'pt_BR');
 
 /*
  * Register application error and exception handlers.
@@ -146,6 +146,8 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+// \Cake\I18n\Time::setToStringFormat('dd/MM/yyyy HH:mm:ss');
+// \Cake\I18n\Date::setToStringFormat('dd/MM/yyyy');
 
-Cake\I18n\FrozenDate::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
-Cake\I18n\FrozenTime::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
+// Cake\I18n\FrozenDate::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
+// Cake\I18n\FrozenTime::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
