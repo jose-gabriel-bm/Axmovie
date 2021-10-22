@@ -15,7 +15,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->applyMiddleware('csrf');
 
-    $routes->connect('/', ['controller' => 'Usuarios', 'action' => 'login']);
+    $routes->connect('/', ['controller' => 'Users', 'action' => 'login']);
 
     // $routes->connect('/pages/*', ['controller' => 'Usuarios', 'action' => 'display']);
 

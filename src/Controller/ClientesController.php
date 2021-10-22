@@ -64,10 +64,8 @@ public function adicionar()
             'id_cidade' => $cliente['Cidade'],
             'cep' => $cliente['Cep'] ]);          
              
-        if($this->Enderecos->save($entityEndereco)) {
+        $this->Enderecos->save($entityEndereco);
             
-        } 
-
         $this->loadModel('Contatos');
         $entityContato = $this->Contatos->newEntity ([
 
@@ -79,9 +77,9 @@ public function adicionar()
             'whatsapp' => $cliente['Whatsapp'] ]);                         
              
         if($this->Contatos->save($entityContato)) {
-            
+            $this->Flash->success(__('Cliente Cadastrado com sucesso.'));
         } 
-        $this->Flash->success(__('Cliente Cadastrado com sucesso.'));
+       
         return $this->redirect(['action' => 'index']);
     }    
     

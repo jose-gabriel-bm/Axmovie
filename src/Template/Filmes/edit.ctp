@@ -1,10 +1,11 @@
 <nav class="large-2 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
        
-        <li class="heading"><?= $this->Html->link(__('Usuarios'), ['controller' => 'Usuarios','action' =>'index']) ?></li>
+        <li class="heading"><?= $this->Html->link(__('Usuarios'), ['controller' => 'Users','action' =>'index']) ?></li>
         <li class="heading"><?= $this->Html->link(__('Filmes'), ['controller' => 'Filmes','action' =>'index']) ?></li>
         <li class="heading"><?= $this->Html->link(__('Clientes'), ['controller' => 'Clientes','action' =>'index']) ?></li>
         <li class="heading"><?= $this->Html->link(__('Reservas'), ['controller' => 'Reservas','action' =>'index']) ?></li>  
+        <li class="heading"><?= $this->Html->link(__(' Sair '), ['controller' => 'Users', 'action' => 'logout', '_full' => true]);?> 
     </ul>
 </nav>
 <div class="users index large-6 medium-6 columns content">
@@ -20,7 +21,7 @@
         'options' =>  $generos,
         'label'=>'Genero'
     ]);
-        echo $this->Form->control('id_usuario');
+
         echo $this->Form->input(
         'id_diretor', 
     [
@@ -38,11 +39,16 @@
     <label>Status</label>
 <?php
         echo $this->Form->radio('status', ['Inativo', 'Ativo']);
-?>
-    <label>Idioma</label>
-<?php
-        echo $this->Form->select('idioma', ['Ingles', 'Japones','Chines','Portugues','Hindi','Espanhol'],
-        ['empty' => 'Selecione idioma']);
+
+         echo $this->Form->input(
+            'idioma', 
+            [
+                'type' => 'select',
+                'multiple' => false,
+                'options' => ['Ingles' => 'ingles','Japones' => 'Japones','Chines' => 'Chines','Portugues' => 'Portugues','Hindi' => 'Hindi','Espanhol' =>'Espanhol'],
+                'label'=>'Idioma'
+            ]
+        );
 
         echo $this->Html->link(__('Cancelar  '), ['controller' => 'Filmes','action' =>'index']);
         echo $this->Form->button('Salvar');

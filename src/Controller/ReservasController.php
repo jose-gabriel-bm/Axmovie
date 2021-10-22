@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use App\Model\Entity\Reserva;
+use DateTime;
 
 class ReservasController extends AppController{
 
@@ -122,12 +123,9 @@ class ReservasController extends AppController{
     public function fechamento($id = null)
     {
         $reserva = $this->Reservas->get($id);
-
-        
-        // $teste = $this->calculoReserva($reserva);
-        // debug($teste);
-
-
+ 
+        $this->calculoReserva($reserva);
+      
         $this->set(['reserva' => $reserva]);
 
         $this->loadModel('Filmes');
@@ -142,15 +140,54 @@ class ReservasController extends AppController{
             'valueField' => 'nome'
         ])->toArray();
 
+        if($this->request->is(['post','put'])){
+
+            // $reserva = $this->request->data();
+        
+            $entityReserva = $this->Reservas->newEntity ([
+                'id_usuario' => '3',
+                'id_cliente' => $reserva['id_cliente'],
+                'id_filme' => $reserva['id_filme'],
+                'valor_multa_atraso' => $reserva['valor_multa_atraso'],
+                'valor_total_pagar' => $reserva['valor_total_pagar'],
+                'data_inicio_locacao' => $reserva['data_inicio_locacao'],
+                'data_limite_devolucao' => $reserva['data_limite_devolucao'],
+                'data_devolucao' => $reserva['data_devolucao'],
+                'status' => '0'
+            ]);
+           
+            if($this->Reservas->save($entityReserva)){
+              $this->Flash->success('Reserva fechada com sucesso');
+              return $this->redirect(['action' => 'index']);
+            }else{
+              $this->Flash->error('Reserva não foi fechada, por gentileza tentar novamente');
+           }
+        }
        
         $this->set(compact('reserva','filme','cliente'));
     }
-    // private function calculoReserva(Reserva $reserva){
+    private function calculoReserva(Reserva $reserva){
         
-    //     $hoje = date('d/m/Y H:i:s');
-    //     $this->reserva->data_devolucao = $hoje ;
+        $hoje = new  DateTime('now');
+        $reserva->data_devolucao = $hoje;
 
-    //     return $reserva;
+        $diferencaLocacao = $reserva->data_inicio_locacao->diff($reserva->data_limite_devolucao);
+        $horasLocacao = $diferencaLocacao->h + ($diferencaLocacao->days * 24);
+
+        $horasAtraso = 0;
+        if($reserva->data_limite_devolucao < $reserva->data_devolucao){
+            $diferencaAtraso = $reserva->data_limite_devolucao->diff($reserva->data_devolucao);
+            $horasAtraso = $diferencaAtraso->h + ($diferencaAtraso->days * 24);
+        }
+      
+        $valorLocacao = $horasLocacao * 0.15;
+        $valorAtraso = $horasAtraso * 00.10;
        
-    // }
+        $reserva->valor_multa_atraso = ($horasAtraso * 00.20) + $valorAtraso ;
+    
+        $reserva->valor_total_pagar = $reserva->valor_multa_atraso + $valorLocacao;
+
+        return $reserva;
+       
+    }
 }
