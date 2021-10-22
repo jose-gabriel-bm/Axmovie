@@ -34,7 +34,7 @@ public function view($id = null){
 }
 
 public function adicionar(){
-
+    
     $filme = $this->Filmes->newEntity();
     
     $this->loadModel('Generos');
@@ -50,6 +50,7 @@ public function adicionar(){
     ])->toArray();
 
     if($this->request->is('post')){
+        
         $filme = $this->Filmes->patchEntity($filme, $this->request->getData());
 
         if($this->Filmes->save($filme)){

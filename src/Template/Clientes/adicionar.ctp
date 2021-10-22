@@ -23,10 +23,7 @@ echo $this->Form->create(null); ?>
 echo $this->Form->control('Nome',['required' => true]);
 echo $this->Form->control('CPF' ,['required' => true]);
 echo $this->Form->control('Email');?>
-<label>Status*</label>
-<?php
-echo $this->Form->radio('status', ['Inativo', 'Ativo'],['required' => true]);
-?>
+
 </div>
 <div>
 <label>

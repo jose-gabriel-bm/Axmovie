@@ -3,6 +3,7 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\ORM\RulesChecker;
 
 class ClientesTable extends Table {
 
@@ -21,4 +22,12 @@ class ClientesTable extends Table {
             'foreignKey' => 'id_cliente'
         ]);
     }
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['nome'], 'Nome ja resgistrado'));
+        return $rules;
+
+        $rules->add($rules->isUnique(['cpf'], 'cpf ja esta cadastrado'));
+        return $rules;
+    } 
 }

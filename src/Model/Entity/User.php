@@ -10,6 +10,7 @@ class User extends Entity
         'id'=>true,
         'nome'=>true,
         'email'=>true,
+        'username'=>true,
         'password'=>true,
         'id_perfil'=>true,
         'status'=>true,

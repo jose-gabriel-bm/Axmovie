@@ -7,7 +7,7 @@
 echo $this->Form->create($usuario);
 
 echo $this->Form->control('nome',['required' => true]);
-echo $this->Form->control('username',['required' => true,'label'=>'Usuario']);
+echo $this->Form->control('username',['required' => true]);
 echo $this->Form->input(
     'id_perfil', 
     [

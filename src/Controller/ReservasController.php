@@ -56,8 +56,7 @@ class ReservasController extends AppController{
            
             $entityReserva = $this->Reservas->newEntity([
                 
-                // id_usuario => $this->Auth-usuarios('id'),
-                'id_usuario' => '3',
+                'id_usuario' =>  $this->Auth->user('id'),
 		        'id_cliente' => $reserva['id_cliente'],
 		        'id_filme' => $reserva['id_filme'],
                 'data_inicio_locacao' => $reserva['data_inicio_locacao'],
@@ -141,11 +140,9 @@ class ReservasController extends AppController{
         ])->toArray();
 
         if($this->request->is(['post','put'])){
-
-            // $reserva = $this->request->data();
         
             $entityReserva = $this->Reservas->newEntity ([
-                'id_usuario' => '3',
+                'id_usuario' =>  $this->Auth->user('id'),
                 'id_cliente' => $reserva['id_cliente'],
                 'id_filme' => $reserva['id_filme'],
                 'valor_multa_atraso' => $reserva['valor_multa_atraso'],

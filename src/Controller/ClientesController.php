@@ -34,29 +34,29 @@ public function adicionar()
     
     if ($this->request->is(['patch', 'post', 'put',])) {
 
-
         $cliente = $this->request->data();
         
         $entityCliente = $this->Clientes->newEntity ([
-            'id_usuario' => '3',
-            // id_usuario => $this->Auth-usuarios('id'),
+            'id_usuario' =>  $this->Auth->user('id'),
             'nome' => $cliente['Nome'],
             'cpf' => $cliente['CPF'],
             'email' => $cliente['Email'],
-            'status' => $cliente['status'] ]);
+            'status' => 1 ]);
     
         $idCliente = null;
         if($this->Clientes->save($entityCliente)) {
             $idCliente = $entityCliente->id;  
-        } 
+        } else{
+            $this->Flash->error('Dados pessoais do cliente nao pode ser Salvo.');
+            return;
+        }
 
         //Esse componente loadModel e usado quando esta acessando uma tabela diferente da controler
         $this->loadModel('Enderecos');
         $entityEndereco = $this->Enderecos->newEntity ([
 
-            'id_usuario' => '3',
+            'id_usuario' =>  $this->Auth->user('id'),
             'id_cliente' => $idCliente,
-            // id_usuario => $this->Auth-usuarios('id'),
             'logradouro' => $cliente['Logradouro'],
             'numero' => $cliente['Numero'],
             'complemento' => $cliente['Complemento'],
@@ -78,7 +78,10 @@ public function adicionar()
              
         if($this->Contatos->save($entityContato)) {
             $this->Flash->success(__('Cliente Cadastrado com sucesso.'));
-        } 
+        } else{
+            $this->Flash->error('Numero de contato em duplicidade');
+            return $this->redirect(['action' => 'adicionar']);
+        }
        
         return $this->redirect(['action' => 'index']);
     }    
@@ -106,7 +109,4 @@ public function edit($id = null){
     $this->set(compact('cliente'));
 }
       
-// // public function inativar()
-// //     {
-//     }
 }
