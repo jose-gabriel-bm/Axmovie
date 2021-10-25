@@ -39,21 +39,25 @@ class ReservasController extends AppController{
     {
         
         $this->loadModel('Clientes');
+
         $cliente =$this->Clientes->find('list', [
             'keyField' => 'id',
             'valueField' => 'nome'
-        ])->toArray();
+        ])
+        ->where(['status' => true])
+        ->toArray();
 
         $this->loadModel('Filmes');
         $filme =$this->Filmes->find('list', [
             'keyField' => 'id',
             'valueField' => 'titulo'
-        ])->toArray();
+        ])
+        ->where(['status' => true])
+        ->toArray();
 
         if($this->request->is(['post', 'put'])){
-
             $reserva = $this->request->data;
-           
+
             $entityReserva = $this->Reservas->newEntity([
                 
                 'id_usuario' =>  $this->Auth->user('id'),
@@ -79,18 +83,22 @@ class ReservasController extends AppController{
     {
 
         $reserva = $this->Reservas->get($id);
-
+       
         $this->loadModel('Filmes');
         $filme =$this->Filmes->find('list', [
             'keyField' => 'id',
             'valueField' => 'titulo'
-        ])->toArray();
+        ])
+        ->where(['status' => true])
+        ->toArray();
 
         $this->loadModel('Clientes');
         $cliente =$this->Clientes->find('list', [
             'keyField' => 'id',
             'valueField' => 'nome'
-        ])->toArray();
+        ])
+        ->where(['status' => true])
+        ->toArray();
       
         if($this->request->is(['post','put'])){
             $reserva = $this->Reservas->patchEntity($reserva, $this->request->data);
@@ -121,6 +129,9 @@ class ReservasController extends AppController{
     }
     public function fechamento($id = null)
     {
+        $idLogado = $this->Auth->user('id');
+        $this->set(compact('idLogado'));
+
         $reserva = $this->Reservas->get($id);
  
         $this->calculoReserva($reserva);
@@ -140,25 +151,17 @@ class ReservasController extends AppController{
         ])->toArray();
 
         if($this->request->is(['post','put'])){
-        
-            $entityReserva = $this->Reservas->newEntity ([
-                'id_usuario' =>  $this->Auth->user('id'),
-                'id_cliente' => $reserva['id_cliente'],
-                'id_filme' => $reserva['id_filme'],
-                'valor_multa_atraso' => $reserva['valor_multa_atraso'],
-                'valor_total_pagar' => $reserva['valor_total_pagar'],
-                'data_inicio_locacao' => $reserva['data_inicio_locacao'],
-                'data_limite_devolucao' => $reserva['data_limite_devolucao'],
-                'data_devolucao' => $reserva['data_devolucao'],
-                'status' => '0'
-            ]);
+
+            $reserva = $this->Reservas->patchEntity($reserva, $this->request->data);
+
+            debug($reserva);
            
-            if($this->Reservas->save($entityReserva)){
-              $this->Flash->success('Reserva fechada com sucesso');
-              return $this->redirect(['action' => 'index']);
-            }else{
-              $this->Flash->error('Reserva não foi fechada, por gentileza tentar novamente');
-           }
+        //     if($this->Reservas->save($reserva)){
+        //       $this->Flash->success('Reserva fechada com sucesso');
+        //       return $this->redirect(['action' => 'index']);
+        //     }else{
+        //       $this->Flash->error('Reserva não foi fechada, por gentileza tentar novamente');
+        //    }
         }
        
         $this->set(compact('reserva','filme','cliente'));

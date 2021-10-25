@@ -2,7 +2,7 @@
 
 return [
    
-    'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
+    'debug' => true,
 
     'Security' => [
         'salt' => env('SECURITY_SALT', '9683a2d68392d558fd645ee00ae47202d1cc7599250723b5d58d36f124b1917e'),
