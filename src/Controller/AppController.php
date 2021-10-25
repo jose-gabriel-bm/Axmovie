@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\Event;
 
 class AppController extends Controller
 {
@@ -25,8 +26,13 @@ class AppController extends Controller
                 'controller'=>'Users',
                 'action'=>'login'
             ]
-         ]);
-        
+         ]);       
+    }
+    public function beforeRender(Event $event)
+    {
+        $usuarioLogado = $this->Auth->user('username');
+        $this->set(compact('usuarioLogado'));
         
     }
+    
 }

@@ -20,26 +20,28 @@ $cakeDescription = 'Axmovie';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-12 medium-10 columns">
-            <!-- <li>
-                <h3><a>
-                <?php echo $this->Html->link(__(' Sair '), 
-                ['controller' => 'Users', 'action' => 'logout', '_full' => true]);?>
-                </a></h3>
-            </li> -->
-            <li>
-                <h3><a>
+
+<nav class="top-bar expanded" data-topbar role="navigation">
+
+<table class="title-area large-12 medium-10 columns">
+    <tr>
+        <td>
+            <h4><a>
                 <?php echo $this->Html->link(__(' Axmovie '), 
                 ['controller' => 'Usuarios', 'action' => 'index', '_full' => true]);?>
-                </a></h3>
-            </li>
-           
-            
-        </ul>
-        <div class="top-bar-section">
-        </div>
-    </nav>
+            </a></h4> 
+        </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td>
+             <h4><a> <?php echo $usuarioLogado?> </a></h4> 
+        </td>
+    </tr>
+</table>
+</nav>
+   
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>

@@ -31,6 +31,8 @@ public function view($id = null){
 
 public function adicionar()
 {
+    // $usuarioLogado = $this->Auth->user('username');
+    // $this->set(compact('usuarioLogado'));
     
     if ($this->request->is(['patch', 'post', 'put',])) {
 
