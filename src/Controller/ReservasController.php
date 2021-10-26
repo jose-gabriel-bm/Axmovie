@@ -149,12 +149,17 @@ class ReservasController extends AppController{
             'keyField' => 'id',
             'valueField' => 'nome'
         ])->toArray();
+       
+         $idCliente = $reserva->id_cliente;
+         $idFilme = $reserva->id_filme;
 
         if($this->request->is(['post','put'])){
-
+            $hoje = new  DateTime('now');
+            $reserva->data_devolucao = $hoje;
+            // debug($reserva->date_devolucao);
             $reserva = $this->Reservas->patchEntity($reserva, $this->request->data);
-
-            debug($reserva);
+            debug($this->request->data);
+           
            
         //     if($this->Reservas->save($reserva)){
         //       $this->Flash->success('Reserva fechada com sucesso');
@@ -164,7 +169,7 @@ class ReservasController extends AppController{
         //    }
         }
        
-        $this->set(compact('reserva','filme','cliente'));
+        $this->set(compact('reserva','filme','cliente','idCliente','idFilme'));
     }
     private function calculoReserva(Reserva $reserva){
         

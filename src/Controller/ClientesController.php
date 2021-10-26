@@ -20,7 +20,6 @@ class ClientesController extends AppController
     public function view($id = null)
     {
 
-
         $this->loadModel('Enderecos');
         $cliente = $this->Clientes->get($id, [
             'contain' => ['Enderecos', 'Contatos']

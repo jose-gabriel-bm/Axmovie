@@ -4,19 +4,19 @@ a.disabled {
 }
 /* menu superior */
 a:hover {
-    color: rgb(5, 5, 5);
+    color:#fdfbfb;
 }
 
 a {
-    color: #15848F;
+    color:rgb(10, 10, 10) ;
 }
 /* menu superior */
 .side-nav li a:not(.button) {
-    color: #090a0a;
+    color: #f6fcfc;
 }
 
 .side-nav li a:not(.button):hover {
-    color: #000000;
+    color: #070707;
 }
 
 header {
@@ -43,13 +43,13 @@ legend {
 
 .actions.columns {
     margin-top:1rem;
-    border-left: 5px solid #e8eaeb;
+    border-left: 5px solid #0c0c0c;
     padding-left: 15px;
     padding: 32px 20px;
 }
 
 .actions.columns h3 {
-    color:#ebf2f3;
+    color:#070707;
 }
 
 .related table {
@@ -79,7 +79,7 @@ legend {
     padding: 0.25rem 0.5rem 0.375rem;
     font-size: 0.8rem;
     background-color: #0097a7;
-    color: #fff;
+    color: rgb(7, 7, 7);
     border-radius: 1000px;
 }
 
@@ -164,7 +164,7 @@ input[type=radio] {
 }
 
 .view h2 {
-    color: #6F6F6F;
+    color: #020202;
 }
 
 .view .columns.strings {
@@ -174,8 +174,8 @@ input[type=radio] {
 }
 
 .view .numbers {
-    background-color: #B7E3EC;
-    color: #FFF;
+    background-color: #050505;
+    color: rgb(10, 10, 10);
     border-radius: 3px;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.24);
     margin-right: 0.7rem;
@@ -472,6 +472,7 @@ div.message.hidden {
 
 .vertical-table td {
     text-align: right;
+
 }
 
 .content {

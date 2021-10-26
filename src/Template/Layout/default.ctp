@@ -28,14 +28,10 @@ $cakeDescription = 'Axmovie';
         <td>
             <h4><a>
                 <?php echo $this->Html->link(__(' Axmovie '), 
-                ['controller' => 'Usuarios', 'action' => 'index', '_full' => true]);?>
+                ['controller' => 'Users', 'action' => 'index', '_full' => true]);?>
             </a></h4> 
         </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td>
+        <td style="text-align: right;">
              <h4><a> <?php echo $usuarioLogado?> </a></h4> 
         </td>
     </tr>
