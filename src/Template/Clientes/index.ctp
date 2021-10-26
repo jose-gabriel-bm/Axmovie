@@ -22,16 +22,16 @@
     <table>
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Açoes</th>
+                <th><?= $this->Paginator->sort('nome', 'Nome')?></th>
+                <th><?= $this->Paginator->sort('cpf', 'CPF')?></th>
+                <th><?= $this->Paginator->sort('email', 'E-mail')?></th>
+                <th><?= $this->Paginator->sort('status', 'Status')?></th>
+                <th><?= $this->Paginator->sort('açoes', 'Ações')?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($clientes as $cliente) : ?>
-
+            <?php foreach ($clientes as $cliente ) : ?>
+               
                 <tr>
                     <td><?php echo $cliente->nome; ?></td>
                     <td><?php echo $cliente->cpf; ?></td>

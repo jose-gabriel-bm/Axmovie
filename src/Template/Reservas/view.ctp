@@ -8,7 +8,7 @@
         <li class="heading"><?= $this->Html->link(__(' Sair '), ['controller' => 'Users', 'action' => 'logout', '_full' => true]);?> 
     </ul>
 </nav>
-<div class="users view large-10 medium-10 columns content">
+<div class="users view large-6 medium-6 columns content">
     <h3><?php echo 'Visualizar reserva';  ?></h3>
     <table >
         <tr>
@@ -36,8 +36,16 @@
             <td><?php echo !$reserva->valor_multa_atraso ? "-" :$reserva->valor_multa_atraso; ?></td>
         </tr>
         <tr> 
+            <td>Valor Locação: </td>
+            <td><?php echo !$reserva->valor_locacao ? "-" :$reserva->valor_locacao; ?></td>
+        </tr>
+        <tr> 
             <td>Valor total da reserva: </td>
             <td><?php echo !$reserva->valor_total_pagar ?"-":$reserva->valor_total_pagar; ?></td>
+        </tr>
+        <tr> 
+            <td>Observação: </td>
+            <td><?php echo !$reserva->observacoes ?"-":$reserva->observacoes; ?></td>
         </tr>
         <tr>
             <td>Status: </td>
@@ -48,3 +56,4 @@
    <?php echo $this->Html->link(__('Voltar  '), ['controller' => 'Reservas','action' =>'index']);
     ?>
 </div>
+<div class="large-4 medium-4">

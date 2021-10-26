@@ -1,3 +1,4 @@
+
 <nav class="large-2 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
        
@@ -8,7 +9,9 @@
         <li class="heading"><?= $this->Html->link(__(' Sair '), ['controller' => 'Users', 'action' => 'logout', '_full' => true]);?> 
     </ul>
 </nav>
-<div class="users view large-6 medium-6 columns content">
+
+<div class="users view large-8 medium-8 columns content">
+    
    <h3><?php echo $cliente->nome;  ?></h3>
     <table>
         <div>
@@ -29,65 +32,58 @@
             </tr>
         </div>
     </table>
-
-    <table>
         <label>
-            <h5><b>Endereço</b></h5>
+            <h5><b>Contatos</b></h5>
         </label>
+        
+    <table>
+        <thead>
+            <tr>
+                <th>DDD</th>
+                <th>Celular</th>
+                <th>Principal</th>
+                <th>Whatsapp</th>
+            </tr>
+        </thead>
+        <tbody>
 
-        <tr> 
-            <td>Logradouro:</td>
-            <td><?php echo $cliente->enderecos[0]->logradouro; ?></td>
-        </tr>
-        <tr> 
-            <td>numero: </td>
-            <td><?php echo $cliente->enderecos[0]->numero; ?></td>
-        </tr>
-        <tr> 
-            <td>Bairro: </td>
-            <td><?php echo $cliente->enderecos[0]->bairro;  ?></td>
-        </tr>
-        <tr>
-            <td>Cep: </td>
-            <td><?php echo $cliente->enderecos[0]->cep;  ?></td>
-        </tr>
-        <tr>
-            <td>Complemento: </td>
-            <td><?php echo $cliente->enderecos[0]->complemento;  ?></td>
-        </tr>
-      
+            <?php foreach ($cliente->contatos as $contato ) : ?>
+                <tr>
+                    <td><?php echo $contato['ddd']; ?></td>
+                    <td><?php echo $contato['numero']; ?></td>
+                    <td><?php echo $contato['numero_principal']; ?></td>
+                    <td><?php echo $contato['possui_whatsapp']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
     </table>
+    <label>
+            <h5><b>Endereçõs</b></h5>
+        </label>    
     <table>
-        <label>
-            <h5><b>Contato</b></h5>
-        </label>
+        <thead>
+            <tr>
+                <th>Logradouro</th>
+                <th>Numero</th>
+                <th>Bairro</th>
+                <th>Cep</th>
+                <th>Complemento</th>
+            </tr>
+        </thead>
+        <tbody>
 
-        <tr> 
-            <td>Codigo Pais: </td>
-            <td><?php echo $cliente->contatos[0]->codigo_pais; ?></td>
-        </tr>
-        <tr> 
-            <td>DDD: </td>
-            <td><?php echo $cliente->contatos[0]->ddd;?></td>
-        </tr>
-        <tr> 
-            <td>Celular: </td>
-            <td><?php echo $cliente->contatos[0]->numero; ?></td>
-        </tr>
-
-        <tr>
-            <td>Principal: </td>
-            <td><?php echo  $cliente->contatos[0]->numero_principal; ?></td>
-        </tr>
-
-        <tr>
-            <td>Whatsapp: </td>
-            <td><?php echo  $cliente->contatos[0]->possui_whatsapp; ?></td>
-        </tr>
-       
+            <?php foreach ($cliente->enderecos as $endereco ) : ?>
+                <tr>
+                    <td><?php echo $endereco['logradouro']; ?></td>
+                    <td><?php echo $endereco['numero']; ?></td>
+                    <td><?php echo $endereco['bairro']; ?></td>
+                    <td><?php echo $endereco['cep']; ?></td>
+                    <td><?php echo $endereco['complemento']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
     </table>
     <?PHP echo $this->Html->link(__('Voltar  '), ['controller' => 'Clientes','action' =>'index']);?>
-
 </div>
-<div class="users view large-1 medium-1 columns content"></div>
 <div class="users view large-2 medium-2 columns content"></div>
+

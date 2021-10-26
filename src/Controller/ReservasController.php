@@ -12,14 +12,26 @@ class ReservasController extends AppController{
     {
         $this->paginate = [
             'limit' => 10,
-            'order' => ['Reservas.id' => 'asc',]
+            'order' => ['Reservas.data_inicio_locacao' => 'Desc']
         ]; 
+        $search =  $this->request->query('search');
+        $reservas = null;
+
+        if($search == null){
 
         $reservas = $this->Reservas->find('all',[
             'contain' => ['Clientes','Filmes']
-        ]); 
+        ]);
+        }else{
+            $reservas = $this->Reservas->find('all',[
+                'contain' => ['Clientes','Filmes']
+            ])
+            ->where(['nome LIKE'=> "%$search%"]);
+            
+        }
 
         $reservas = $this->paginate($reservas);
+
      
         $this->set(compact('reservas'));
     }
@@ -154,19 +166,22 @@ class ReservasController extends AppController{
          $idFilme = $reserva->id_filme;
 
         if($this->request->is(['post','put'])){
+
             $hoje = new  DateTime('now');
             $reserva->data_devolucao = $hoje;
-            // debug($reserva->date_devolucao);
+                           
             $reserva = $this->Reservas->patchEntity($reserva, $this->request->data);
-            debug($this->request->data);
-           
-           
-        //     if($this->Reservas->save($reserva)){
-        //       $this->Flash->success('Reserva fechada com sucesso');
-        //       return $this->redirect(['action' => 'index']);
-        //     }else{
-        //       $this->Flash->error('Reserva não foi fechada, por gentileza tentar novamente');
-        //    }
+
+            $reserva->valor_locacao = $this->request->data['valor_locacao'];
+            $reserva->observacoes = $this->request->data['observacoes'];
+            $reserva->valor_total_pagar = $reserva->valor_multa_atraso+$reserva->valor_locacao;       
+
+            if($this->Reservas->save($reserva)){
+              $this->Flash->success('Reserva fechada com sucesso');
+              return $this->redirect(['action' => 'index']);
+            }else{
+              $this->Flash->error('Reserva não foi fechada, por gentileza tentar novamente');
+           }
         }
        
         $this->set(compact('reserva','filme','cliente','idCliente','idFilme'));
@@ -186,11 +201,11 @@ class ReservasController extends AppController{
         }
       
         $valorLocacao = $horasLocacao * 0.15;
-        $valorAtraso = $horasAtraso * 00.10;
+        $valorAtraso = $horasAtraso * 00.05;
        
-        $reserva->valor_multa_atraso = ($horasAtraso * 00.20) + $valorAtraso ;
+        $reserva->valor_multa_atraso = ($horasAtraso * 00.15) + $valorAtraso ;
     
-        $reserva->valor_total_pagar = $reserva->valor_multa_atraso + $valorLocacao;
+        $reserva->valor_locacao = $valorLocacao;
 
         return $reserva;
        

@@ -20,7 +20,7 @@ class UsersController extends AppController
         $this->paginate = [
             'limit' => 10,
             'order' => [
-                'Usuarios.id' => 'DESC',
+                'Usuarios.nome' => 'DESC',
             ]
         ];
 
@@ -28,7 +28,10 @@ class UsersController extends AppController
             'contain' => ['Perfis']
         ]);
         $usuarios = $this->paginate($usuarios);
+        
         $this->set(compact('usuarios',));
+
+
     }
 
     public function view($id = null)
@@ -86,8 +89,7 @@ class UsersController extends AppController
             unset($this->request->data['password']);
             $request = $this->request->data;
             $usuario = $this->Users->patchEntity($usuario, $request);
-            // debug($request);
-            // debug($usuario);
+
             if ($this->Users->save($usuario)) {
                 $this->Flash->success('Usuario editado com sucesso');
                 return $this->redirect(['action' => 'index']);

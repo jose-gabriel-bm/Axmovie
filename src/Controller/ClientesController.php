@@ -9,21 +9,24 @@ class ClientesController extends AppController
 
     public function index()
     {
+     
         $this->paginate = [
             'limit' => 10,
             'order' => ['Usuarios.id' => 'asc',]
         ];
         $clientes = $this->paginate($this->Clientes);
         $this->set(compact('clientes'));
+        
     }
 
-    public function view($id = null)
+    public function view($id)
     {
-
-        $this->loadModel('Enderecos');
+                
         $cliente = $this->Clientes->get($id, [
             'contain' => ['Enderecos', 'Contatos']
         ]);
+
+        // debug($cliente);
         $this->set(compact('cliente'));
     }
 
@@ -92,14 +95,13 @@ class ClientesController extends AppController
     public function edit($id = null)
     {
 
-        $cliente = $this->Clientes->get($id, [
-            'contain' => ['Enderecos', 'Contatos']
-        ]);
+        $cliente = $this->Clientes->get($id);
 
         if ($this->request->is(['post', 'put',])) {
 
             $clienteEdicao = $this->Clientes->patchEntity($cliente, $this->request->getData());
-            $clienteEdicao = $cliente;
+          
+            debug($clienteEdicao);
             if ($this->Clientes->save($clienteEdicao)) {
 
                 $this->Flash->success(__('Cliente Editado com sucesso.'));
@@ -125,12 +127,14 @@ class ClientesController extends AppController
 
                 $contato = $this->request->data;
             
+           
+
+        if ($this->request->is(['patch', 'post', 'put',])) {
+
             if($verificacao > 0 && $contato['Principal'] == 1){
                 $this->Flash->error('Cliente ja possui numero principal');
                 return;
             }
-
-        if ($this->request->is(['patch', 'post', 'put',])) {
 
             $this->loadModel('Contatos');
             $entityContato = $this->Contatos->newEntity([

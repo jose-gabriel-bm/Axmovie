@@ -13,13 +13,13 @@
     <h3>Lista de Usuarios</h3>
     <table>
         <thead>
-            <tr>
-                <!-- <th>ID</th> -->
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Perfil</th>
-                <th>Status</th>
-                <th>Açoes</th>
+            <tr >
+             
+                <th><?= $this->Paginator->sort('nome', 'Nome'); ?></th>
+                <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
+                <th><?= $this->Paginator->sort('id_perfil', 'Perfil'); ?></th>
+                <th><?= $this->Paginator->sort('status', 'Status'); ?></th>
+                <th><?= $this->Paginator->sort('açoes', 'Ações')?></th>
             </tr>
         </thead>
         <tbody>

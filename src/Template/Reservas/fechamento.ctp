@@ -38,12 +38,8 @@
                 <td >Valor Locação:</td>
                 <td ><?php echo $this->Form->control('valor_locacao', ['label' => false]);?></td>
             </tr>
-            <tr>
-                <td >Total a pagar:</td>
-                <td ><?php echo $this->Form->control('valor_total_pagar', ['label' => false]);?></td>
-            </tr>
             <tr >
-                <td colspan="2"><?php echo $this->Form->control('observacoes', ['type' => 'text']);?></td>
+                <td colspan="2"><?php echo $this->Form->control('observacoes', ['type' => 'textArea']);?></td>
             </tr>
             <tr>
 
