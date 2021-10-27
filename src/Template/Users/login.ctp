@@ -1,14 +1,8 @@
-<div class="large-3 medium-3 columns content"></div>
-
-<div class="large-5 medium-5 columns content">
-
-        <?= $this->Form->create('post', ['class' => 'form-signin']) ?>
-
-
+<div class="large-5 medium-5 container2">
         <h1 class="h3 mb-3 font-weight-normal ">Faça seu Login</h1>
-
+        <?= $this->Form->create('post', ['class' => 'form-signin']) ?>    
         <div class="form-group">
-                <label>Usuario</label>
+        <label>Usuario</label>
                 <?= $this->Form->control('username', [
                         'class' => 'form-control',
                         'placeholder' => 'Digite seu usuario', 
@@ -17,7 +11,7 @@
                 ]) ?>
         </div>
         <div class="form-group">
-                <label>Senha</label>
+        <label>Senha</label>
                 <?= $this->Form->control('password', [
                         'class' => 'form-control',
                         'placeholder' => 'Digite sua Senha', 
@@ -28,11 +22,5 @@
 
         <?= $this->Form->button(__('Logar',), ['class' => 'btn btn-lg btn-primary btn-block',]) ?>
         <br>
-        Ainda nao e cadastrado?
-        <?= $this->Html->link(__('Cadastre-se'), ['controller' => 'Users', 'action' => 'add']) ?>
         <?= $this->Form->end() ?>
-</div>
-
-<div class="large-4 medium-4 columns content">
-
 </div>

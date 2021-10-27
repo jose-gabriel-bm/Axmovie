@@ -8,13 +8,6 @@ use Cake\Event\Event;
 
 class UsersController extends AppController
 {
-    //Funcao autoriza a cadastrar usuario antes de logar.
-    public function BeforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        $this->Auth->allow('add');
-    }
-
     public function index()
     {
         $this->paginate = [
