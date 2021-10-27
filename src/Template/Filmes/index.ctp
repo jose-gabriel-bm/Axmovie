@@ -45,7 +45,6 @@
                 <td>
                 <?php echo $this->Html->link(__(' Visualizar '), 
                 ['controller' => 'filmes', 'action' => 'view', $filme->id]);
-
                 echo $this->Html->link(__(' Editar '), 
                 ['controller' => 'filmes', 'action' => 'edit', $filme->id]);
                 

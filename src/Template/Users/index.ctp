@@ -10,7 +10,23 @@
 </nav>
 
 <div class="users index large-10 medium-10 columns content">
-    <h3>Lista de Usuarios</h3>
+    <h3 style="margin-bottom:0rem ;">Lista de Usuarios</h3>
+    <table style="margin-bottom:0rem ;">
+        <tr>
+            <td><?php if ($verificacaoPerfil == 1){echo $this->Html->link(__('Adicionar novo Usuario '),
+                        ['controller' => 'users', 'action' => 'add']); }
+                        ?></td>
+            <td ></td>
+            <td style="text-align: right;">
+            <?php
+                echo $this->Form->create(null, ['type' => 'get']);
+	            echo $this->Form->input('search', 
+		        ['label' => false, 
+		        'placeholder' => 'Digite aqui nome do cliente' ]);?></td>
+
+            <td style="text-align: center;"><?php echo $this->Form->button('Pesquisar')?> </td>
+        </tr>
+    </table>
     <table>
         <thead>
             <tr >
@@ -32,13 +48,15 @@
                 
                 <td><?php echo $usuario->opcoes_status; ?></td>
                 <td>
-                <?php echo $this->Html->link(__(' Visualizar '), 
+                <?php echo $this->Html->link(__(' Detalhes '), 
                 ['controller' => 'Users', 'action' => 'view', $usuario->id]);
-
-                echo $this->Html->link(__(' Editar '), 
-                ['controller' => 'Users', 'action' => 'edit', $usuario->id]);
+      
+                if($verificacaoPerfil == 1){
+                    echo $this->Html->link(__(' Editar '), 
+                    ['controller' => 'Users', 'action' => 'edit', $usuario->id]);
+                }
+               
                 ?> 
-
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -26,9 +26,17 @@ class ReservasController extends AppController{
             $reservas = $this->Reservas->find('all',[
                 'contain' => ['Clientes','Filmes']
             ])
-            ->where(['nome LIKE'=> "%$search%"]);
-            
+            ->where([
+                'OR' => [
+                    ['nome LIKE'=> "%$search%"],
+                    ['titulo LIKE'=> "%$search%"],
+                    ['data_inicio_locacao LIKE'=> "%$search%"],
+                    ['data_limite_devolucao LIKE'=> "%$search%"],
+                    ['data_devolucao  LIKE'=> "%$search%"],          
+                ]      
+        ]);
         }
+     
 
         $reservas = $this->paginate($reservas);
 

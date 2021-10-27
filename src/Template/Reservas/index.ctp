@@ -11,7 +11,7 @@
 
     <div class="users index large-10 medium-10 columns content">
     <h3>Lista de Reservas</h3>
-    <table>
+    <table style="margin-bottom:0rem ;">
         <tr>
             <td><?php echo $this->Html->link(__('Adicionar nova Reserva '),
                         ['controller' => 'reservas', 'action' => 'adicionar']

@@ -10,6 +10,8 @@ class UsersController extends AppController
 {
     public function index()
     {
+        $verificacaoPerfil = $this->Auth->user('id_perfil');
+
         $this->paginate = [
             'limit' => 10,
             'order' => [
@@ -22,8 +24,8 @@ class UsersController extends AppController
         ]);
         $usuarios = $this->paginate($usuarios);
         
-        // debug($usuarios);
-        $this->set(compact('usuarios',));
+       
+        $this->set(compact('usuarios','verificacaoPerfil'));
 
 
     }
@@ -41,27 +43,30 @@ class UsersController extends AppController
 
     public function add()
     {
+        if($this->Auth->user('id_perfil') == 2){
+            $this->Flash->error(__(' Acesso negado'));
+            return $this->redirect(['action' => 'index']);
+        }
+
         $usuario = $this->Users->newEntity();
 
-        $this->loadModel('Perfis');
-        $perfis = $this->Perfis->find('list', [
-            'keyField' => 'id',
-            'valueField' => 'perfil'
-        ])->toArray();
-
         if ($this->request->is('post')) {
-            $usuario = $this->Users->patchEntity($usuario, $this->request->getData());
+
+            $requisicao = $this->request->getData();
+            $requisicao['id_perfil'] = 2;
+           
+            $usuario = $this->Users->patchEntity($usuario,$requisicao );
             //criptografia de senha.
             $usuario->password = (new DefaultPasswordHasher)->hash($usuario->password);
-
+       
             if ($this->Users->save($usuario)) {
                 $this->Flash->success(__('Usuario Cadastrado com sucesso'));
-                return $this->redirect(['action' => 'login']);
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('Erro: Usuario não foi Cadastrado, tentar novamente '));
             }
         }
-        $this->set(compact('usuario', 'perfis'));
+        $this->set(compact('usuario'));
     }
 
     public function edit($id = null)
@@ -71,18 +76,12 @@ class UsersController extends AppController
             'contain' => ['Perfis']
         ]);
 
-        $this->loadModel('Perfis');
-        $perfis = $this->Perfis->find('list', [
-            'keyField' => 'id',
-            'valueField' => 'perfil'
-        ])->toArray();
-
-        unset($usuario['password']);
-
         if ($this->request->is(['post', 'put'])) {
-            unset($this->request->data['password']);
+           
             $request = $this->request->data;
+            $request['id_perfil'] = 2;
             $usuario = $this->Users->patchEntity($usuario, $request);
+            $usuario->password = (new DefaultPasswordHasher)->hash($usuario->password);
 
             if ($this->Users->save($usuario)) {
                 $this->Flash->success('Usuario editado com sucesso');
@@ -92,19 +91,7 @@ class UsersController extends AppController
             }
         }
 
-        $this->set(compact('usuario', 'perfis'));
-    }
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $usuario = $this->Users->get($id);
-        
-        if ($this->Users->delete($usuario)) {
-            $this->Flash->success('Usuario deletado com sucesso');
-        } else {
-            $this->Flash->error('Usuario nao pode ser deletado, verificar e tentar novamente');
-        }
-        return $this->redirect(['action' => 'index']);
+        $this->set(compact('usuario'));
     }
     public function login()
     {
