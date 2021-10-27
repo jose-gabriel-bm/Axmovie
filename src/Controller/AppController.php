@@ -30,8 +30,8 @@ class AppController extends Controller
     }
     public function beforeRender(Event $event)
     {
-        $usuarioLogado = $this->Auth->user('username');
-        
-        $this->set(compact('usuarioLogado'));
+                $usuarioLogado = $this->Auth->user('username');
+                
+                $this->set(compact('usuarioLogado'));
     }
 }

@@ -12,7 +12,7 @@ class ClientesController extends AppController
      
         $this->paginate = [
             'limit' => 10,
-            'order' => ['Usuarios.id' => 'asc',]
+            'order' => ['Usuarios.id' => 'Desc',]
         ];
         $clientes = $this->paginate($this->Clientes);
         $this->set(compact('clientes'));
@@ -101,7 +101,6 @@ class ClientesController extends AppController
 
             $clienteEdicao = $this->Clientes->patchEntity($cliente, $this->request->getData());
           
-            debug($clienteEdicao);
             if ($this->Clientes->save($clienteEdicao)) {
 
                 $this->Flash->success(__('Cliente Editado com sucesso.'));

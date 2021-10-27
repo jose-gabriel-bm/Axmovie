@@ -25,5 +25,6 @@ class User extends Entity
     {
         return $this->status ? 'Administrador' : 'Atendente';
     }
+    
 
 }

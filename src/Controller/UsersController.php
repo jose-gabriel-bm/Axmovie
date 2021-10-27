@@ -8,7 +8,7 @@ use Cake\Event\Event;
 
 class UsersController extends AppController
 {
-
+    //Funcao autoriza a cadastrar usuario antes de logar.
     public function BeforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -29,6 +29,7 @@ class UsersController extends AppController
         ]);
         $usuarios = $this->paginate($usuarios);
         
+        // debug($usuarios);
         $this->set(compact('usuarios',));
 
 
@@ -104,6 +105,7 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $usuario = $this->Users->get($id);
+        
         if ($this->Users->delete($usuario)) {
             $this->Flash->success('Usuario deletado com sucesso');
         } else {
@@ -116,17 +118,29 @@ class UsersController extends AppController
 
         if ($this->request->is('post')) {
 
-            $user = $this->Auth->identify();       
+            $user = $this->Auth->identify();
 
-            if ($user['status'] == true){
-                if ($user) {
-                    $this->Auth->setUser($user);
-                    return $this->redirect($this->Auth->redirectUrl());
-                } else {
-                    $this->Flash->error(__('Usuario ou senha incorreta'));
-                }
-            }else{
+            //verifica se dentro da tabela users o status e false
+            $this->loadModel('Users');
+            $verificacaoStatus = $this->Users
+                ->find()
+                ->where([
+                    'username'=>$this->request->data['username'],
+                    'status'=> false,
+                ])
+                ->count();
+                    
+            if ($verificacaoStatus > 0){
+
                 $this->Flash->error(__('Usuario inativo'));
+                return;
+            }
+
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error(__('Usuario ou senha incorreta'));
             }
         }
     }
