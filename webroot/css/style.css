@@ -49,7 +49,7 @@ legend {
 }
 
 .actions.columns h3 {
-    color:#070707;
+    color:#dd0303;
 }
 
 .related table {
@@ -479,6 +479,18 @@ div.message.hidden {
 .content {
     padding: 4rem;
 }
+.container3 { 
+    width: 350px; 
+    margin-left: 270px;
+    margin-right: auto;
+    margin-top: 50px; 
+}
+.container4 { 
+    width: 800px; 
+    margin-left: 270px;
+    margin-right: auto;
+    margin-top: 50px; 
+}
 
 /* Use 'one true layout' methods to get equal height columns */
 .container {
@@ -532,6 +544,9 @@ div.message.hidden {
     margin-top: 20px;
     margin-bottom: 10px;
     border-bottom: 0px;
+}
+.titulo{
+    color:  #4d8f97;
 }
 
 .content h5 {

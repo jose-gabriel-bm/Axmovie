@@ -8,9 +8,9 @@
         <li class="heading"><?= $this->Html->link(__(' Sair '), ['controller' => 'Users', 'action' => 'logout', '_full' => true]); ?>
     </ul>
 </nav>
-<div class="large-6 medium-6 columns content">
+<div class="large-4 medium-4 container3 ">
     <label>
-        <h5><b>Endereço</b></h5>
+        <h5 class="titulo"><b>Adicionar Endereço</b></h5>
     </label>
 
     <?php
@@ -26,5 +26,35 @@
     echo $this->Form->end();
     ?>
 </div>
-<div class="users view large-1 medium-1 columns content"></div>
-<div class="users view large-2 medium-2 columns content"></div>
+
+<div class="users view large-6 medium-6 container4 "> 
+</table>
+        <label>
+            <h5 class="titulo"><b>Endereços</b></h5>
+        </label>    
+    <table>
+        <thead>
+            <tr>
+                <th>Logradouro</th>
+                <th>Numero</th>
+                <th>Bairro</th>
+                <th>Cep</th>
+                <th>Complemento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($cliente->enderecos as $endereco ) : ?>
+                <tr>
+                    <td><?php echo $endereco['logradouro']; ?></td>
+                    <td><?php echo $endereco['numero']; ?></td>
+                    <td><?php echo $endereco['bairro']; ?></td>
+                    <td><?php echo $endereco['cep']; ?></td>
+                    <td><?php echo $endereco['complemento']; ?></td>
+                    <td></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
