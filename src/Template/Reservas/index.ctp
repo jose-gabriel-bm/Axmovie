@@ -23,7 +23,6 @@
 	            echo $this->Form->input('search', 
 		        ['label' => false, 
 		        'placeholder' => 'Digite aqui nome do cliente' ]);?></td>
-
             <td style="text-align: center;"><?php echo $this->Form->button('Pesquisar')?> </td>
         </tr>
     </table>

@@ -50,11 +50,11 @@
                         );
 
                         echo $this->Html->link(
-                            __(' Adicionar Contato '),
+                            __('Contatos '),
                             ['controller' => 'clientes', 'action' => 'adicionarContato', $cliente->id]
                         );
                         echo $this->Html->link(
-                            __(' Adicionar Endereco '),
+                            __(' Endereços '),
                             ['controller' => 'clientes', 'action' => 'adicionarEndereco', $cliente->id]
                         );
 

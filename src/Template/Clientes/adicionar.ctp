@@ -16,10 +16,11 @@
             <h5><b>Dados pessoais</b></h5>
         </label>
         <?php
+
         echo $this->Form->create(null);
-        echo $this->Form->control('Nome', ['required' => true]);
-        echo $this->Form->control('CPF', ['required' => true]);
-        echo $this->Form->control('Email');
+        echo $this->Form->control('nome', ['required' => true , 'label'=> 'Nome']);
+        echo $this->Form->control('cpf', ['required' => true, 'label'=> 'CPF']);
+        echo $this->Form->control('email',['label'=> 'E-mail']);
         echo $this->Html->link(__('Cancelar  '), ['controller' => 'Clientes', 'action' => 'index']);
         echo $this->Form->button('Cadastrar');
         echo $this->Form->end(); ?>

@@ -26,72 +26,42 @@ class ClientesController extends AppController
             'contain' => ['Enderecos', 'Contatos']
         ]);
 
-        // debug($cliente);
         $this->set(compact('cliente'));
     }
 
 
     public function adicionar()
     {
-
+        $cliente = $this->Clientes->newEntity();
         if ($this->request->is(['patch', 'post', 'put',])) {
 
-            $cliente = $this->request->data();
+            $requisicao = $this->request->getData();
+            $requisicao['id_usuario'] =  $this->Auth->user('id');
+            $requisicao['status'] = 1;
+            
+            $cliente = $this->Clientes->patchEntity($cliente,$requisicao, ['validate' => true]);
+            
+            //verifica se o CPF nao esta em duplicidade;
+            $verificacao = $this->Clientes
+                ->find()
+                ->where([
+                    'cpf' => $cliente['cpf'],
+                ])
+                ->count();
+            if($verificacao > 0){
+                $this->Flash->error('CPF em duplicidade');
+                return;
+            }
 
-            $entityCliente = $this->Clientes->newEntity([
-                'id_usuario' =>  $this->Auth->user('id'),
-                'nome' => $cliente['Nome'],
-                'cpf' => $cliente['CPF'],
-                'email' => $cliente['Email'],
-                'status' => 1
-            ]);
-
-            $idCliente = null;
-            if ($this->Clientes->save($entityCliente)) {
-                $idCliente = $entityCliente->id;
+            if ($this->Clientes->save($cliente)) {
+                $this->Flash->success(__('Dados do cliente salvo com sucesso.'));
+                return $this->redirect(['action' => 'adicionar']);
             } else {
                 $this->Flash->error('Dados pessoais do cliente nao pode ser Salvo.');
                 return;
             }
-
-            //Esse componente loadModel e usado quando esta acessando uma tabela diferente da controler
-            $this->loadModel('Enderecos');
-            $entityEndereco = $this->Enderecos->newEntity([
-
-                'id_usuario' =>  $this->Auth->user('id'),
-                'id_cliente' => $idCliente,
-                'logradouro' => $cliente['Logradouro'],
-                'numero' => $cliente['Numero'],
-                'complemento' => $cliente['Complemento'],
-                'bairro' => $cliente['Bairro'],
-                'id_cidade' => $cliente['Cidade'],
-                'cep' => $cliente['Cep']
-            ]);
-
-            $this->Enderecos->save($entityEndereco);
-
-            $this->loadModel('Contatos');
-            $entityContato = $this->Contatos->newEntity([
-
-                'id_cliente' => $idCliente,
-                'codigo_pais' => $cliente['Codigo_Pais'],
-                'ddd' => $cliente['DDD'],
-                'numero' => $cliente['Celular'],
-                'principal' => $cliente['Principal'],
-                'whatsapp' => $cliente['Whatsapp']
-            ]);
-
-            if ($this->Contatos->save($entityContato)) {
-                $this->Flash->success(__('Cliente Cadastrado com sucesso.'));
-            } else {
-                $this->Flash->error('Numero de contato em duplicidade');
-                return $this->redirect(['action' => 'adicionar']);
-            }
-
-            return $this->redirect(['action' => 'index']);
         }
     }
-
     public function edit($id = null)
     {
 

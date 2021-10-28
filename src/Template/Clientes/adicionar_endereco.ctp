@@ -21,7 +21,7 @@
     echo $this->Form->control('Bairro', ['required' => true]);
     echo $this->Form->control('Cidade');
     echo $this->Form->control('Cep');
-    echo $this->Html->link(__('Cancelar  '), ['controller' => 'Clientes', 'action' => 'index']);
+    echo $this->Html->link(__('Voltar  '), ['controller' => 'Clientes', 'action' => 'index']);
     echo $this->Form->button('Cadastrar');
     echo $this->Form->end();
     ?>

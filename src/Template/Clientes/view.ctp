@@ -14,7 +14,7 @@
     
    <h3><?php echo $cliente->nome;  ?></h3>
     <table>
-        <div>
+    <div>
             <label>
                 <h5><b>Dados pessoais</b></h5>
             </label>
@@ -30,7 +30,7 @@
                 <td>Status: </td>
                 <td><?php echo $cliente->opcoes_status; ?></td>
             </tr>
-        </div>
+    </div>
     </table>
         <label>
             <h5><b>Contatos</b></h5>
