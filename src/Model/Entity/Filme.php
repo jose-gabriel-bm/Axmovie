@@ -20,6 +20,6 @@ class Filme extends Entity
 
     protected function _getOpcoesLancamento()
     {
-        return $this->status ? 'Sim' : 'Não';
+        return $this->lancamento ? 'Sim' : 'Nao';
     }
 }

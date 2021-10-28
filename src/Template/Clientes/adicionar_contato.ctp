@@ -8,8 +8,8 @@
         <li class="heading"><?= $this->Html->link(__(' Sair '), ['controller' => 'Users', 'action' => 'logout', '_full' => true]); ?>
     </ul>
 </nav>
-<div class="large-9 medium-9 columns content">
-    <div class="large-7 medium-7 columns content">
+
+    <div class="large-4 medium-4 columns content">
         <label>
             <h5><b>Adicionar Contato</b></h5>
         </label>
@@ -30,16 +30,17 @@
         </label>
         <?php
             echo $this->Form->radio('Whatsapp', ['Não ', 'Sim'], ['required' => true]);
+            echo $this->Html->link(__('Cancelar  '), ['controller' => 'Clientes', 'action' => 'index']);
             echo $this->Form->button('Cadastrar');
             echo $this->Form->end(); 
         ?>
-    </div>
-    
-    <div>
+    </div> 
+ 
+    <div class="large-6 medium-6 columns content">
+        <table>
         <label>
             <h5><b>Contatos</b></h5>
         </label>
-        <table>
             <thead>
                 <tr>
                     <th>DDD</th>
@@ -56,10 +57,16 @@
                         <td><?php echo $contato['numero']; ?></td>
                         <td><?php echo $contato['numero_principal']; ?></td>
                         <td><?php echo $contato['possui_whatsapp']; ?></td>
+                        <td>
+                        <?php 
+                            echo $this->Html->link(__('Editar'), 
+                            ['controller' => 'clientes', 'action' => 'editarContato', $contato->id]);
+                            echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$contato->id ],
+                            ['confirm' => 'Realmente deseja apagar o usuario?', $contato->id ]); 
+                        ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-</div>
-<div class="users view large-1 medium-1 columns content"></div>

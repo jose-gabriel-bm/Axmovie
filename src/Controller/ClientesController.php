@@ -9,23 +9,19 @@ class ClientesController extends AppController
 
     public function index()
     {
-     
         $this->paginate = [
             'limit' => 10,
             'order' => ['Usuarios.id' => 'Desc',]
         ];
         $clientes = $this->paginate($this->Clientes);
         $this->set(compact('clientes'));
-        
     }
 
     public function view($id)
-    {
-                
+    {          
         $cliente = $this->Clientes->get($id, [
             'contain' => ['Enderecos', 'Contatos']
         ]);
-
         $this->set(compact('cliente'));
     }
 
@@ -39,7 +35,7 @@ class ClientesController extends AppController
             $requisicao['id_usuario'] =  $this->Auth->user('id');
             $requisicao['status'] = 1;
             
-            $cliente = $this->Clientes->patchEntity($cliente,$requisicao, ['validate' => true]);
+            $cliente = $this->Clientes->patchEntity($cliente,$requisicao);
             
             //verifica se o CPF nao esta em duplicidade;
             $verificacao = $this->Clientes
@@ -83,9 +79,13 @@ class ClientesController extends AppController
     }
     public function  adicionarContato($id)
     {
+        $cliente = $this->Clientes->get($id, [
+            'contain' => ['Enderecos', 'Contatos']
+        ]);
+        $this->set(compact('cliente'));
+
 
             $this->loadModel('Contatos');
-
             $verificacao = $this->Contatos
                 ->find()
                 ->where([
@@ -94,9 +94,7 @@ class ClientesController extends AppController
                 ])
                 ->count();
 
-                $contato = $this->request->data;
-            
-           
+                $contato = $this->request->data;           
 
         if ($this->request->is(['patch', 'post', 'put',])) {
 
@@ -107,7 +105,6 @@ class ClientesController extends AppController
 
             $this->loadModel('Contatos');
             $entityContato = $this->Contatos->newEntity([
-
                 'id_cliente' => $id,
                 'codigo_pais' => $contato['Codigo_Pais'],
                 'ddd' => $contato['DDD'],
@@ -118,10 +115,11 @@ class ClientesController extends AppController
 
             if ($this->Contatos->save($entityContato)) {
                 $this->Flash->success(__('Contato Cadastrado com sucesso.'));
+                header("Refresh: 1"); 
             } else {
                 $this->Flash->error('Numero de contato em duplicidade');
             }
-        }
+        }       
     }
     public function adicionarEndereco($id)
     {
@@ -149,4 +147,17 @@ class ClientesController extends AppController
         }
 
     }
+    // public function delete($id = null){
+
+    //     $this->request->allowMethod(['post', 'delete']);
+
+    //     $contato = $this->Contatos->get($id);
+
+    //     if ($this->Contatos->delete($contato)) {
+    //         $this->Flash->success(__('Contato Deletado com sucesso'));
+    //     } else {
+    //         $this->Flash->error(__('Contato nao pode ser deletado'));
+    //     }
+
+    // }
 }

@@ -50,8 +50,12 @@ public function adicionar(){
     ])->toArray();
 
     if($this->request->is('post')){
+
+        $requisicao = $this->request->getData();
+        $requisicao['id_usuario'] =  $this->Auth->user('id');
+        $requisicao['status'] = 1;
         
-        $filme = $this->Filmes->patchEntity($filme, $this->request->getData());
+        $filme = $this->Filmes->patchEntity($filme, $requisicao);
 
         if($this->Filmes->save($filme)){
             $this->Flash->success(__('Filme Cadastrado com sucesso'));
@@ -94,8 +98,6 @@ public function adicionar(){
         $this->set(compact('filme','generos','diretores'));
       
       }
-      
-
     
     public function delete($id = null)
     {
