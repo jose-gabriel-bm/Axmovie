@@ -11,6 +11,7 @@
 
     <div class="large-4 medium-4 columns content">
         <label>
+        <h3><?php echo $cliente->nome;  ?></h3>
             <h5><b>Adicionar Contato</b></h5>
         </label>
         <?php

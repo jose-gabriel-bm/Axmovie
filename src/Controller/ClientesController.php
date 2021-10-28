@@ -123,6 +123,11 @@ class ClientesController extends AppController
     }
     public function adicionarEndereco($id)
     {
+        $cliente = $this->Clientes->get($id, [
+            'contain' => ['Enderecos', 'Contatos']
+        ]);
+        $this->set(compact('cliente'));
+
         if ($this->request->is(['patch', 'post', 'put',])) {
 
             $endereco = $this->request->data;
@@ -141,12 +146,42 @@ class ClientesController extends AppController
             ]);
             if ($this->Enderecos->save($entityEndereco)) {
                 $this->Flash->success(__('Endereco Cadastrado com sucesso.'));
+                header("Refresh: 1"); 
             } else {
                 $this->Flash->error('Endereco nao pode ser salvo');
             }
         }
 
     }
+
+    public function editarContato($id = null){
+
+        $cliente = $this->Clientes->get($id, [
+            'contain' => ['Enderecos', 'Contatos']
+        ]);
+        $this->set(compact('cliente'));
+
+        debug($cliente->contatos[0]->numero);
+
+        if ($this->request->is(['post', 'put',])) {
+
+            $clienteEdicao = $this->Clientes->patchEntity($cliente, $this->request->getData());
+
+            
+          
+            // if ($this->Clientes->save($clienteEdicao)) {
+
+            //     $this->Flash->success(__('Cliente Editado com sucesso.'));
+            //     return $this->redirect(['action' => 'index']);
+            // } else {
+            //     $this->Flash->danger('Cliente nao pode ser editado.');
+            // }
+        }
+        
+        $this->set(compact('cliente'));
+    }
+
+
     // public function delete($id = null){
 
     //     $this->request->allowMethod(['post', 'delete']);

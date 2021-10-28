@@ -51,7 +51,14 @@
                     <td><?php echo $endereco['bairro']; ?></td>
                     <td><?php echo $endereco['cep']; ?></td>
                     <td><?php echo $endereco['complemento']; ?></td>
-                    <td></td>
+                    <td>
+                        <?php 
+                            echo $this->Html->link(__('Editar'), 
+                            ['controller' => 'clientes', 'action' => 'editarEndereco', $endereco->id]);
+                            echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$endereco->id ],
+                            ['confirm' => 'Realmente deseja apagar o usuario?', $endereco->id ]); 
+                        ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
