@@ -198,14 +198,23 @@ class ReservasController extends AppController{
         
         $hoje = new  DateTime('now');
         $reserva->data_devolucao = $hoje;
-
-        $diferencaLocacao = $reserva->data_inicio_locacao->diff($reserva->data_limite_devolucao);
-        $horasLocacao = $diferencaLocacao->h + ($diferencaLocacao->days * 24);
-
+        
+        $horasLocacao = 0;
         $horasAtraso = 0;
+        
         if($reserva->data_limite_devolucao < $reserva->data_devolucao){
+
             $diferencaAtraso = $reserva->data_limite_devolucao->diff($reserva->data_devolucao);
             $horasAtraso = $diferencaAtraso->h + ($diferencaAtraso->days * 24);
+
+            $diferencaLocacao = $reserva->data_inicio_locacao->diff($reserva->data_limite_devolucao);
+            $horasLocacao = $diferencaLocacao->h + ($diferencaLocacao->days * 24);
+           
+        }else{
+
+            $diferencaLocacao = $reserva->data_inicio_locacao->diff($reserva->data_devolucao);
+            $horasLocacao = $diferencaLocacao->h + ($diferencaLocacao->days * 24);
+
         }
       
         $valorLocacao = $horasLocacao * 0.15;

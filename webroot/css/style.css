@@ -16,7 +16,7 @@ a {
 }
 
 .side-nav li a:not(.button):hover {
-    color: #070707;
+    color: #484a4b;
 }
 
 header {
@@ -337,7 +337,7 @@ pre {
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 0.4375rem 0.875rem;
+    padding: 0.5000rem 0.1000rem;
 }
 
 #actions-sidebar {
