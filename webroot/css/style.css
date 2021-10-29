@@ -599,3 +599,6 @@ table td {
     color: #fff;
     cursor: pointer;
   }
+.topoTabela{
+    margin-top: 125px;
+}

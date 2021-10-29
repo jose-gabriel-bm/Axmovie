@@ -1,7 +1,7 @@
 <?= $this->element('cabecalho')?>
 <?= $this->element('menulateral')?>
 
-    <div class="large-4 medium-4 columns content">
+    <div class="large-5 medium-5 columns content">
         <label>
         <h3><?php echo $cliente->nome;  ?></h3>
             <h5><b>Adicionar Contato</b></h5>
@@ -29,18 +29,19 @@
         ?>
     </div> 
  
-    <div class="large-6 medium-6 columns content">
-        <table>
+    <div class="large-5 medium-5 columns topoTabela">
         <label>
             <h5><b>Contatos</b></h5>
         </label>
+        <table>
             <thead>
                 <tr>
                     <th>DDD</th>
                     <th>Celular</th>
                     <th>Principal</th>
                     <th>Whatsapp</th>
-                    <th>Ações</th>
+                    <th  style="text-align: center;" colspan="2">Ações</th>
+                
                 </tr>
             </thead>
             <tbody>
@@ -54,9 +55,12 @@
                         <?php 
                             echo $this->Html->link(__('Editar'), 
                             ['controller' => 'clientes', 'action' => 'editarContato', $contato->id]);
-                            echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$contato->id ],
-                            ['confirm' => 'Realmente deseja apagar o usuario?', $contato->id ]); 
                         ?>
+                        </td>
+                        <td>
+                            <?php echo $this->Form->postlink(('Deletar'), ['controller' => 'clientes','action' => 'deleteContato',$contato->id ],
+                            ['confirm' => 'Realmente deseja apagar o contato?', $contato->id ]); 
+                            ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -206,17 +206,36 @@ class ClientesController extends AppController
     }
 
 
-    // public function delete($id = null){
+    public function deleteContato($id = null)
+    {
 
-    //     $this->request->allowMethod(['post', 'delete']);
+        $this->loadModel('Contatos');
 
-    //     $contato = $this->Contatos->get($id);
+        $this->request->allowMethod(['post', 'delete']);
+        $contato = $this->Contatos->get($id);
+        
+        if ($this->Contatos->delete($contato)) {
+            $this->Flash->success(__('Contato Deletado com sucesso'));
+            return $this->redirect(['controller'=> 'clientes','action'=>'adicionar_contato',$contato->id_cliente]);
+        } else {
+            $this->Flash->error(__('Contato nao pode ser deletado'));
+            return $this->redirect(['controller'=> 'clientes','action'=>'adicionar_contato',$contato->id_cliente]);
+        }
 
-    //     if ($this->Contatos->delete($contato)) {
-    //         $this->Flash->success(__('Contato Deletado com sucesso'));
-    //     } else {
-    //         $this->Flash->error(__('Contato nao pode ser deletado'));
-    //     }
+    }
+    public function deleteEndereco($id = null){
 
-    // }
+        $this->loadModel('Enderecos');
+
+        $this->request->allowMethod(['post', 'delete']);
+        $endereco = $this->Enderecos->get($id);
+        
+        if ($this->Enderecos->delete($endereco)) {
+            $this->Flash->success(__('Endereco Deletado com sucesso'));
+            return $this->redirect(['controller'=> 'clientes','action'=>'adicionar_endereco',$endereco->id_cliente]);
+        } else {
+            $this->Flash->error(__('Endereco nao pode ser deletado'));
+            return $this->redirect(['controller'=> 'clientes','action'=>'adicionar_endereco',$endereco->id_cliente]);
+        }
+    }
 }

@@ -48,8 +48,10 @@
                         <?php 
                             echo $this->Html->link(__('Editar'), 
                             ['controller' => 'clientes', 'action' => 'editarEndereco', $endereco->id]);
-                            echo $this->Form->postlink(('Deletar'), ['action' => 'delete',$endereco->id ],
-                            ['confirm' => 'Realmente deseja apagar o usuario?', $endereco->id ]); 
+                           
+                            echo $this->Form->postlink(('Deletar'), 
+                            ['controller' => 'clientes','action' => 'deleteEndereco',$endereco->id ],
+                            ['confirm' => 'Realmente deseja apagar o endereco?', $endereco->id ]); 
                         ?>
                     </td>
                 </tr>
