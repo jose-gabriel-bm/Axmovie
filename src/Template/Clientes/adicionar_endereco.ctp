@@ -1,9 +1,10 @@
 <?= $this->element('cabecalho')?>
 <?= $this->element('menulateral')?>
 
-<div class="large-4 medium-4 container3 ">
+<div class="large-5 medium-5 columns content ">
     <label>
-        <h5 class="titulo"><b>Adicionar Endereço</b></h5>
+    <h3><?php echo $cliente->nome;  ?></h3>
+        <h5><b>Adicionar Endereço</b></h5>
     </label>
 
     <?php
