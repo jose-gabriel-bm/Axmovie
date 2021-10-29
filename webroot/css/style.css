@@ -568,3 +568,34 @@ table td {
     vertical-align: rigt;
     word-break: break-all;
 }
+
+.login {
+    margin-top: 100px;
+    margin-bottom: 70px;
+    margin-left: 450px;
+    width: 350px;
+    font-size: 16px;
+  }
+  .login-header {
+    background: #4d8f97;
+    padding: 20px;
+    font-size: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0px;
+  }
+  .login-container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background: #ebebeb;
+    padding: 12px;
+  }
+
+  .login input[type="submit"] {
+    background: #28d;
+    border-color: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
