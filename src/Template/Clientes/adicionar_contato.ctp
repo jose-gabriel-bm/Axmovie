@@ -1,3 +1,4 @@
+<?= $this->element('cabecalho')?>
 <nav class="large-2 medium-2 columns" id="actions-sidebar">
     <ul class="side-nav">
 
