@@ -18,6 +18,4 @@
         echo $this->Form->button('Cadastrar');
         echo $this->Form->end(); ?>
 
-    </div>
-    <div class="users view large-1 medium-1 columns content"></div>
-    <div class="users view large-2 medium-2 columns content"></div>
+</div>

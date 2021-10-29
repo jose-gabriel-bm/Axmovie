@@ -11,7 +11,10 @@
         </li>
         <li class="heading">
             <?= $this->Html->link(__('Reservas'),['controller' => 'Reservas','action' =>'index'])?>
-        </li>  
+        </li>
+        <li class="heading">
+            <?= $this->Html->link(__('Relatorios'),['controller' => 'Reservas','action' =>'index'])?>
+        </li>          
         <li class="heading">
             <?= $this->Html->link(__(' Sair '),['controller' => 'Users', 'action' => 'logout', '_full' => true]);?>
         </li> 

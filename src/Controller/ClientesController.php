@@ -36,7 +36,19 @@ class ClientesController extends AppController
             $requisicao['status'] = 1;
             
             $cliente = $this->Clientes->patchEntity($cliente,$requisicao);
-            
+
+            //verifica se o nome nao esta em duplicidade;
+                $verificacao = $this->Clientes
+                ->find()
+                ->where([
+                    'nome' => $cliente['nome'],
+                ])
+                ->count();
+            if($verificacao > 0){
+                $this->Flash->error('Nome ja esta cadastrado');
+                return;
+            }
+
             //verifica se o CPF nao esta em duplicidade;
             $verificacao = $this->Clientes
                 ->find()
@@ -49,6 +61,18 @@ class ClientesController extends AppController
                 return;
             }
 
+            //verificar a quantidade de caracteres.
+            $contagemCaracteres = strlen($cliente['cpf']);
+            if($contagemCaracteres < 11 ){
+                $this->Flash->error('CPF deve ter no minimo 11 caracteres');
+                return;
+            }
+            if($contagemCaracteres > 11){
+                $this->Flash->error('CPF deve ter no maximo 11 caracteres');
+                return;
+            }
+            
+            //Salva a requisição
             if ($this->Clientes->save($cliente)) {
                 $this->Flash->success(__('Dados do cliente salvo com sucesso.'));
                 return $this->redirect(['action' => 'adicionar']);
