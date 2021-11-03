@@ -51,6 +51,4 @@ class ReservasTable extends Table {
         return $validator;
      }
 
-    //Funçao para nao deixar adicionar ou editar com dados ja existentes no banco.
-      
 }

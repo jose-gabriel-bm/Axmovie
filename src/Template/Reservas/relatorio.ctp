@@ -6,7 +6,7 @@
     <table class='relatorio-container'>
         <tr>
             <td><?php
-            echo $this->Form->create(NULL,["url" => ["action" => "relatoriosprontos"], "method" => "post"]);
+            echo $this->Form->create(NULL);
                 echo $this->Form->input('selecaoRelatorio', [
                     'type' => 'select',
                     'multiple' => false,
@@ -44,7 +44,7 @@
                 );?>
             </td>
             <td style="text-align: center; vertical-align: middle;">
-                <?php echo $this->Form->button('Gerar Relatorio'); ?>
+                <?php echo $this->Form->button('Baixar Relatorio'); ?>
                 <?php echo $this->Form->end(); ?>
             </td>
         </tr>
@@ -100,8 +100,28 @@
             </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td>
+            <?php
+                echo $this->Form->control('de_data_inicio_locacao',
+                [
+                'type' => 'datetime',
+                'minYear' => date('Y') +1,
+                'maxYear' => date('Y') + 10,
+                'label' => '(Data de inicio locação)De:',
+                ]);
+            ?>
+            </td>
+            <td>
+            <?php
+                echo $this->Form->control('ate_data_inicio_locacao',
+                [
+                'type' => 'datetime',
+                'minYear' => date('Y') +1,
+                'maxYear' => date('Y') + 10,
+                'label' => '(Data de inicio locação)ate:',
+                ]);
+            ?>
+            </td>
             <td></td>
             <td style="text-align: center; vertical-align: middle;">
                 <?php echo $this->Form->button('Gerar Relatorio'); ?>
