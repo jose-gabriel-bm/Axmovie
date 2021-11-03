@@ -499,7 +499,7 @@ div.message.hidden {
 }
 .container2 { 
     width: 350px; 
-    margin-left: auto;
+    margin-left: 300px;
     margin-right: auto;
     margin-top: 50px; 
 }
@@ -590,7 +590,7 @@ table td {
     margin-top: 0px;
     margin-bottom: 0px;
     background: #ebebeb;
-    padding: 12px;
+    padding: 20px;
   }
 
   .login input[type="submit"] {
@@ -601,4 +601,52 @@ table td {
   }
 .topoTabela{
     margin-top: 125px;
+}
+.login-container2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background: #4d8f97;
+    width: 310px; 
+    height: 40px;
+    padding-top: 10px;
+       
+  }
+#relatorio{
+    
+    width: 1060px; 
+    height: 110px;
+    background: #ebebeb;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 230px;
+    margin-right: 230px;
+    color: #0097a7;
+}
+.botaorelatorio{
+
+    background: #4d8f97;
+    width: 200px; 
+    height: 30px;
+   
+       
+}
+.relatorio-container {
+    width: 1060px; 
+    height: 110px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background: #ebebeb;
+
+}
+.labelRelatorio{
+    color: #4d8f97;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.trrelatorio{
+    margin-left: 30px;
+    margin-right: 20px;
 }

@@ -14,6 +14,6 @@
                 'label' => false,
                 'required' => true
         ]) ?>
-        <?= $this->Form->button(__('Logar',['class' => 'login-container'])) ?>
+        <button class="login-container2" type="submit">Logar</button>
         <?= $this->Form->end() ?>
 </div>

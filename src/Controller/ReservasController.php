@@ -135,17 +135,29 @@ class ReservasController extends AppController{
       
     }
          
-    public function delete($id = null)
+    public function relatorio($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
-        // $reserva = $this->Reservas->get($id);
+        if($this->request->is(['post','put'])){
+            $teste = $this->request->data;
+        }
+        $this->loadModel('Clientes');
 
-        // if($this->Reservas->delete($reserva)){
-        //     $this->Flash->success('Reserva deletada com sucesso');
-        // }else{
-        //     $this->Flash->error('Reserva nao pode ser deletada, verificar e tentar novamente');
-        // }
-        // return $this->redirect(['action' =>'index']);      
+        $cliente =$this->Clientes->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'nome'
+        ])
+        ->where(['status' => true])
+        ->toArray();
+
+        $this->loadModel('Filmes');
+        $filme =$this->Filmes->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'titulo'
+        ])
+        ->where(['status' => true])
+        ->toArray();
+
+        $this->set(compact('cliente','filme'));
     }
     public function fechamento($id = null)
     {
@@ -194,6 +206,27 @@ class ReservasController extends AppController{
        
         $this->set(compact('reserva','filme','cliente','idCliente','idFilme'));
     }
+    public function relatoriosprontos(){
+        
+        if($_POST['selecaoRelatorio'] == 'FATURAMENTO'){
+
+            $this->loadModel('Reservas');
+            $reservas = $this->Reservas->find()
+            ->where([
+                    'data_devolucao >=' => $_POST['de_data_devolucao'],
+                    'data_devolucao <=' => $_POST['ate_data_devolucao']    
+            ]);
+        }
+        if($_POST['selecaoRelatorio'] == 'ARRECADAÇÃO DE MULTA'){
+
+        }
+        if($_POST['selecaoRelatorio'] == '50 CLIENTES QUE MAIS ATRASAM'){
+
+        }
+       
+    debug($reservas);
+
+    }
     private function calculoReserva(Reserva $reserva){
         
         $hoje = new  DateTime('now');
@@ -227,4 +260,5 @@ class ReservasController extends AppController{
         return $reserva;
        
     }
+
 }
