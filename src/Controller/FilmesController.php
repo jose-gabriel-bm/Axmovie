@@ -11,7 +11,7 @@ public function index(){
     $this->paginate = [
         'limit' => 10,
         'order' => [
-        'Filmes.id' => 'desc',]
+        'Filmes.nome' => 'desc',]
     ];  
     $filmes = $this->Filmes->find('all',[
         'contain' => ['Generos','Diretores']

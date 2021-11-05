@@ -36,30 +36,51 @@
         <table>
             <thead>
                 <tr>
-                    <th>DDD</th>
-                    <th>Celular</th>
-                    <th>Principal</th>
-                    <th>Whatsapp</th>
-                    <th  style="text-align: center;" colspan="2">Ações</th>
-                
+                    <th style="text-align: center;">
+                        <?= $this->Paginator->sort('ddd', 'DDD')?>
+                    </th>
+                    <th style="text-align: center;">
+                        <?= $this->Paginator->sort('celular', 'Celular')?>
+                    </th>
+                    <th style="text-align: center;">
+                        <?= $this->Paginator->sort('principal', 'Principal')?>
+                    </th>
+                    <th style="text-align: center;">
+                        <?= $this->Paginator->sort('whatsapp', 'Whatsapp')?>
+                    </th>
+                    <th style="text-align: center;">
+                        <?= $this->Paginator->sort('acoes', 'Ações')?>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($cliente->contatos as $contato ) : ?>
                     <tr>
-                        <td><?php echo $contato['ddd']; ?></td>
-                        <td><?php echo $contato['numero']; ?></td>
-                        <td><?php echo $contato['numero_principal']; ?></td>
-                        <td><?php echo $contato['possui_whatsapp']; ?></td>
-                        <td>
-                        <?php 
-                            echo $this->Html->link(__('Editar'), 
-                            ['controller' => 'clientes', 'action' => 'editarContato', $contato->id]);
-                        ?>
+                        <td style="text-align: center;">
+                            <?php 
+                                echo $contato['ddd']; 
+                            ?>
                         </td>
-                        <td>
-                            <?php echo $this->Form->postlink(('Deletar'), ['controller' => 'clientes','action' => 'deleteContato',$contato->id ],
-                            ['confirm' => 'Realmente deseja apagar o contato?', $contato->id ]); 
+                        <td style="text-align: center;">
+                            <?php 
+                                echo $contato['numero']; 
+                            ?>
+                        </td>
+                        <td style="text-align: center;">
+                            <?php 
+                                echo $contato['numero_principal']; 
+                            ?>
+                        </td>
+                        <td style="text-align: center;">
+                            <?php 
+                                echo $contato['possui_whatsapp']; 
+                            ?>
+                        </td>
+                        <td style="text-align: center;">
+                            <?php
+                                echo $this->Form->postlink(('Deletar'), 
+                                ['controller' => 'clientes','action' => 'deleteContato',$contato->id ],
+                                ['confirm' => 'Realmente deseja apagar o contato?', $contato->id ]); 
                             ?>
                         </td>
                     </tr>

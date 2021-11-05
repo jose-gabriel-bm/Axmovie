@@ -11,7 +11,6 @@
     <table>
         <thead>
             <tr>
-                
                 <th><?= $this->Paginator->sort('titulo', 'Titulo')?></th>
                 <th><?= $this->Paginator->sort('genero', 'Genero')?></th>
                 <th><?= $this->Paginator->sort('id_diretor', 'Diretor')?></th>
@@ -19,8 +18,7 @@
                 <th><?= $this->Paginator->sort('valor_compra', 'valor do Filme')?></th>
                 <th><?= $this->Paginator->sort('status', 'Status')?></th>
                 <th><?= $this->Paginator->sort('idioma', 'Idioma')?></th>
-                <th><?= $this->Paginator->sort('açoes', 'Ações')?></th>
-                
+                <th><?= $this->Paginator->sort('açoes', 'Ações')?></th>    
             </tr>
         </thead>
         <tbody>

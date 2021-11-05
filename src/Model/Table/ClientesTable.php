@@ -49,4 +49,5 @@ class ClientesTable extends Table {
         $rules->add($rules->isUnique(['cpf'], 'cpf ja esta cadastrado'));
         return $rules;
     } 
+
 }

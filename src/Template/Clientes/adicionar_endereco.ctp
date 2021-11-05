@@ -29,12 +29,24 @@
     <table>
         <thead>
             <tr>
-                <th>Logradouro</th>
-                <th>Numero</th>
-                <th>Bairro</th>
-                <th>Cep</th>
-                <th>Complemento</th>
-                <th>Ações</th>
+                <th>
+                    <?= $this->Paginator->sort('logradouro', 'Logradouro')?>
+                </th>
+                <th>
+                    <?= $this->Paginator->sort('numero', 'Numero')?>
+                </th>
+                <th>
+                    <?= $this->Paginator->sort('bairro', 'Bairro')?>
+                </th>
+                <th>
+                    <?= $this->Paginator->sort('cep', 'Cep')?>
+                </th>
+                <th>
+                    <?= $this->Paginator->sort('complemento', 'Complemento')?>
+                </th>
+                <th>
+                    <?= $this->Paginator->sort('acoes', 'Ações')?>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -47,8 +59,8 @@
                     <td><?php echo $endereco['complemento']; ?></td>
                     <td>
                         <?php 
-                            echo $this->Html->link(__('Editar'), 
-                            ['controller' => 'clientes', 'action' => 'editarEndereco', $endereco->id]);
+                            // echo $this->Html->link(__('Editar'), 
+                            // ['controller' => 'clientes', 'action' => 'editarEndereco', $endereco->id]);
                            
                             echo $this->Form->postlink(('Deletar'), 
                             ['controller' => 'clientes','action' => 'deleteEndereco',$endereco->id ],

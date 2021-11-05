@@ -185,7 +185,7 @@ class ClientesController extends AppController
         ]);
         $this->set(compact('cliente'));
 
-        debug($cliente->contatos[0]->numero);
+        // debug($cliente->contatos[0]->numero);
 
         if ($this->request->is(['post', 'put',])) {
 

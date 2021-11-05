@@ -1,7 +1,7 @@
 <?= $this->element('cabecalho')?>
 <?= $this->element('menulateral')?>
 
-<div class="large-9 medium-9 columns content">
+<div class="large-6 medium-6 columns content">
     <h3>Cadastro de Filme</h3>
         <?php
             echo $this->Form->create($filme);
@@ -43,3 +43,4 @@
             echo $this->Form->end();
         ?>
 </div>
+<div class="large-4 medium-4 columns content"></div>

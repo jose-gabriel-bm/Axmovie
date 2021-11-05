@@ -41,7 +41,6 @@ class ReservasController extends AppController
 
         $reservas = $this->paginate($reservas);
 
-
         $this->set(compact('reservas'));
     }
 
@@ -142,16 +141,17 @@ class ReservasController extends AppController
             'keyField' => 'id',
             'valueField' => 'nome'
         ])
-            ->where(['status' => true])
-            ->toArray();
+        ->where(['status' => true]);
 
         $this->loadModel('Filmes');
         $filme = $this->Filmes->find('list', [
             'keyField' => 'id',
             'valueField' => 'titulo'
         ])
-            ->where(['status' => true])
-            ->toArray();
+        ->where(['status' => true])
+        ->toArray();
+
+
         $this->set(compact('cliente', 'filme'));
 
         if ($this->request->is(['post', 'put'])) {
@@ -191,7 +191,9 @@ class ReservasController extends AppController
                     ['data_devolucao >=' => $de_data_devolucao],
                     ['data_devolucao <=' => $ate_data_devolucao]
                 ]
-            ])->toArray();
+            ])
+            ->order(['data_devolucao' => 'ASC'])
+            ->toArray();
 
         // Nome do arquivo que será exportado
         $arquivo = 'RelatorioFaturamento.xls';
