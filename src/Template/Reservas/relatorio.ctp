@@ -13,7 +13,7 @@
                     'options' => [
                         'FATURAMENTO' => 'FATURAMENTO',
                         'ARRECADAÇÃO DE MULTA' => 'ARRECADAÇÃO DE MULTA',
-                        '50 CLIENTES QUE MAIS ATRASAM' => '50 CLIENTES QUE MAIS ATRASAM',
+                        '10 CLIENTES QUE MAIS ATRASAM' => '10 CLIENTES QUE MAIS ATRASAM',
                     ],
                     'label' => 'Selecionar Relatorio',
                 ]);
@@ -55,8 +55,10 @@
     <h3 style="margin-bottom:0rem;color: #4d8f97;">Relatorio Personalizados</h3>
     <table class='relatorio-container'>
         <tr>
-            <td>      
-                <?php echo $this->Form->input(
+            <td>     
+            <?php 
+            echo $this->Form->create();    
+             echo $this->Form->input(
                 'id_cliente', 
                 [
                     'type' => 'select',
