@@ -15,7 +15,7 @@ class UsersController extends AppController
         $this->paginate = [
             'limit' => 10,
             'order' => [
-                'Usuarios.nome' => 'DESC',
+                'Usuarios.created' => 'DESC',
             ]
         ];
 
