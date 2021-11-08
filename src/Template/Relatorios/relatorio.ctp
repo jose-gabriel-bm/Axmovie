@@ -21,32 +21,32 @@
                 ?>
             </td>
             <td>
-            <?php
-                echo $this->Form->control('de_data_devolucao',
-                [
-                    'type' => 'date',
-                    'minYear' => date('Y') +1,
-                    'maxYear' => date('Y') + 10,
-                    'label' => 'De:',
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->control('de_data_devolucao',
+                    [
+                        'type' => 'date',
+                        'minYear' => date('Y') +1,
+                        'maxYear' => date('Y') + 10,
+                        'label' => 'De:',
+                    ]);
+                ?>
             </td>
             <td>
-            <?php
-                echo $this->Form->control('ate_data_devolucao',
-                [
-                    'type' => 'date',
-                    'minYear' => date('Y') +1,
-                    'maxYear' => date('Y') + 10,
-                    'label' => 'Ate:',
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->control('ate_data_devolucao',
+                    [
+                        'type' => 'date',
+                        'minYear' => date('Y') +1,
+                        'maxYear' => date('Y') + 10,
+                        'label' => 'Ate:',
+                    ]);
+                ?>
             </td>
             <td >
-            <?php 
-                echo $this->Form->button('Baixar Relatorio');
-                echo $this->Form->end(); 
-            ?>
+                <?php 
+                    echo $this->Form->button('Baixar Relatorio');
+                    echo $this->Form->end(); 
+                ?>
             </td>
         </tr>
     </table>
@@ -56,82 +56,81 @@
     <table class='relatorio-container'>
         <tr>
             <td>     
-            <?php 
-                echo $this->Form->create();    
-                echo $this->Form->control('id_cliente', 
-                [
-                    'type' => 'select',
-                    'multiple' => false,
-                    'options' => $cliente,
-                    'label'=>'Cliente'
-                ]);
-            ?>
+                <?php 
+                    echo $this->Form->create();    
+                    echo $this->Form->control('id_cliente', 
+                    [
+                        'type' => 'select',
+                        'multiple' => false,
+                        'options' => $cliente,
+                        'label'=>'Cliente'
+                    ]);
+                ?>
             </td>
             <td>
-            <?php 
-                echo $this->Form->control('id_filme', 
-                [
-                    'type' => 'select',
-                    'multiple' => false,
-                    'options' => $filme,
-                    'label'=>'Filme'
-                ]);
-            ?>
+                <?php 
+                    echo $this->Form->control('id_filme', 
+                    [
+                        'type' => 'select',
+                        'multiple' => false,
+                        'options' => $filme,
+                        'label'=>'Filme'
+                    ]);
+                ?>
             </td>
             <td>
-            <?php
-                echo $this->Form->control('de_data_devolucao',
-                [
-                    'type' => 'date',
-                    'minYear' => date('Y') +1,
-                    'maxYear' => date('Y') + 10,
-                    'label' => '(Data devolução)De:',
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->control('de_data_devolucao',
+                    [
+                        'type' => 'date',
+                        'minYear' => date('Y') +1,
+                        'maxYear' => date('Y') + 10,
+                        'label' => '(Data devolução)De:',
+                    ]);
+                ?>
             </td>
             <td>
-            <?php
-                echo $this->Form->control('ate_data_devolucao',
-                [
-                    'type' => 'date',
-                    'minYear' => date('Y') +1,
-                    'maxYear' => date('Y') + 10,
-                    'label' => '(Data devolução)Ate:',
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->control('ate_data_devolucao',
+                    [
+                        'type' => 'date',
+                        'minYear' => date('Y') +1,
+                        'maxYear' => date('Y') + 10,
+                        'label' => '(Data devolução)Ate:',
+                    ]);
+                ?>
             </td>
         </tr>
         <tr>
             <td>
-            <?php
-                echo $this->Form->control('de_data_inicio_locacao',
-                [
-                    'type' => 'date',
-                    'minYear' => date('Y') +1,
-                    'maxYear' => date('Y') + 10,
-                    'label' => '(Data de inicio locação)De:',
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->control('de_data_inicio_locacao',
+                    [
+                        'type' => 'date',
+                        'minYear' => date('Y') +1,
+                        'maxYear' => date('Y') + 10,
+                        'label' => '(Data de inicio locação)De:',
+                    ]);
+                ?>
             </td>
             <td>
-            <?php
-                echo $this->Form->control('ate_data_inicio_locacao',
-                [
-                    'type' => 'date',
-                    'minYear' => date('Y') +1,
-                    'maxYear' => date('Y') + 10,
-                    'label' => '(Data de inicio locação)ate:',
-                ]);
-            ?>
+                <?php
+                    echo $this->Form->control('ate_data_inicio_locacao',
+                    [
+                        'type' => 'date',
+                        'minYear' => date('Y') +1,
+                        'maxYear' => date('Y') + 10,
+                        'label' => '(Data de inicio locação)ate:',
+                    ]);
+                ?>
             </td>
             <td></td>
             <td>
-            <?php 
-                echo $this->Form->button('Gerar Relatorio');
-                echo $this->Form->end(); 
-            ?>
+                <?php 
+                    echo $this->Form->button('Gerar Relatorio');
+                    echo $this->Form->end(); 
+                ?>
             </td>
         </tr>
     </table>
-
 </div>

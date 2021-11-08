@@ -3,15 +3,34 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Model\Entity\Reserva;
-use DateTime;
+// use App\Model\Entity\Reserva;
+// use DateTime;
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet; 
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class RelatoriosController extends AppController
 {
 
     public function index()
     {
-    }
+        $a = 'a';
+        debug(++$a);
+        // Criar uma nova planilha 
+        $spreadsheet = new Spreadsheet();
+        // Adicione valor em uma folha dentro dessa planilha. 
+
+        // // (É possível ter várias planilhas em uma única planilha) 
+        $sheet = $spreadsheet-> getActiveSheet (); 
+        $sheet-> setCellValue ('A1', 'opa');
+        $sheet-> setCellValue ('A2', 'opa');
+
+        // Salve a planilha na pasta webroot 
+        $writer = new Xlsx ($spreadsheet); 
+        $writer->save('teste.xlsx'); 
+        exit;
+    } 
+
 
     public function view($id = null)
     {  
@@ -40,8 +59,7 @@ class RelatoriosController extends AppController
             'valueField' => 'titulo'
         ])
         ->where(['status' => true])
-        ->toArray();
-
+        ->toArray();      
 
         $this->set(compact('cliente', 'filme'));
 
@@ -65,8 +83,7 @@ class RelatoriosController extends AppController
         //concatena as posicao do array
         $de_data_devolucao = $requisicaoRelatorio['de_data_devolucao']['year']
             . '-' . $requisicaoRelatorio['de_data_devolucao']['month']
-            . '-' . $requisicaoRelatorio['de_data_devolucao']['day'];
-        //concatena as posicao do array               
+            . '-' . $requisicaoRelatorio['de_data_devolucao']['day'];            
         $ate_data_devolucao = $requisicaoRelatorio['ate_data_devolucao']['year']
             . '-' . $requisicaoRelatorio['ate_data_devolucao']['month']
             . '-' . $requisicaoRelatorio['ate_data_devolucao']['day'];
@@ -86,45 +103,43 @@ class RelatoriosController extends AppController
             ->order(['data_devolucao' => 'ASC'])
             ->toArray();
 
-        // Nome do arquivo que será exportado
-        $arquivo = 'RelatorioFaturamento.xls';
-        // Tabela HTML com o formato da planilha
-        $html = '';
-        $html .= '<table border="2">';
-        $html .= '<tr>';
-        $html .= '<td colspan="5">Relatorio de Faturamento </tr>';
-        $html .= '</tr>';
-        // Cabeçalho planilha
-        $html .= '<tr>';
-        $html .= '<td><b>Codigo Reserva</b></td>';
-        $html .= '<td><b>Data de Entrada do Valor</b></td>';
-        $html .= '<td><b>Valor Total Pago</b></td>';
-        $html .= '<td><b>Cliente</b></td>';
-        $html .= '<td><b>Filme</b></td>';
-        $html .= '</tr>';
-        //Corpo planilha
+        //geraçao de planilha
+
+        // $arquivo ='.planilhas/relatorio.xlsx';
+        // $planilha =;
+
+        $spreadsheet = new Spreadsheet();
+        $planilha = $spreadsheet-> getActiveSheet (); 
+
+        $planilha->setCellValue('A1','Codigo Reserva');
+        $planilha->setCellValue('B1','Data de Entrada do Valor');
+        $planilha->setCellValue('C1','Cliente');
+        $planilha->setCellValue('D1','Filme');
+        $planilha->setCellValue('E1','Valor Total Pago');
+
+        $contador = 1;
         foreach ($faturamento as $fatura) {
-            $html .= '<tr>';
-            $html .= '<td>' . $fatura["id"] . '</td>';
-            $html .= '<td>' . $fatura["data_devolucao"] . '</td>';
-            $html .= '<td>' . $fatura["valor_total_pagar"] . '</td>';
-            $html .= '<td>' . $fatura["id_cliente"] . '</td>';
-            $html .= '<td>' . $fatura["id_filme"] . '</td>';
-            $html .= '</tr>';
+            $contador++;
+            $planilha->setCellValue('A'.$contador,$fatura["id"]);
+            $planilha->setCellValue('B'.$contador,$fatura["data_devolucao"]);
+            $planilha->setCellValue('C'.$contador,$fatura["id_cliente"]);
+            $planilha->setCellValue('D'.$contador,$fatura["id_filme"]);
+            $planilha->setCellValue('E'.$contador,$fatura["valor_total_pagar"]);
         }
-        $html .= '</table>';
-        // Configurações header para forçar o download
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Pragma: no-cache");
-        header("Content-type: application/x-msexcel");
-        header("Content-Disposition: attachment; filename=\"{$arquivo}\"");
-        header("Content-Description: PHP Generated Data");
-        // Envia o conteúdo do arquivo
-        echo $html;
+        $writer = new Xlsx ($spreadsheet); 
+        $writer->save('RelatorioFaturamento.xlsx'); 
         exit;
+
     }
+
+    public function setCabecalho(Spreadsheet $xlsx, array $row)
+    {
+        
+        ['Codigo Reserva', 'Data de Entrada do Valor', '123'];
+        // $xlsx->setCellValue
+    }
+
+
     public function relatorioMulta($requisicaoRelatorio)
     {
         $de_data_devolucao = $requisicaoRelatorio['de_data_devolucao']['year']
@@ -255,5 +270,6 @@ class RelatoriosController extends AppController
     public function relatorioPersonalizado()
     {
     }
+    
 
 }
