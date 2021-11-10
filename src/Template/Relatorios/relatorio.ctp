@@ -7,7 +7,7 @@
         <tr>
             <td>
                 <?php
-                    echo $this->Form->create(NULL);
+                    echo $this->Form->create();
                     echo $this->Form->control('selecaoRelatorio', [
                         'type' => 'select',
                         'multiple' => false,

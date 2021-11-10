@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-// use App\Model\Entity\Reserva;
-// use DateTime;
+use App\Model\Entity\Reserva;
+use DateTime;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet; 
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -14,34 +14,9 @@ class RelatoriosController extends AppController
 
     public function index()
     {
-        $a = 'a';
-        debug(++$a);
-        // Criar uma nova planilha 
-        $spreadsheet = new Spreadsheet();
-        // Adicione valor em uma folha dentro dessa planilha. 
 
-        // // (É possível ter várias planilhas em uma única planilha) 
-        $sheet = $spreadsheet-> getActiveSheet (); 
-        $sheet-> setCellValue ('A1', 'opa');
-        $sheet-> setCellValue ('A2', 'opa');
 
-        // Salve a planilha na pasta webroot 
-        $writer = new Xlsx ($spreadsheet); 
-        $writer->save('teste.xlsx'); 
-        exit;
     } 
-
-
-    public function view($id = null)
-    {  
-    }
-
-    public function adicionar()
-    {
-    }
-    public function edit($id = null)
-    {
-    }
 
     public function relatorio($id = null)
     {
@@ -80,65 +55,42 @@ class RelatoriosController extends AppController
     }
     public function relatorioFaturamento($requisicaoRelatorio)
     {
-        //concatena as posicao do array
+        //conversao das datas
         $de_data_devolucao = $requisicaoRelatorio['de_data_devolucao']['year']
-            . '-' . $requisicaoRelatorio['de_data_devolucao']['month']
-            . '-' . $requisicaoRelatorio['de_data_devolucao']['day'];            
+        . '-' . $requisicaoRelatorio['de_data_devolucao']['month']
+        . '-' . $requisicaoRelatorio['de_data_devolucao']['day'];            
         $ate_data_devolucao = $requisicaoRelatorio['ate_data_devolucao']['year']
-            . '-' . $requisicaoRelatorio['ate_data_devolucao']['month']
-            . '-' . $requisicaoRelatorio['ate_data_devolucao']['day'];
+        . '-' . $requisicaoRelatorio['ate_data_devolucao']['month']
+        . '-' . $requisicaoRelatorio['ate_data_devolucao']['day'];
 
         $this->loadModel('Reservas');
-        $faturamento = $this->Reservas->find()
+        $query = $this->Reservas->find()
             ->select([
-                'id', 'id_cliente', 'id_filme', 'valor_total_pagar',
-                'data_devolucao'
-            ])
+                        'id','data_devolucao' ,'id_cliente', 'id_filme', 'valor_total_pagar'
+                    ])
             ->where([
-                'AND' => [
-                    ['data_devolucao >=' => $de_data_devolucao],
-                    ['data_devolucao <=' => $ate_data_devolucao]
-                ]
-            ])
-            ->order(['data_devolucao' => 'ASC'])
-            ->toArray();
+                'AND' => 
+                    [
+                        ['valor_total_pagar >' => 0],
+                        ['data_devolucao >=' => $de_data_devolucao],
+                        ['data_devolucao <=' => $ate_data_devolucao]
+                    ]
+                    ])
+            ->order(['data_devolucao' => 'ASC']);   
 
-        //geraçao de planilha
-
-        // $arquivo ='.planilhas/relatorio.xlsx';
-        // $planilha =;
-
+        // geraçao de planilha
+        $cabecalhos = array("Codigo Reserva","Data de Entrada do Valor","Cliente","Filme","Valor Total Pago");
+        
         $spreadsheet = new Spreadsheet();
-        $planilha = $spreadsheet-> getActiveSheet (); 
-
-        $planilha->setCellValue('A1','Codigo Reserva');
-        $planilha->setCellValue('B1','Data de Entrada do Valor');
-        $planilha->setCellValue('C1','Cliente');
-        $planilha->setCellValue('D1','Filme');
-        $planilha->setCellValue('E1','Valor Total Pago');
-
-        $contador = 1;
-        foreach ($faturamento as $fatura) {
-            $contador++;
-            $planilha->setCellValue('A'.$contador,$fatura["id"]);
-            $planilha->setCellValue('B'.$contador,$fatura["data_devolucao"]);
-            $planilha->setCellValue('C'.$contador,$fatura["id_cliente"]);
-            $planilha->setCellValue('D'.$contador,$fatura["id_filme"]);
-            $planilha->setCellValue('E'.$contador,$fatura["valor_total_pagar"]);
-        }
+        
+        $this->setCabecalho($spreadsheet,$cabecalhos);
+        $this->setCorpo($spreadsheet,$query);
+        
         $writer = new Xlsx ($spreadsheet); 
         $writer->save('RelatorioFaturamento.xlsx'); 
         exit;
 
     }
-
-    public function setCabecalho(Spreadsheet $xlsx, array $row)
-    {
-        
-        ['Codigo Reserva', 'Data de Entrada do Valor', '123'];
-        // $xlsx->setCellValue
-    }
-
 
     public function relatorioMulta($requisicaoRelatorio)
     {
@@ -270,6 +222,40 @@ class RelatoriosController extends AppController
     public function relatorioPersonalizado()
     {
     }
+    public function setCabecalho($spreadsheet,$cabecalhos)
+    {
+        $planilha = $spreadsheet-> getActiveSheet (); 
+        $letra = "A";
+        foreach ($cabecalhos as $cabecalho) 
+        {
+            $planilha->setCellValue($letra.'1',$cabecalho);
+            ++$letra;
+        }
+        
+    }
+    public function setCorpo($spreadsheet,$query)
+    {
+        $planilha = $spreadsheet-> getActiveSheet ();
+
+        $letra = "A";
+        $numero = 2;
+        foreach ($query as $linha)    
+        {         
+            //converte a query(objeto) em array, iguinorando informaçoes desnecessarias do PHP.
+            $linha = json_decode(json_encode($linha));
+            $linha = array_values((array)$linha);
+
+            foreach ($linha as $coluna){
+                $planilha->setCellValue($letra.$numero,$coluna);
+                ++$letra;
+            }
+            $numero++;
+            $letra = "A";
+
+        }
+                
+    }
+
     
 
 }
