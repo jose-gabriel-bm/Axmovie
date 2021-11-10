@@ -91,7 +91,6 @@ class RelatoriosController extends AppController
         exit;
 
     }
-
     public function relatorioMulta($requisicaoRelatorio)
     {
         $de_data_devolucao = $requisicaoRelatorio['de_data_devolucao']['year']
@@ -104,10 +103,9 @@ class RelatoriosController extends AppController
 
         $this->loadModel('Reservas');
 
-        $faturamento = $this->Reservas->find()
+        $query = $this->Reservas->find()
             ->select([
-                'id', 'id_cliente', 'id_filme', 'valor_multa_atraso', 'valor_locacao',
-                'data_devolucao', 'data_limite_devolucao'
+                'id', 'data_devolucao','data_limite_devolucao','id_cliente','id_filme','valor_multa_atraso','valor_locacao'
             ])
             ->where([
                 'AND' => [
@@ -116,48 +114,22 @@ class RelatoriosController extends AppController
                     ['data_devolucao <=' => $ate_data_devolucao]
                 ]
             ])
-            ->order(['data_devolucao' => 'ASC'])
-            ->toArray();
+            ->order(['data_devolucao' => 'ASC']);
 
-        $arquivo = 'RelatorioMulta.xls';
-        $html = '';
-        $html .= '<table border="4">';
-        $html .= '<tr>';
-        $html .= '<td colspan="7">Relatorio de Arrecadacao de Multa </tr>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td><b>Codigo Reserva</b></td>';
-        $html .= '<td><b>Data de Entrada do Valor</b></td>';
-        $html .= '<td><b>Horas de atraso</b></td>';
-        $html .= '<td><b>Cliente</b></td>';
-        $html .= '<td><b>Filme</b></td>';
-        $html .= '<td><b>Valor Multa</b></td>';
-        $html .= '<td><b>Valor Locacao</b></td>';
-        $html .= '</tr>';
-        foreach ($faturamento as $fatura) {
-            $diasAtraso = $fatura['data_limite_devolucao']->diff($fatura['data_devolucao']);
-            $horasAtraso = $diasAtraso->h + ($diasAtraso->days * 24);
-            $html .= '<tr>';
-            $html .= '<td>' . $fatura["id"] . '</td>';
-            $html .= '<td>' . $fatura["data_devolucao"] . '</td>';
-            $html .= '<td>' . $horasAtraso . '</td>';
-            $html .= '<td>' . $fatura["id_cliente"] . '</td>';
-            $html .= '<td>' . $fatura["id_filme"] . '</td>';
-            $html .= '<td>' . $fatura["valor_multa_atraso"] . '</td>';
-            $html .= '<td>' . $fatura["valor_locacao"] . '</td>';
-            $html .= '</tr>';
-        }
-        $html .= '</table>';
+        // geraçao de arquivo Xlsx
 
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Pragma: no-cache");
-        header("Content-type: application/x-msexcel");
-        header("Content-Disposition: attachment; filename=\"{$arquivo}\"");
-        header("Content-Description: PHP Generated Data");
-        echo $html;
+        $cabecalhos =array("Código Reserva","Data de Devolução","Data lime de Devolução","Cliente","Filme","Valor Multa","Valor Locacao");
+        // ,"Horas de atraso"
+
+        $spreadsheet = new Spreadsheet();
+        $this->setCabecalho($spreadsheet,$cabecalhos);
+        $this->setCorpo($spreadsheet,$query);
+        $writer = new Xlsx ($spreadsheet); 
+        $writer->save('RelatorioMulta.xlsx'); 
         exit;
+        
+        // $diasAtraso = $fatura['data_limite_devolucao']->diff($fatura['data_devolucao']);
+        // $horasAtraso = $diasAtraso->h + ($diasAtraso->days * 24);
     }
     public function relatorioClientesAtrasam($requisicaoRelatorio)
     {
@@ -170,53 +142,30 @@ class RelatoriosController extends AppController
             . '-' . $requisicaoRelatorio['ate_data_devolucao']['day'];
 
         $this->loadModel('Reservas');
-
-        $faturamento = $this->Reservas->find()
+        $query = $this->Reservas->find()
             ->select([
                 'id', 'id_cliente', 'valor_multa_atraso',
                 'data_devolucao', 'data_limite_devolucao'
             ])
             ->where([
                 'AND' => [
+                    ['valor_multa_atraso >' => 0],
                     ['data_devolucao >=' => $de_data_devolucao],
                     ['data_devolucao <=' => $ate_data_devolucao]
                 ]
             ])
             ->order(['valor_multa_atraso' => 'DESC'])
-            ->limit(10)
-            ->toArray();
+            ->limit(10);
 
-        $arquivo = 'RelatorioAtrasoCliente.xls';
-        $html = '';
-        $html .= '<table border="4">';
-        $html .= '<tr>';
-        $html .= '<td colspan="4">Relatorio 10 clientes que mais atrasam </tr>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td><b>Codigo Reserva</b></td>';
-        $html .= '<td><b>Horas de atraso</b></td>';
-        $html .= '<td><b>Cliente</b></td>';
-        $html .= '<td><b>Valor Multa</b></td>';
-        $html .= '</tr>';
-        foreach ($faturamento as $fatura) {
-            $diasAtraso = $fatura['data_limite_devolucao']->diff($fatura['data_devolucao']);
-            $horasAtraso = $diasAtraso->h + ($diasAtraso->days * 24);
-            $html .= '<tr>';
-            $html .= '<td>' . $fatura["id"] . '</td>';
-            $html .= '<td>' . $horasAtraso . '</td>';
-            $html .= '<td>' . $fatura["id_cliente"] . '</td>';
-            $html .= '<td>' . $fatura["valor_multa_atraso"] . '</td>';
-            $html .= '</tr>';
-        }
-        $html .= '</table>';
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Pragma: no-cache");
-        header("Content-type: application/x-msexcel");
-        header("Content-Disposition: attachment; filename=\"{$arquivo}\"");
-        header("Content-Description: PHP Generated Data");
-        echo $html;
+        // geraçao de arquivo Xlsx
+
+        $spreadsheet = new Spreadsheet();
+
+        $cabecalhos =array("Código Reserva","Cliente","Valor Multa","Data de Devolução","Data lime de Devolução");
+        $this->setCabecalho($spreadsheet,$cabecalhos);
+        $this->setCorpo($spreadsheet,$query);
+        $writer = new Xlsx ($spreadsheet); 
+        $writer->save('RelatorioAtrasoCliente.xlsx'); 
         exit;
     }
     public function relatorioPersonalizado()
@@ -254,8 +203,6 @@ class RelatoriosController extends AppController
 
         }
                 
-    }
-
-    
+    }  
 
 }
