@@ -15,9 +15,9 @@ return [
             'host' => 'localhost',
             
             //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'root',
+            'password' => '323746',
+            'database' => 'banco_axmovie',
             'log' => true,
             'url' => env('DATABASE_URL', null),
         ],
