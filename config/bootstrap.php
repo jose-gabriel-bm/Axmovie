@@ -149,5 +149,5 @@ Type::build('timestamp')
 // \Cake\I18n\Time::setToStringFormat('dd/MM/yyyy HH:mm:ss');
 // \Cake\I18n\Date::setToStringFormat('dd/MM/yyyy');
 
-// Cake\I18n\FrozenDate::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
-// Cake\I18n\FrozenTime::setToStringFormat('dd/MM/yyyy - hh:mm:ss');
+Cake\I18n\FrozenDate::setDefaultLocale('pt_BR');
+Cake\I18n\FrozenTime::setDefaultLocale('pt_BR');

@@ -4,10 +4,11 @@
 <div class="users index large-10 medium-10 columns">
     <h3 style="margin-bottom:0rem;color: #4d8f97;">Relatorios Prontos</h3>
     <table class='relatorio-container'>
+
         <tr>
             <td>
                 <?php
-                    echo $this->Form->create(null,['controller' => 'Relatorios','Action' => 'relatorio']);
+                    echo $this->Form->create(null,['url' => ['action' => 'relatorio']]);
                     echo $this->Form->control('selecaoRelatorio', [
                         'type' => 'select',
                         'multiple' => false,
@@ -25,8 +26,8 @@
                     echo $this->Form->control('de_data_devolucao',
                     [
                         'type' => 'date',
-                        'minYear' => date('Y') +1,
-                        'maxYear' => date('Y') + 10,
+                        'maxYear' => date('Y') + 0,
+                        'minYear' => date('Y') -4,
                         'label' => 'De:',
                     ]);
                 ?>
@@ -36,8 +37,8 @@
                     echo $this->Form->control('ate_data_devolucao',
                     [
                         'type' => 'date',
-                        'minYear' => date('Y') +1,
-                        'maxYear' => date('Y') + 10,
+                        'minYear' => date('Y') -4,
+                        'maxYear' => date('Y') + 0,
                         'label' => 'Ate:',
                     ]);
                 ?>
@@ -83,8 +84,8 @@
                     echo $this->Form->control('de_data_devolucao',
                     [
                         'type' => 'date',
-                        'minYear' => date('Y') +1,
-                        'maxYear' => date('Y') + 10,
+                        'minYear' => date('Y') -4,
+                        'maxYear' => date('Y') + 0,
                         'label' => '(Data devolução)De:',
                     ]);
                 ?>
@@ -94,8 +95,8 @@
                     echo $this->Form->control('ate_data_devolucao',
                     [
                         'type' => 'date',
-                        'minYear' => date('Y') +1,
-                        'maxYear' => date('Y') + 10,
+                        'minYear' => date('Y') -4,
+                        'maxYear' => date('Y') + 0,
                         'label' => '(Data devolução)Ate:',
                     ]);
                 ?>
@@ -107,8 +108,8 @@
                     echo $this->Form->control('de_data_inicio_locacao',
                     [
                         'type' => 'date',
-                        'minYear' => date('Y') +1,
-                        'maxYear' => date('Y') + 10,
+                        'minYear' => date('Y') -4,
+                        'maxYear' => date('Y') + 0,
                         'label' => '(Data de inicio locação)De:',
                     ]);
                 ?>
@@ -118,8 +119,8 @@
                     echo $this->Form->control('ate_data_inicio_locacao',
                     [
                         'type' => 'date',
-                        'minYear' => date('Y') +1,
-                        'maxYear' => date('Y') + 10,
+                        'minYear' => date('Y') -4,
+                        'maxYear' => date('Y') + 0,
                         'label' => '(Data de inicio locação)ate:',
                     ]);
                 ?>

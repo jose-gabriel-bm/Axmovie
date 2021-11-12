@@ -65,7 +65,6 @@ class RelatoriosController extends AppController
 
             if ($requisicaoRelatorio['selecaoRelatorio'] == 'FATURAMENTO') {
                 $this->relatorioFaturamento($de_data_devolucao,$ate_data_devolucao);
-                echo "deu certo";
             }
             if ($requisicaoRelatorio['selecaoRelatorio'] == 'ARRECADAÇÃO DE MULTA') {
                 $this->relatorioMulta($de_data_devolucao,$ate_data_devolucao);
@@ -73,6 +72,7 @@ class RelatoriosController extends AppController
             if ($requisicaoRelatorio['selecaoRelatorio'] == '10 CLIENTES QUE MAIS ATRASAM') {
                 $this->relatorioClientesAtrasam($de_data_devolucao,$ate_data_devolucao);
             }
+            
         }
     }
     public function relatorioFaturamento($de_data_devolucao,$ate_data_devolucao)
@@ -99,10 +99,10 @@ class RelatoriosController extends AppController
         $this->setCorpo($spreadsheet,$query);
         $writer = new Xlsx ($spreadsheet); 
         $writer->save('RelatorioFaturamento.xlsx'); 
+        return $this->redirect(['controller' => 'Relatorios', 'action' => 'index']);
         exit;
-
     }
-    public function relatorioMulta($de_data_devolucao,$ate_data_devoluca)
+    public function relatorioMulta($de_data_devolucao,$ate_data_devolucao)
     {
         $this->loadModel('Reservas');
         $query = $this->Reservas->find()
@@ -127,12 +127,13 @@ class RelatoriosController extends AppController
         $this->setCorpo($spreadsheet,$query);
         $writer = new Xlsx ($spreadsheet); 
         $writer->save('RelatorioMulta.xlsx'); 
+        return $this->redirect(['controller' => 'Relatorios', 'action' => 'index']);
         exit;
         
         // $diasAtraso = $fatura['data_limite_devolucao']->diff($fatura['data_devolucao']);
         // $horasAtraso = $diasAtraso->h + ($diasAtraso->days * 24);
     }
-    public function relatorioClientesAtrasam($de_data_devolucao,$ate_data_devoluca)
+    public function relatorioClientesAtrasam($de_data_devolucao,$ate_data_devolucao)
     {
         $this->loadModel('Reservas');
         $query = $this->Reservas->find()
@@ -158,26 +159,27 @@ class RelatoriosController extends AppController
         $this->setCorpo($spreadsheet,$query);
         $writer = new Xlsx ($spreadsheet); 
         $writer->save('RelatorioAtrasoCliente.xlsx'); 
+        return $this->redirect(['controller' => 'Relatorios', 'action' => 'index']);
         exit;
     }
-    public function relatorioPersonalizado($spreadsheet,$cabecalhos)
-    {
-        $this->loadModel('Reservas');
-        $query = $this->Reservas->find()
-            ->select([
-                        'id','data_devolucao' ,'id_cliente', 'id_filme', 'valor_total_pagar'
-                    ])
-            ->where([
-                'AND' => 
-                    [
-                        ['valor_total_pagar >' => 0],
-                        ['data_devolucao >=' => $de_data_devolucao],
-                        ['data_devolucao <=' => $ate_data_devolucao]
-                    ]
-                    ])
-            ->order(['data_devolucao' => 'ASC']);
+    // public function relatorioPersonalizado($spreadsheet,$cabecalhos)
+    // {
+    //     $this->loadModel('Reservas');
+    //     $query = $this->Reservas->find()
+    //         ->select([
+    //                     'id','data_devolucao' ,'id_cliente', 'id_filme', 'valor_total_pagar'
+    //                 ])
+    //         ->where([
+    //             'AND' => 
+    //                 [
+    //                     ['valor_total_pagar >' => 0],
+    //                     ['data_devolucao >=' => $de_data_devolucao],
+    //                     ['data_devolucao <=' => $ate_data_devolucao]
+    //                 ]
+    //                 ])
+    //         ->order(['data_devolucao' => 'ASC']);
 
-    }
+    // }
     public function setCabecalho($spreadsheet,$cabecalhos)
     {
         $planilha = $spreadsheet-> getActiveSheet (); 
