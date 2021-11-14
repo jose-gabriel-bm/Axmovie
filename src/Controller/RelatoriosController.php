@@ -8,6 +8,9 @@ use DateTime;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet; 
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
+use Cake\Http\CallbackStream;
 
 class RelatoriosController extends AppController
 {
@@ -79,8 +82,9 @@ class RelatoriosController extends AppController
     {
         $this->loadModel('Reservas');
         $query = $this->Reservas->find()
+            ->contain(['Clientes','Filmes'])
             ->select([
-                        'id','data_devolucao' ,'id_cliente', 'id_filme', 'valor_total_pagar'
+                        'id','data_devolucao' ,'Clientes.nome', 'Filmes.titulo', 'valor_total_pagar'
                     ])
             ->where([
                 'AND' => 
@@ -90,15 +94,22 @@ class RelatoriosController extends AppController
                         ['data_devolucao <=' => $ate_data_devolucao]
                     ]
                     ])
-            ->order(['data_devolucao' => 'ASC']);   
+            ->order(['data_devolucao' => 'ASC'])
+            ->toarray();   
 
         // geraçao de planilha
         $cabecalhos = array("Codigo Reserva","Data de Entrada do Valor","Cliente","Filme","Valor Total Pago");
+       
+
         $spreadsheet = new Spreadsheet();
+        $arquivo = WWW_ROOT.'relatorios'.DS.'faturamento'.DS.'Relatorio.xlsx';
+
         $this->setCabecalho($spreadsheet,$cabecalhos);
         $this->setCorpo($spreadsheet,$query);
+
         $writer = new Xlsx ($spreadsheet); 
-        $writer->save('RelatorioFaturamento.xlsx'); 
+        $writer->save($arquivo);
+        
         return $this->redirect(['controller' => 'Relatorios', 'action' => 'index']);
         exit;
     }
@@ -120,6 +131,7 @@ class RelatoriosController extends AppController
 
         // geraçao de arquivo Xlsx
         $cabecalhos =array("Código Reserva","Data de Devolução","Data lime de Devolução","Cliente","Filme","Valor Multa","Valor Locacao");
+ 
         // ,"Horas de atraso"
 
         $spreadsheet = new Spreadsheet();
@@ -155,6 +167,7 @@ class RelatoriosController extends AppController
         $spreadsheet = new Spreadsheet();
 
         $cabecalhos =array("Código Reserva","Cliente","Valor Multa","Data de Devolução","Data lime de Devolução");
+       
         $this->setCabecalho($spreadsheet,$cabecalhos);
         $this->setCorpo($spreadsheet,$query);
         $writer = new Xlsx ($spreadsheet); 
@@ -197,18 +210,22 @@ class RelatoriosController extends AppController
 
         $letra = "A";
         $numero = 2;
+
         foreach ($query as $linha)    
         {         
-            //converte a query(objeto) em array, iguinorando informaçoes desnecessarias do PHP.
+            
+            // //converte a query(objeto) em array, iguinorando informaçoes desnecessarias do PHP.
             $linha = json_decode(json_encode($linha));
             $linha = array_values((array)$linha);
 
-            foreach ($linha as $coluna){
-                $planilha->setCellValue($letra.$numero,$coluna);
-                ++$letra;
-            }
-            $numero++;
-            $letra = "A";
+            debug($linha);
+
+            // foreach ($linha as $coluna){
+            //     $planilha->setCellValue($letra.$numero,$coluna);
+            //     ++$letra;
+            // }
+            // $numero++;
+            // $letra = "A";
 
         }
                 

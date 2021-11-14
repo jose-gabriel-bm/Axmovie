@@ -49,6 +49,10 @@
                     echo $this->Form->end(); 
                 ?>
             </td>
+         
+            <td>
+                <?= $this->Html->link('Download ', '/relatorios/faturamento/Relatorio.xlsx', ['download' => 'Relatorio.xlsx', 'class' => 'btn btn-sm btn-success']) ?>
+            </td>
         </tr>
     </table>
 </div>
