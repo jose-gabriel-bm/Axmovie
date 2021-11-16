@@ -18,6 +18,7 @@ class ReservasController extends AppController
         $search =  $this->request->query('search');
         $reservas = null;
 
+        
         if ($search == null) {
 
             $reservas = $this->Reservas->find('all', [
