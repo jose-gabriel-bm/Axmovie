@@ -3,24 +3,45 @@
 
 <div class="users index large-10 medium-10 columns content">
     <h3 style="margin-bottom:0rem ;">Lista de Usuarios</h3>
-    <table style="margin-bottom:0rem ;">
-        <tr>
-            <td><?php 
+            
+            <?php 
                 if ($verificacaoPerfil == 1){echo $this->Html->link(__('Adicionar novo Usuario '),
-                    ['controller' => 'users', 'action' => 'add']);
-                } ?>
-            </td>
-            <td ></td>
-            <td style="text-align: right;">
-            <?php
-                echo $this->Form->create(null, ['type' => 'get']);
-	            echo $this->Form->input('search', 
-		        ['label' => false, 
-		        'placeholder' => 'Digite aqui nome do cliente' ]);?></td>
+                    ['controller' => 'users', 'action' => 'add']); } 
+            ?> 
 
-            <td style="text-align: center;"><?php echo $this->Form->button('Pesquisar')?> </td>
-        </tr>
-    </table>
+<div class="dropdown">
+  <button class="mainmenubtn">Pesquisar</button>
+    <div class="dropdown-child">
+        <a><?php
+                echo $this->Form->create(null, ['type' => 'get']);
+        	    echo $this->Form->input(
+                'nome',[
+                    'label' => false, 
+        		        'placeholder' => 'Nome do cliente' ]);
+        	    echo $this->Form->input('email', 
+        		    ['label' => false, 
+        		    'placeholder' => 'Email' ]);
+                echo $this->Form->select(
+                    'perfil', [                                            
+                        'Administrador' => 'Administrador',
+                        'Atendente' => 'Atendente',
+                    ],
+                    ['empty' => 'Selecionar Perfil'],
+                );
+                echo $this->Form->select(
+                    'status', [                                            
+                        'Ativo' => 'Ativo',
+                        'Inativo' => 'Inativo',
+                    ],
+                    ['empty' => 'Selecionar Status'],
+                );
+                echo $this->Form->button('Pesquisar');
+                echo $this->Form->end();
+            ?>     
+        </a>
+    </div>
+</div>   
+
     <table>
         <thead>
             <tr >

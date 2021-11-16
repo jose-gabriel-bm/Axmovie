@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
-use Cake\Event\Event;
 
 class UsersController extends AppController
 {
@@ -19,14 +18,11 @@ class UsersController extends AppController
             ]
         ];
 
-        $usuarios = $this->Users->find('all', [
-            'contain' => ['Perfis']
-        ]);
-        $usuarios = $this->paginate($usuarios);
-        
-       
-        $this->set(compact('usuarios','verificacaoPerfil'));
+        $busca =  $this->request->query();
 
+        $this->buscaIndex($busca);
+
+        $this->set(compact('verificacaoPerfil'));
 
     }
 
@@ -95,7 +91,7 @@ class UsersController extends AppController
     }
     public function login()
     {
-$this->Auth->AllowedActions = array('add');
+    $this->Auth->AllowedActions = array('add');
         if ($this->request->is('post')) {
 
             $user = $this->Auth->identify();
@@ -127,5 +123,38 @@ $this->Auth->AllowedActions = array('add');
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
+    }
+    public function buscaIndex($busca){
+
+        $usuarios = null;
+        
+        if ($busca == null) {
+
+            $usuarios = $this->Users->find('all', [
+                'contain' => ['Perfis']
+            ]);
+    
+        } else {
+
+            $usuarios = $this->Users->find('all', [
+                'contain' => ['Perfis']
+            ]);
+
+            $usuarios = $usuarios->where(['email LIKE' => "%$busca[email]%"]);
+            $usuarios = $usuarios->where(['nome LIKE' => "%$busca[nome]%"]);
+            $usuarios = $usuarios->where(['perfil LIKE' => "%$busca[perfil]%"]);
+
+            if($busca['status'] == 'Ativo'):
+                $usuarios = $usuarios->where(['status =' => 1]);
+            endif;
+
+            if($busca['status'] == 'Inativo'):
+                $usuarios = $usuarios->where(['status =' => 0]);
+            endif;
+            
+        }
+
+        $usuarios = $this->paginate($usuarios); 
+        $this->set(compact('usuarios')); 
     }
 }

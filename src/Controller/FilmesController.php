@@ -4,22 +4,20 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-class FilmesController extends AppController{
+class FilmesController extends AppController
+{
 
 public function index(){
    
     $this->paginate = [
         'limit' => 10,
         'order' => [
-        'Filmes.nome' => 'desc',]
+        'Filmes.titulo' => 'Desc',]
     ];  
-    $filmes = $this->Filmes->find('all',[
-        'contain' => ['Generos','Diretores']
-    ]);
-    
-   $filmes = $this->paginate($filmes);
 
-   $this->set(compact('filmes'));
+    $busca =  $this->request->query();
+    $this->buscaIndex($busca);
+ 
 }
 
 public function view($id = null){
@@ -110,4 +108,47 @@ public function adicionar(){
         }
         return $this->redirect(['action' =>'index']);      
     }
+    public function buscaIndex($busca)
+    {
+        $filmes = null;
+        
+        if ($busca == null) {
+
+            $filmes = $this->Filmes->find('all', [
+                'contain' => ['Generos','Diretores']
+             ]);
+
+        } else {
+
+            $filmes = $this->Filmes->find('all', [
+                'contain' => ['Generos','Diretores']
+            ])->where([
+                'AND' => [
+                    ['titulo LIKE' => "%$busca[titulo]%"],
+                    // ['valor_compra LIKE' => "%$busca[valor_compra]%"],
+                    ['idioma LIKE' => "%$busca[idioma]%"]
+                ]
+            ]); 
+  
+            if($busca['status'] == 'Ativo'):
+                $filmes = $filmes->where(['status =' => 1]);
+            endif;
+
+            if($busca['status'] == 'Inativo'):
+                $filmes = $filmes->where(['status =' => 0]);
+            endif;
+
+            if($busca['lancamento'] == 'Sim'):
+                $filmes = $filmes->where(['lancamento =' => 1]);
+            endif;
+
+            if($busca['lancamento'] == 'Nao'):
+                $filmes = $filmes->where(['lancamento =' => 0]);
+            endif;
+            
+        }
+        $filmes = $this->paginate($filmes);
+        $this->set(compact('filmes'));
+    }
+    
 }

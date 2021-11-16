@@ -15,6 +15,7 @@ class ReservasController extends AppController
             'limit' => 10,
             'order' => ['Reservas.data_inicio_locacao' => 'Desc']
         ];
+
         $search =  $this->request->query('search');
         $reservas = null;
 
@@ -25,7 +26,9 @@ class ReservasController extends AppController
                 'contain' => ['Clientes', 'Filmes']
             ]);
         } else {
-            $reservas = $this->Reservas->find('all', [
+            $reservas = 'opa';
+            
+            $this->Reservas->find('all', [
                 'contain' => ['Clientes', 'Filmes']
             ])
                 ->where([

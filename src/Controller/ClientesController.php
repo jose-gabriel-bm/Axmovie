@@ -11,10 +11,13 @@ class ClientesController extends AppController
     {
         $this->paginate = [
             'limit' => 10,
-            'order' => ['Usuarios.id' => 'Desc',]
+            'order' => [
+            'Clientes.id' => 'Desc',]
         ];
-        $clientes = $this->paginate($this->Clientes);
-        $this->set(compact('clientes'));
+
+        $busca =  $this->request->query();
+        $this->buscaIndex($busca);
+
     }
 
     public function view($id)
@@ -238,4 +241,36 @@ class ClientesController extends AppController
             return $this->redirect(['controller'=> 'clientes','action'=>'adicionar_endereco',$endereco->id_cliente]);
         }
     }
+    public function buscaIndex($busca)
+    {
+        $clientes = null;
+        
+        if ($busca == null) {
+
+            $clientes = $this->Clientes->find('all');
+
+        } else {
+
+            $clientes = $this->Clientes->find('all')
+            ->where([
+                'AND' => [
+                    ['nome LIKE' => "%$busca[nome]%"],
+                    ['cpf LIKE' => "%$busca[cpf]%"],
+                    ['email LIKE' => "%$busca[email]%"],    
+                ]
+            ]);         
+
+            if($busca['status'] == 'Ativo'):
+                $clientes = $clientes->where(['status =' => 1]);
+            endif;
+
+            if($busca['status'] == 'Inativo'):
+                $clientes = $clientes->where(['status =' => 0]);
+            endif;
+           
+        }
+        $clientes = $this->paginate($clientes);
+        $this->set(compact('clientes'));
+    }
+    
 }

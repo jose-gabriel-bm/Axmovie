@@ -8,6 +8,43 @@
         <?php echo $this->Html->link(__('Adicionar novo Filme '), ['controller' => 'filmes','action' =>'adicionar']); ?>  
     </ul>
     </nav>
+
+<div class="dropdown">
+    <button class="mainmenubtn">Pesquisar</button>
+    <div class="dropdown-child">
+        <a>
+            <?php
+                echo $this->Form->create(null, ['type' => 'get']);
+        	    echo $this->Form->input(
+                'titulo',[
+                    'label' => false, 
+        		    'placeholder' => 'Nome do Filme' ]);
+                echo $this->Form->input('valor_compra', 
+        		    ['label' => false, 
+        		    'placeholder' => 'Valor do Filme' ]);
+                echo $this->Form->input('idioma', 
+        		    ['label' => false, 
+        		    'placeholder' => 'Idioma' ]);
+                echo $this->Form->select(
+                    'lancamento', [                                            
+                        'sim' => 'Sim',
+                        'nao' => 'Nao',
+                    ],
+                    ['empty' => 'Selecionar Lancamento'],
+                );
+                echo $this->Form->select(
+                    'status', [                                            
+                        'Ativo' => 'Ativo',
+                        'Inativo' => 'Inativo',
+                    ],
+                    ['empty' => 'Selecionar Status'],
+                );
+                echo $this->Form->button('Pesquisar');
+                echo $this->Form->end();
+            ?>     
+        </a>
+    </div>
+</div> 
     <table>
         <thead>
             <tr>
@@ -24,7 +61,7 @@
         <tbody>
             <?php foreach ($filmes as $filme): ?>
             <tr>
-                
+
                 <td><?php echo $filme->titulo; ?></td>
                 <td><?php echo $filme->genero->genero; ?></td>
                 <td><?php echo $filme->diretore->nome; ?></td>
