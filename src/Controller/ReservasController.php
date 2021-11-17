@@ -16,36 +16,9 @@ class ReservasController extends AppController
             'order' => ['Reservas.data_inicio_locacao' => 'Desc']
         ];
 
-        $search =  $this->request->query('search');
-        $reservas = null;
+        $busca =  $this->request->query();
+        $this->buscaIndex($busca);
 
-        
-        if ($search == null) {
-
-            $reservas = $this->Reservas->find('all', [
-                'contain' => ['Clientes', 'Filmes']
-            ]);
-        } else {
-            $reservas = 'opa';
-            
-            $this->Reservas->find('all', [
-                'contain' => ['Clientes', 'Filmes']
-            ])
-                ->where([
-                    'OR' => [
-                        ['nome LIKE' => "%$search%"],
-                        ['titulo LIKE' => "%$search%"],
-                        ['data_inicio_locacao LIKE' => "%$search%"],
-                        ['data_limite_devolucao LIKE' => "%$search%"],
-                        ['data_devolucao  LIKE' => "%$search%"],
-                    ]
-                ]);
-        }
-
-
-        $reservas = $this->paginate($reservas);
-
-        $this->set(compact('reservas'));
     }
 
     public function view($id = null)
@@ -446,5 +419,43 @@ class ReservasController extends AppController
         $reserva->valor_locacao = $valorLocacao;
 
         return $reserva;
+    }
+    public function buscaIndex($busca)
+    {
+        $reservas = null;
+        
+        if ($busca == null) {
+
+            $reservas = $this->Reservas->find('all', [
+                'contain' => ['Filmes','Clientes']
+             ]);
+            
+
+        } else {
+
+            $reservas = $this->Reservas->find('all', [
+                'contain' => ['Filmes','Clientes']
+            ])->where([
+                'AND' => [
+                    ['titulo LIKE' => "%$busca[titulo]%"],
+                    ['nome LIKE' => "%$busca[nome]%"]
+                ]
+            ]);
+  
+            if($busca['status'] == 'Aberta'):
+                $busca['status'] = 1;
+                $busca['status'] = (int)$busca['status'];
+                $reservas = $reservas->where(['status LIKE' => "%$busca[status]%"]);
+            endif;         
+
+            if($busca['status'] == 'Fechada'):
+                $busca['status'] = 0;
+                $busca['status'] = (int)$busca['status'];
+                $reservas = $reservas->where(['status LIKE' => "%$busca[status]%"]);
+            endif;
+            
+        }
+        $reservas = $this->paginate($reservas);
+        $this->set(compact('reservas'));
     }
 }

@@ -109,43 +109,43 @@ public function adicionar(){
         return $this->redirect(['action' =>'index']);      
     }
     public function buscaIndex($busca)
-    {
-        $filmes = null;
-        
-        if ($busca == null) {
+    {           
+            if(isset($busca)){
 
+            $filmes = $this->Filmes->find('all', [
+                'contain' => ['Generos','Diretores']
+            ]);
+            if(isset($busca['titulo'])){
+                $filmes = $filmes->where(['titulo LIKE' => "%$busca[titulo]%"]);
+            }
+            if(isset($busca['idioma'])){
+                $filmes = $filmes->where(['idioma LIKE' => "%$busca[idioma]%"]);
+            }
+            if(isset($busca['valor_compra'])){
+                $filmes = $filmes->where(['valor_compra =' => $busca['valor_compra']]);
+            }
+            if(isset($busca['status'])){
+                if($busca['status'] == 'Ativo'):
+                    $filmes = $filmes->where(['status =' => (int)1]);
+                endif;
+    
+                if($busca['status'] == 'Inativo'):
+                    $filmes = $filmes->where(['status =' => (int)0]);
+                endif;
+            }
+            if(isset($busca['lancamento'])){
+                if($busca['lancamento'] == 'Sim'):
+                    $filmes = $filmes->where(['lancamento =' => (int)1]);
+                endif;
+    
+                if($busca['lancamento'] == 'Nao'):
+                    $filmes = $filmes->where(['lancamento =' => (int)0]);
+                endif;
+            }           
+        }else{
             $filmes = $this->Filmes->find('all', [
                 'contain' => ['Generos','Diretores']
              ]);
-
-        } else {
-
-            $filmes = $this->Filmes->find('all', [
-                'contain' => ['Generos','Diretores']
-            ])->where([
-                'AND' => [
-                    ['titulo LIKE' => "%$busca[titulo]%"],
-                    // ['valor_compra LIKE' => "%$busca[valor_compra]%"],
-                    ['idioma LIKE' => "%$busca[idioma]%"]
-                ]
-            ]); 
-  
-            if($busca['status'] == 'Ativo'):
-                $filmes = $filmes->where(['status =' => 1]);
-            endif;
-
-            if($busca['status'] == 'Inativo'):
-                $filmes = $filmes->where(['status =' => 0]);
-            endif;
-
-            if($busca['lancamento'] == 'Sim'):
-                $filmes = $filmes->where(['lancamento =' => 1]);
-            endif;
-
-            if($busca['lancamento'] == 'Nao'):
-                $filmes = $filmes->where(['lancamento =' => 0]);
-            endif;
-            
         }
         $filmes = $this->paginate($filmes);
         $this->set(compact('filmes'));

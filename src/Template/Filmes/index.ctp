@@ -27,8 +27,8 @@
         		    'placeholder' => 'Idioma' ]);
                 echo $this->Form->select(
                     'lancamento', [                                            
-                        'sim' => 'Sim',
-                        'nao' => 'Nao',
+                        'Sim' => 'Sim',
+                        'Nao' => 'Nao',
                     ],
                     ['empty' => 'Selecionar Lancamento'],
                 );

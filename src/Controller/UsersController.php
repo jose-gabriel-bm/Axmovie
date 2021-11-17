@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\ORM\TableRegistry;
 
 class UsersController extends AppController
 {
@@ -16,14 +17,13 @@ class UsersController extends AppController
             'order' => [
                 'Usuarios.created' => 'DESC',
             ]
-        ];
-
-        $busca =  $this->request->query();
-
+        ];      
+    
+        $busca = $this->request->getQuery();
+      
         $this->buscaIndex($busca);
 
         $this->set(compact('verificacaoPerfil'));
-
     }
 
     public function view($id = null)
@@ -125,36 +125,39 @@ class UsersController extends AppController
         return $this->redirect($this->Auth->logout());
     }
     public function buscaIndex($busca){
-
-        $usuarios = null;
         
-        if ($busca == null) {
-
-            $usuarios = $this->Users->find('all', [
-                'contain' => ['Perfis']
-            ]);
-    
-        } else {
+        if (isset($busca)) {       
 
             $usuarios = $this->Users->find('all', [
                 'contain' => ['Perfis']
             ]);
 
-            $usuarios = $usuarios->where(['email LIKE' => "%$busca[email]%"]);
-            $usuarios = $usuarios->where(['nome LIKE' => "%$busca[nome]%"]);
-            $usuarios = $usuarios->where(['perfil LIKE' => "%$busca[perfil]%"]);
+            if(isset($busca['email'])){
+                $usuarios = $usuarios->where(['email LIKE' => "%$busca[email]%"]);
+            }
+            if(isset($busca['nome'])){
+                $usuarios = $usuarios->where(['nome LIKE' => "%$busca[nome]%"]);
+            }
+            if(isset($busca['perfil'])){
+                $usuarios = $usuarios->where(['perfil LIKE' => "%$busca[perfil]%"]);
+            }
+            if(isset($busca['status'])){
 
-            if($busca['status'] == 'Ativo'):
-                $usuarios = $usuarios->where(['status =' => 1]);
-            endif;
-
-            if($busca['status'] == 'Inativo'):
-                $usuarios = $usuarios->where(['status =' => 0]);
-            endif;
-            
+                if($busca['status'] == 'Ativo'):
+                    $usuarios = $usuarios->where(['status =' => 1]);
+                endif;
+                if($busca['status'] == 'Inativo'):
+                    $usuarios = $usuarios->where(['status =' => 0]);
+                endif; 
+            }
+        }else{
+ 
+            $usuarios = $this->Users->find('all', [
+                'contain' => ['Perfis']
+            ]);
         }
 
-        $usuarios = $this->paginate($usuarios); 
+        $usuarios = $this->paginate($usuarios);
         $this->set(compact('usuarios')); 
     }
-}
+ }
