@@ -654,7 +654,7 @@ table td {
 
 
 .mainmenubtn {
-    background-color: #ebebeb;
+    background-color: #4d8f97;
     color: rgb(63, 59, 59);
     border: none;
     cursor: pointer;
@@ -664,9 +664,7 @@ table td {
     text-align: left;
 
 }
-.mainmenubtn:hover {
-    background-color: #4d8f97;
-    }
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -682,6 +680,7 @@ table td {
     text-decoration: none;
     display: block;
 }
-.dropdown:hover .dropdown-child {
-    display: block;
+
+.show-menu-dw {
+    display: block !important;
 }

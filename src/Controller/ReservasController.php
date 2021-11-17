@@ -422,38 +422,29 @@ class ReservasController extends AppController
     }
     public function buscaIndex($busca)
     {
-        $reservas = null;
-        
-        if ($busca == null) {
-
+        if (isset($busca)) 
+        {
+            $reservas = $this->Reservas->find('all', [
+                'contain' => ['Filmes','Clientes']]);  
+                
+            if(isset($busca['titulo'])){   
+                $reservas = $reservas->where(['titulo LIKE' => "%$busca[titulo]%"]); 
+            }   
+            if(isset($busca['nome'])){   
+                $reservas = $reservas->where(['nome LIKE' => "%$busca[nome]%"]); 
+            }     
+            if(isset($busca['status'])){  
+                if($busca['status'] == 'Aberta'):
+                    $reservas = $reservas->where(['Reservas.status =' => 1]);
+                endif;         
+                if($busca['status'] == 'Fechada'):
+                    $reservas = $reservas->where(['Reservas.status =' => 0]);
+                endif;
+            }        
+        } else {
             $reservas = $this->Reservas->find('all', [
                 'contain' => ['Filmes','Clientes']
              ]);
-            
-
-        } else {
-
-            $reservas = $this->Reservas->find('all', [
-                'contain' => ['Filmes','Clientes']
-            ])->where([
-                'AND' => [
-                    ['titulo LIKE' => "%$busca[titulo]%"],
-                    ['nome LIKE' => "%$busca[nome]%"]
-                ]
-            ]);
-  
-            if($busca['status'] == 'Aberta'):
-                $busca['status'] = 1;
-                $busca['status'] = (int)$busca['status'];
-                $reservas = $reservas->where(['status LIKE' => "%$busca[status]%"]);
-            endif;         
-
-            if($busca['status'] == 'Fechada'):
-                $busca['status'] = 0;
-                $busca['status'] = (int)$busca['status'];
-                $reservas = $reservas->where(['status LIKE' => "%$busca[status]%"]);
-            endif;
-            
         }
         $reservas = $this->paginate($reservas);
         $this->set(compact('reservas'));

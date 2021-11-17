@@ -8,7 +8,7 @@
         ['controller' => 'reservas', 'action' => 'adicionar']);  
         ?>
 <div class="dropdown">
-    <button class="mainmenubtn">Pesquisar</button>
+    <button class="mainmenubtn" style="margin-bottom: 30px" onclick="openDropDown()">Pesquisar</button>
     <div class="dropdown-child">
         <a>
             <?php
@@ -33,10 +33,7 @@
             ?>     
         </a>
     </div>
-</div> 
-</div>
-    <div class="users index large-10 medium-10 columns content " style="padding-top: 0px !important;">
-       
+</div>       
         <table>
             <thead>
                 <tr>
@@ -97,21 +94,24 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div class="paginator">
-            <ul class="pagination">
-                <?php echo $this->Paginator->first('<<' . __('Primeira')); ?>
-                <?php echo $this->Paginator->prev('<' . __('Anterior')); ?>
-                <?php echo $this->Paginator->numbers(); ?>
-                <?php echo $this->Paginator->next(__('Proxima') . '>'); ?>
-                <?php echo $this->Paginator->last(__('Ultima') . '>>'); ?>
-            </ul>
-            <p>
-                <?php
-
-                echo $this->Paginator->counter(['format' => __('Pagina {{page}} 
-                    de {{pages}}, mostrado {{current}} registro(s) do total de {{count}}')]);
-
-                ?>
-            </p>
-        </div>
+    <div class="paginator">
+        <ul class="pagination">
+            <?php echo $this->Paginator->first('<<' . __('Primeira')); ?>
+            <?php echo $this->Paginator->prev('<' . __('Anterior')); ?>
+            <?php echo $this->Paginator->numbers(); ?>
+            <?php echo $this->Paginator->next(__('Proxima') . '>'); ?>
+            <?php echo $this->Paginator->last(__('Ultima') . '>>'); ?>
+        </ul>
+        <p>
+            <?php
+            echo $this->Paginator->counter(['format' => __('Pagina {{page}} 
+                de {{pages}}, mostrado {{current}} registro(s) do total de {{count}}')]);
+            ?>
+        </p>
     </div>
+</div>
+<script>
+    function openDropDown() {
+        document.querySelectorAll('.dropdown-child')[0].classList.toggle('show-menu-dw');
+    }
+</script>

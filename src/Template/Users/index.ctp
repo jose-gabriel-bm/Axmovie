@@ -10,7 +10,7 @@
             ?> 
 
 <div class="dropdown">
-  <button class="mainmenubtn">Pesquisar</button>
+    <button class="mainmenubtn" style="margin-bottom: 30px" onclick="openDropDown()">Pesquisar</button>
     <div class="dropdown-child">
         <a><?php
                 echo $this->Form->create(null, ['type' => 'get']);
@@ -89,3 +89,8 @@
         </p>
     </div>
 </div>
+<script>
+    function openDropDown() {
+        document.querySelectorAll('.dropdown-child')[0].classList.toggle('show-menu-dw');
+    }
+</script>

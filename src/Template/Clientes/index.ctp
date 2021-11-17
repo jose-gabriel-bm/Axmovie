@@ -8,7 +8,7 @@
     <?php echo $this->Html->link(__('Adicionar novo Cliente '), ['controller' => 'clientes', 'action' => 'adicionar']); ?>
 
 <div class="dropdown">
-    <button class="mainmenubtn">Pesquisar</button>
+    <button class="mainmenubtn" style="margin-bottom: 30px" onclick="openDropDown()">Pesquisar</button>
     <div class="dropdown-child">
         <a>
             <?php
@@ -102,3 +102,8 @@
         </p>
     </div>
 </div>
+<script>
+    function openDropDown() {
+        document.querySelectorAll('.dropdown-child')[0].classList.toggle('show-menu-dw');
+    }
+</script>

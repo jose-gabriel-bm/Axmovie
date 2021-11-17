@@ -3,14 +3,12 @@
 
 <div class="users index large-10 medium-10 columns content">
     <h3>Lista de Filmes</h3>
-    <nav class="large-2 medium-2 ">
-        <ul class="side-nav">
-        <?php echo $this->Html->link(__('Adicionar novo Filme '), ['controller' => 'filmes','action' =>'adicionar']); ?>  
-    </ul>
-    </nav>
-
+    <?php 
+        echo $this->Html->link(__('Adicionar novo Filme '), 
+        ['controller' => 'filmes','action' =>'adicionar']); 
+    ?>  
 <div class="dropdown">
-    <button class="mainmenubtn">Pesquisar</button>
+    <button class="mainmenubtn" style="margin-bottom: 30px" onclick="openDropDown()">Pesquisar</button>
     <div class="dropdown-child">
         <a>
             <?php
@@ -103,3 +101,8 @@
         </p>
     </div>
 </div>
+<script>
+    function openDropDown() {
+        document.querySelectorAll('.dropdown-child')[0].classList.toggle('show-menu-dw');
+    }
+</script>

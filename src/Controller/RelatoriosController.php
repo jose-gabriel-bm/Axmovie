@@ -50,10 +50,11 @@ class RelatoriosController extends AppController
     {
 
         $this->loadModel('Reservas');
-        $query = $this->Reservas->find()
-            ->contain(['Clientes', 'Filmes'])
+        $query = $this->Reservas->find();
+        $query->contain(['Clientes', 'Filmes'])
             ->select([
                 'id', 'data_devolucao', 'valor_total_pagar', 'Filmes.titulo', 'Clientes.nome',
+               // "total"=>$query->func()->sum('valor_total_pagar')
             ])
             ->where([
                 'AND' =>
@@ -68,6 +69,7 @@ class RelatoriosController extends AppController
 
         // geraçao de planilha
         $cabecalhos = array("Codigo Reserva", "Data de Entrada do Valor", "Valor Total Pago", "Filme", "Cliente");
+
 
         $spreadsheet = new Spreadsheet();
         $arquivo = WWW_ROOT . 'relatorios' . DS .'Relatorio.xlsx';
@@ -185,6 +187,7 @@ class RelatoriosController extends AppController
             $numero++;
             $letra = "A";
         }
+        
          
     }
 }
