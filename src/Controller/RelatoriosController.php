@@ -32,7 +32,7 @@ class RelatoriosController extends AppController
                 . '-' . $requisicaoRelatorio['ate_data_devolucao']['day'];
 
             if ($requisicaoRelatorio['selecaoRelatorio'] == 'FATURAMENTO') {
-                $this->relatorioFaturamento($de_data_devolucao, $ate_data_devolucao);
+                $this->relatorioFaturamento($de_data_devolucao, $ate_data_devolucao,);
             }
             if ($requisicaoRelatorio['selecaoRelatorio'] == 'ARRECADAÇÃO DE MULTA') {
                 $this->relatorioMulta($de_data_devolucao, $ate_data_devolucao);
@@ -48,13 +48,12 @@ class RelatoriosController extends AppController
     }
     public function relatorioFaturamento($de_data_devolucao, $ate_data_devolucao)
     {
-
+        $tipo = "faturamento";
         $this->loadModel('Reservas');
         $query = $this->Reservas->find();
         $query->contain(['Clientes', 'Filmes'])
             ->select([
                 'id', 'data_devolucao', 'valor_total_pagar', 'Filmes.titulo', 'Clientes.nome',
-               // "total"=>$query->func()->sum('valor_total_pagar')
             ])
             ->where([
                 'AND' =>
@@ -67,6 +66,25 @@ class RelatoriosController extends AppController
             ->order(['data_devolucao' => 'ASC'])
             ->toarray();
 
+            $total = $this->Reservas->find();
+            $total->contain(['Clientes', 'Filmes'])
+            ->select([
+                "total"=>$query->func()->sum('valor_total_pagar')
+            ])
+            ->where([
+                'AND' =>
+                [
+                    ['valor_total_pagar >' => 0],
+                    ['data_devolucao >=' => $de_data_devolucao],
+                    ['data_devolucao <=' => $ate_data_devolucao]
+                ]
+            ])
+            ->order(['data_devolucao' => 'ASC'])
+            ->toarray();
+
+        
+           // $total = $total['total'];
+
         // geraçao de planilha
         $cabecalhos = array("Codigo Reserva", "Data de Entrada do Valor", "Valor Total Pago", "Filme", "Cliente");
 
@@ -75,7 +93,7 @@ class RelatoriosController extends AppController
         $arquivo = WWW_ROOT . 'relatorios' . DS .'Relatorio.xlsx';
 
         $this->setCabecalho($spreadsheet, $cabecalhos);
-        $this->setCorpo($spreadsheet, $query);
+        $this->setCorpo($spreadsheet,$query,$tipo,$total);
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($arquivo);
@@ -85,6 +103,9 @@ class RelatoriosController extends AppController
     }
     public function relatorioMulta($de_data_devolucao, $ate_data_devolucao)
     {
+        $total= null;
+        $tipo = "multas";
+        
         $this->loadModel('Reservas');
         $query = $this->Reservas->find()
             ->contain(['Clientes', 'Filmes'])
@@ -110,7 +131,7 @@ class RelatoriosController extends AppController
         $arquivo = WWW_ROOT . 'relatorios' . DS . 'Relatorio.xlsx';
 
         $this->setCabecalho($spreadsheet, $cabecalhos);
-        $this->setCorpo($spreadsheet, $query);
+        $this->setCorpo($spreadsheet,$query,$tipo,$total);
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($arquivo);
@@ -122,6 +143,9 @@ class RelatoriosController extends AppController
     }
     public function relatorioClientesAtrasam($de_data_devolucao, $ate_data_devolucao)
     {
+        $total = NULL;
+        $tipo = "Clientes";
+
         $this->loadModel('Reservas');
         $query = $this->Reservas->find()
             ->contain(['Clientes'])
@@ -145,7 +169,7 @@ class RelatoriosController extends AppController
         $arquivo = WWW_ROOT . 'relatorios' . DS .'Relatorio.xlsx';
 
         $this->setCabecalho($spreadsheet, $cabecalhos);
-        $this->setCorpo($spreadsheet, $query);
+        $this->setCorpo($spreadsheet, $query,$tipo,$total);
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($arquivo);
@@ -160,12 +184,14 @@ class RelatoriosController extends AppController
             ++$letra;
         }
     }
-    public function setCorpo($spreadsheet, $query)
+    public function setCorpo($spreadsheet, $query, $tipo,$total)
     {
         $planilha = $spreadsheet->getActiveSheet();
 
         $letra = "A";
         $numero = 2;
+
+        $total = json_decode(json_encode($total));
 
         foreach ($query as $linha) {
 
@@ -187,7 +213,14 @@ class RelatoriosController extends AppController
             $numero++;
             $letra = "A";
         }
-        
+
+        if($tipo == "faturamento"){
+            foreach ($total as $linha) {
+                $linha = json_decode(json_encode($linha));
+                $linha = array_values((array)$linha);              
+                $planilha->setCellValue('C'.$numero,"Total ".$linha[0]);
+            }
+        }
          
     }
 }
